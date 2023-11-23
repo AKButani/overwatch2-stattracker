@@ -1,22 +1,20 @@
-# Project Title
+# Stat-Watch
 
 [[_TOC_]]
 
 ## Team Members
-1. Team member 1
-2. Team member 2
-3. Team member 3
-4. ...
-5. ...
+1. Arjun Butani
+2. Elia Hämmerli
+3. Alexander Roth
 
 ## Project Description 
-Describe here your project in detail and define your goals.
+ Overwatch 2, a popular team-based multiplayer game, lacks an official centralized web-platform for players to efficiently access detailed statistics about their performance and that of others. Players currently face the challenge of scattered information across multiple platforms, making it difficult to assess their strengths, weaknesses, and overall progress. This project addresses the need for a comprehensive stat tracker website tailored to Overwatch 2 players.
 
 ### Project goals
-Describe here what are the goals of the project.
+The goal is to create a user-friendly website that aggregates and presents detailed player statistics from Overwatch matches. This includes individual performance metrics, hero-specific data and win/loss ratios. The API exposes several types of data, which allows for a variety of data visualizations.
 
 ### Data Sources
-Add here all used datasources and their origin.
+We will leverage the [Overfast API](https://overfast-api.tekrop.fr/) to gather player data efficiently. Our team has already conducted preliminary research and explored the API's capabilities. 
 
 ### Tasks
 Define all the tasks you want your app to solve.
