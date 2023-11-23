@@ -4,7 +4,12 @@ body h2 {
 }
 
 nav {
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  justify-content: center !important;
+
+  & ul {
+    text-align: center;
+  }
 }
 
 body main {
@@ -13,9 +18,9 @@ body main {
 
   padding: var(--spacing) !important;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: start;
+  align-items: center;
   gap: var(--spacing);
 
   & article {

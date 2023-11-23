@@ -1,10 +1,31 @@
+
+import { useState } from "react";
 import "./App.css";
 import Layout from "./Layout";
+import SearchBar from "./SearchBar";
+import OverwatchAPI from "overfast-api-client";
+import { Player, PlayerInfo } from "./types";
+
+
 
 function App() {
+  
+  const [username, setUsername] = useState<string>("");
+  const [playerData, setPlayerData] = useState<PlayerInfo | undefined>(undefined);
+  console.log("PlayerData", playerData);
+
+  const onUsernameSearch = async () => {
+    console.log("Searching for: ", username);
+    //this code should be in backend but i just want to test
+    let player_list = await OverwatchAPI.searchPlayers({ name: username })
+    console.log("Search results: ", player_list);
+    let res = await OverwatchAPI.player(player_list.results[0]!.name);
+    setPlayerData({ career: await res.career, summary: await res.summary });
+  }
+
   return (
       <Layout>
-      TODO: implement me!
+        <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
       </Layout>
   );
 }
