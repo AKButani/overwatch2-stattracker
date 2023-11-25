@@ -1,6 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PlayerDataContext } from "./App";
 import PlayerAvatar from "./PlayerAvatar";
+import PlayerNameWithBackground from "./PlayerNameWithBackground";
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
@@ -11,12 +12,15 @@ const DisplayPlayer = () => {
         return (
             <p> Player not Found or some other error</p>
         )
-    } else{
-        const avatarUrl = playerData.summary.avatar;
+    } else{ 
         return (
             <>
-                <h2> {playerData.summary.username} </h2>
-                <PlayerAvatar imageUrl={avatarUrl}/>
+                {/* I honestly don't like the namecard as of now, but maybe we can do something with it */}
+                { (!playerData.summary.namecard) ? 
+                    <h2> {playerData.summary.username} </h2>:
+                    <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
+                } 
+                <PlayerAvatar imageUrl={playerData.summary.avatar}/>
             </>
         );
     }

@@ -3,8 +3,7 @@ import { createContext, useState } from "react";
 import "./App.css";
 import Layout from "./Layout";
 import SearchBar from "./SearchBar";
-import OverwatchAPI from "overfast-api-client";
-import { Player, PlayerInfo, PlayerInfoContext } from "./types";
+import { PlayerInfo, PlayerInfoContext } from "./types";
 import DisplayPlayer from "./DisplayPlayer";
 /*Test Player: WarDevil#11626*/
 

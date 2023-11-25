@@ -103,12 +103,12 @@ type CompetitiveRank = {
   support: RoleDetails; //Details about the support rank
 };
 
-export type PlayerCareerStats = {
+type PlayerCareerStats = {
   pc?: PlayerCareerStatsPlatform; //Stats on PC
   console?: PlayerCareerStatsPlatform; //Stats on console
 };
 
-export type PlayerCareerStatsPlatform = {
+type PlayerCareerStatsPlatform = {
   quickplay?: PlayerCareerStatsGamemode; //Stats in quickplay
   competitive?: PlayerCareerStatsGamemode; //Stats in competitive
 };
@@ -127,7 +127,7 @@ type PlayerCareerStatsGamemode = {
   career_stats: any;
 };
 
-export type PlayerCareerValueStat = {
+type PlayerCareerValueStat = {
   label: string;
   values: {
     hero: HEROES_KEYS;
@@ -135,13 +135,14 @@ export type PlayerCareerValueStat = {
   }[];
 };
 
-export type PlayerSummary = {
+type PlayerSummary = {
   username: string; //Username of the player
   avatar?: string; //URL of the avatar of the player
   title?: string; //Title of the player
   endorsement: PlayerEndorsement; //Endorsement of the player
   competitive?: PlatformCompetitiveRank; //Competitive rank of the player
   privacy: Privacy; //Privacy of the player
+  namecard?: string; //Namecard of the player
 };
 
 export type PlayerCareer = {
