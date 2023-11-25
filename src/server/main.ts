@@ -8,8 +8,21 @@ const app = express();
 
 //get player data for specific playerId (perfect match)
 app.get("/players/:playerId", async function (_req, res) {
-  console.log("URL", `https://overfast-api.tekrop.fr/players/${_req.params.playerId}`);
-  res.status(200).json(await (await fetch(`https://overfast-api.tekrop.fr/players/${_req.params.playerId}`)).json());
+  
+  try {
+    let response = await fetch(`https://overfast-api.tekrop.fr/players/${_req.params.playerId}`);
+    if(!response.ok){
+      res.status(response.status).send(response.statusText);
+    }else{
+      let data = await response.json();
+      console.log("responding: ", response)
+      res.status(200).json(data);
+    }
+  } catch (error) {
+    console.log("in error");
+    res.status(400).send("Server Error")
+  }
+  
 })
 
 // example route which returns a message

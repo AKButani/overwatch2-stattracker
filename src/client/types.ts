@@ -165,3 +165,8 @@ export type Player = {
   privacy: Privacy; // Privacy of the player career. If private, only some basic informations are available on player details endpoint (avatar, endorsement)
   career_url: string; // Player's career OverFast API URL (Get player career data) [ 1 .. 65536 ] characters
 };
+
+export type PlayerInfoContext = {
+  playerData: PlayerInfo | undefined | false;
+  setPlayerData: React.Dispatch<React.SetStateAction<false | PlayerInfo | undefined>>;
+}

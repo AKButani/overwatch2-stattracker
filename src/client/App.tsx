@@ -1,37 +1,59 @@
 
-import { useState } from "react";
+import { createContext, useState } from "react";
 import "./App.css";
 import Layout from "./Layout";
 import SearchBar from "./SearchBar";
 import OverwatchAPI from "overfast-api-client";
-import { Player, PlayerInfo } from "./types";
+import { Player, PlayerInfo, PlayerInfoContext } from "./types";
+import DisplayPlayer from "./DisplayPlayer";
 /*Test Player: WarDevil#11626*/
 
+export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
 
 function App() {
   
   const [username, setUsername] = useState<string>("");
-  const [playerData, setPlayerData] = useState<PlayerInfo | undefined>(undefined);
+  const [playerData, setPlayerData] = useState<PlayerInfo | undefined | false>(undefined); //false means player not found, undefined means not searched yet
   console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {
     //testing
-    console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
-    
-    console.log("Searching for: ", username);
-    //this code should be in backend but i just want to test
-    let player_list = await OverwatchAPI.searchPlayers({ name: username })
-    console.log("Search results: ", player_list);
-    let testPlayerSummary = await fetch("/hello");
-    console.log("Test", testPlayerSummary);
-    let res = await OverwatchAPI.player(player_list.results[0]!.player_id);
-    setPlayerData({ career: await res.career, summary: await res.summary });
+    //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
+
+    try {
+      let response = await fetch(`/players/${username}`)
+      console.log(response.status)
+      if (!response.ok) {
+        // If the response status is not OK (not in the range 200-299), handle the error
+        if (response.status === 404) {
+          // Handle 404 Not Found
+          console.log("in 404");
+          setPlayerData(false);
+        } else {
+          // Handle other error cases
+          console.log('Server error');
+        }
+      } else {
+        // If the response status is OK, handle the successful response
+        const data = await response.json();
+        console.log('Data:', data);
+        setPlayerData(data);
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.log("in error");
+      console.log('Error:', error);
+    }
   }
 
+
   return (
+    <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <Layout>
         <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+        <DisplayPlayer />
       </Layout>
+    </PlayerDataContext.Provider>
   );
 }
 

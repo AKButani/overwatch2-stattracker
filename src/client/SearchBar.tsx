@@ -11,7 +11,7 @@ const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<Rea
     <div>
       <input
         type="text"
-        placeholder="Enter Player name (eg. Sas-22262)"
+        placeholder="Enter Player name (eg. emongg-11183)"
         value={props.searchTerm}
         onChange={handleInputChange}
         style={{ width: '500px', textAlign: 'center'}}
