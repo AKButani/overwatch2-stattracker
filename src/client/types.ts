@@ -103,12 +103,12 @@ type CompetitiveRank = {
   support: RoleDetails; //Details about the support rank
 };
 
-type PlayerCareerStats = {
+export type PlayerCareerStats = {
   pc?: PlayerCareerStatsPlatform; //Stats on PC
   console?: PlayerCareerStatsPlatform; //Stats on console
 };
 
-type PlayerCareerStatsPlatform = {
+export type PlayerCareerStatsPlatform = {
   quickplay?: PlayerCareerStatsGamemode; //Stats in quickplay
   competitive?: PlayerCareerStatsGamemode; //Stats in competitive
 };
@@ -127,7 +127,7 @@ type PlayerCareerStatsGamemode = {
   career_stats: any;
 };
 
-type PlayerCareerValueStat = {
+export type PlayerCareerValueStat = {
   label: string;
   values: {
     hero: HEROES_KEYS;

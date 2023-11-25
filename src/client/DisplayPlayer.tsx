@@ -15,7 +15,7 @@ const DisplayPlayer = () => {
         const avatarUrl = playerData.summary.avatar;
         return (
             <>
-                <p> Found some info! GL Presenting it!</p>
+                <h2> {playerData.summary.username} </h2>
                 <PlayerAvatar imageUrl={avatarUrl}/>
             </>
         );
