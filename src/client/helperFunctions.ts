@@ -1,6 +1,8 @@
 import { HEROES_KEYS, PlayerCareer, PlayerInfo } from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
+    let t = playerData.stats?.pc?.competitive?.heroes_comparisons
+    
     if (isComp == "both"){
         return undefined;
     }else if(isComp){

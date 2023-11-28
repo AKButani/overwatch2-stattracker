@@ -1,1 +1,71 @@
 /*some style for app component*/
+.hero-card{
+    position: relative;
+    align-self: center;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "header header role"
+        "hero-image play-time kd"
+        "hero-image numWins winRate";
+    width: 80%;
+    border: 5px solid  black;
+    border-radius: 10px;
+    background-color: navy;
+
+    & .toggle-button {
+        position: absolute;
+        right: -25px;
+        /* Adjust the negative margin to control how much of the button is outside the grid */
+        top: 50%;
+        /* transform: translate(-50%, -50%); */
+        height: 50px ;
+        width: 50px ;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+    }
+
+   
+}
+
+.hero-image{
+    grid-area: hero-image;
+}
+
+.play-time{
+    grid-area: play-time;
+}
+
+.kd{
+    grid-area: kd;
+}
+
+.numWins{
+    grid-area: numWins;
+}
+
+.winRate{
+    grid-area: winRate;
+}
+
+.name{
+    grid-area: header;
+    font-weight: bold;
+    background-color: black;
+    border-bottom: 5px solid white;
+    justify-self: stretch;
+}
+
+.role{
+    grid-area: role;
+    background-color: black;
+    border-bottom: 5px solid white;
+    text-align: end;
+    justify-self: stretch;
+}
+

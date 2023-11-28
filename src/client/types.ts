@@ -114,7 +114,11 @@ type PlayerCareerStatsPlatform = {
 };
 
 type PlayerCareerStatsGamemode = {
-  heroes_comparisons: {
+  heroes_comparisons: HeroComparison;
+  career_stats: any;
+};
+
+export type HeroComparison = {
     time_played: PlayerCareerValueStat; //Time played on each hero
     games_won: PlayerCareerValueStat; //Games won on each hero
     weapon_accuracy: PlayerCareerValueStat; //Weapon accuracy on each hero
@@ -123,8 +127,6 @@ type PlayerCareerStatsGamemode = {
     critical_hit_accuracy: PlayerCareerValueStat; //Critical hit accuracy on each hero
     multikill_best: PlayerCareerValueStat; //Best multikill on each hero
     objective_kills: PlayerCareerValueStat; //Objective kills on each hero
-  };
-  career_stats: any;
 };
 
 type PlayerCareerValueStat = {
