@@ -19,7 +19,7 @@ body main {
   padding: var(--spacing) !important;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: center;
   gap: var(--spacing);
 

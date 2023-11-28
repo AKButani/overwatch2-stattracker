@@ -22,7 +22,7 @@ const DisplayPlayer = () => {
                     <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
-                {getPlayTime(playerData, true)}
+                {console.log(getPlayTime(playerData, true))}
             </>
         );
     }
