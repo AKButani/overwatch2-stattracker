@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { PlayerDataContext } from "./App";
 import PlayerAvatar from "./PlayerAvatar";
 import PlayerNameWithBackground from "./PlayerNameWithBackground";
+import {getPlayTime} from "./helperFunctions"
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
@@ -21,6 +22,7 @@ const DisplayPlayer = () => {
                     <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
+                {getPlayTime(playerData, true)}
             </>
         );
     }

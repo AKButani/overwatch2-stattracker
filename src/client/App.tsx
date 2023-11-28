@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import "./App.css";
 import Layout from "./Layout";
 import SearchBar from "./SearchBar";
-import { PlayerInfo, PlayerInfoContext } from "./types";
+import { PlayerCareer, PlayerInfoContext } from "./types";
 import DisplayPlayer from "./DisplayPlayer";
 /*Test Player: WarDevil#11626*/
 
@@ -12,7 +12,7 @@ export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(un
 function App() {
   
   const [username, setUsername] = useState<string>("");
-  const [playerData, setPlayerData] = useState<PlayerInfo | undefined | false>(undefined); //false means player not found, undefined means not searched yet
+  const [playerData, setPlayerData] = useState<PlayerCareer | undefined | false>(undefined); //false means player not found, undefined means not searched yet
   console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {

@@ -168,6 +168,6 @@ export type Player = {
 };
 
 export type PlayerInfoContext = {
-  playerData: PlayerInfo | undefined | false;
-  setPlayerData: React.Dispatch<React.SetStateAction<false | PlayerInfo | undefined>>;
+  playerData: PlayerCareer | undefined | false;
+  setPlayerData: React.Dispatch<React.SetStateAction<false | PlayerCareer | undefined>>;
 }
