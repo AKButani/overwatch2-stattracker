@@ -12,6 +12,7 @@ const HEIGHT = 600;
 interface NodeData {
   name: string;
   category: string;
+  weight: number;
 }
 
 interface LinkData {
@@ -112,31 +113,26 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
       role = "Support";
       heroRoleTable[role] = "Support";
     };
-    nodes.push({name: hero, category: role});
+    nodes.push({name: hero, category: role, weight: time});
     links.push({source: role, target: hero, value: time / timeConverter})
     timePerRole[role] += time;
   });
   roles.forEach((role) => {
-    nodes.push({name: role, category: role})
     const time = timePerRole[role]!;
-    links.push({source: "total", target: role, value: time / timeConverter})
+    nodes.push({name: role, category: role, weight: time})
+    links.push({source: "Total", target: role, value: time / timeConverter})
   });
-  nodes.push({name: "total", category: "total"});
+  nodes.push({name: "Total", category: "Total", weight: 0});
   return {nodes: nodes, links:links};
 }
 
 export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   // create nodes and links
-  // const playtime_array_mockup: HeroTimeTuple[] = [["ana", 10], ["tracer", 20], ["reaper", 15], ["mercy", 40], ["zarya", 5]]
   const comp_stats = props.playerData.stats!.pc!.competitive!;
   var comp_sankey = null;
   if (comp_stats) {
     const playtime_array = createPlaytimeArray(comp_stats);
     const data = convertToNodesLinks(playtime_array);
-    // const data = convertToNodesLinks(playtime_array_mockup);
-    // const data_mockup : Data = {
-    //   nodes: [{name: "source", category: "cat1"}, {name: "sink", category: "cat1"}], 
-    //   links: [{source: "source", target: "sink", value: 10}]};
     comp_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data});
   }
   const quickplay_stats = props.playerData.stats!.pc!.quickplay!;
@@ -162,23 +158,30 @@ const Sankey = ({ width, height, data }: SankeyProps) => {
   const allGroups = [...new Set(data.nodes.map((d) => d.category))].sort();
   const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
+  var nodeSort = (node1: NodeData, node2: NodeData) : number=> {
+    // < 0: node1 above node2; > 0: node1 below node2
+    return node2.weight - node1.weight;
+  };
+
   // Set the sankey diagram properties
-  const sankeyGenerator = sankey<NodeData, LinkData>() // TODO: find how to type the sankey() function
-    .nodeWidth(26)
+  const sankeyGenerator = sankey<NodeData, LinkData>()
+    .nodeWidth(32)
     .nodePadding(10)
     .extent([
       [MARGIN_X, MARGIN_Y],
       [width - MARGIN_X, height - MARGIN_Y],
     ])
-    .nodeId((node) => node.name) // Accessor function: how to retrieve the id that defines each node. This id is then used for the source and target props of links
-    .nodeAlign(sankeyJustify); // Algorithm used to decide node position
+    .nodeId((node) => node.name)
+    .nodeAlign(sankeyJustify) // decides horizontal node position, doesn't matter here
+    // comment out below to have
+    .nodeSort(nodeSort)
+    ; 
+    
 
   // Compute nodes and links positions
   const { nodes, links } = sankeyGenerator(data);
 
-  //
   // Draw the nodes
-  //
   const allNodes = nodes.map((node) => {
     return (
       <g key={node.index}>
@@ -186,19 +189,17 @@ const Sankey = ({ width, height, data }: SankeyProps) => {
           height={node.y1! - node.y0!}
           width={sankeyGenerator.nodeWidth()}
           x={node.x0}
-          y={node.y0}
+          y={node.y0!}
           stroke={"black"}
           fill={colorScale(node.category)}
           fillOpacity={1}
-          rx={0.9}
+          rx={0.5}
         />
       </g>
     );
   });
 
-  //
   // Draw the links
-  //
   const allLinks = links.map((link, i) => {
     const linkGenerator = sankeyLinkHorizontal();
     const path = linkGenerator(link);
@@ -209,7 +210,7 @@ const Sankey = ({ width, height, data }: SankeyProps) => {
         d={path!}
         stroke={colorScale(link.source)}
         fill="none"
-        strokeOpacity={0.3}
+        strokeOpacity={0.4}
         strokeWidth={link.width}
       />
     );
