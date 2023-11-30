@@ -114,6 +114,19 @@ export const CircDiagram = ({ width, height, data, valueFunction }: CircularPack
             {node.data.name}
           </text>
         ))}
+        {root
+        .descendants()
+        .slice(1)
+        .map((node) => (
+          <image
+            key={node.data.name}
+            x={node.x - node.r}
+            y={node.y - node.r}
+            width={node.r * 2}
+            height={node.r * 2}
+            href={"./public/Images/heroes/"+ node.data.name.toLocaleLowerCase() +".png"}
+          />
+        ))}
     </svg>
   );
 };
