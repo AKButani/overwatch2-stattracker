@@ -125,6 +125,7 @@ export const CircDiagram = ({ width, height, data, valueFunction }: CircularPack
             width={node.r * 2}
             height={node.r * 2}
             href={"./public/Images/heroes/"+ node.data.name.toLocaleLowerCase() +".png"}
+            style={{ clipPath: 'circle()' }}
           />
         ))}
     </svg>
