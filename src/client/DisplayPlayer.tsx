@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { PlayerDataContext } from "./App";
 import PlayerAvatar from "./PlayerAvatar";
 import PlayerNameWithBackground from "./PlayerNameWithBackground";
-import {getPlayTime} from "./helperFunctions"
+import {getPlayTime, getOverallHeroPlaytime} from "./helperFunctions"
+import {CircDiagram} from "./CircularPacking/CircDiagram"
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
@@ -22,6 +23,7 @@ const DisplayPlayer = () => {
                     <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
+                <CircDiagram width={500} height={500} data={playerData} valueFunction={getOverallHeroPlaytime}/>
                 {console.log(getPlayTime(playerData, true))}
             </>
         );

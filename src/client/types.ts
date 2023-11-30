@@ -124,8 +124,10 @@ type PlayerCareerStatsGamemode = {
     multikill_best: PlayerCareerValueStat; //Best multikill on each hero
     objective_kills: PlayerCareerValueStat; //Objective kills on each hero
   };
-  career_stats: any;
+  career_stats: CareerStatsDetailed;
 };
+
+
 
 type PlayerCareerValueStat = {
   label: string;
@@ -171,3 +173,70 @@ export type PlayerInfoContext = {
   playerData: PlayerCareer | undefined | false;
   setPlayerData: React.Dispatch<React.SetStateAction<false | PlayerCareer | undefined>>;
 }
+
+
+export type CareerStatsDetailed = {
+  "all-Heroes"?: CareerStatsDetailedAllHeroes;
+  ana?:CareerStatsDetailedHero;
+  ashe?:CareerStatsDetailedHero;
+  baptiste?:CareerStatsDetailedHero;
+  bastion?:CareerStatsDetailedHero;
+  brigitte?:CareerStatsDetailedHero;
+  cassidy?:CareerStatsDetailedHero;
+  dva?:CareerStatsDetailedHero;
+  doomfist?:CareerStatsDetailedHero;
+  echo?:CareerStatsDetailedHero;
+  genji?:CareerStatsDetailedHero;
+  hanzo?:CareerStatsDetailedHero;
+  junkerqueen?:CareerStatsDetailedHero;
+  junkrat?:CareerStatsDetailedHero;
+  kiriko?:CareerStatsDetailedHero;
+  lucio?:CareerStatsDetailedHero;
+  mei?:CareerStatsDetailedHero;
+  mercy?:CareerStatsDetailedHero;
+  moira?:CareerStatsDetailedHero;
+  orisa?:CareerStatsDetailedHero;
+  pharah?:CareerStatsDetailedHero;
+  ramattra?:CareerStatsDetailedHero;
+  reaper?:CareerStatsDetailedHero;
+  reinhardt?:CareerStatsDetailedHero;
+  roadhog?:CareerStatsDetailedHero;
+  sigma?:CareerStatsDetailedHero;
+  sojourn?:CareerStatsDetailedHero;
+  "soldier-76"?:CareerStatsDetailedHero;
+  sombra?:CareerStatsDetailedHero;
+  symmetra?:CareerStatsDetailedHero;
+  torbjorn?:CareerStatsDetailedHero;
+  tracer?:CareerStatsDetailedHero;
+  widowmaker?:CareerStatsDetailedHero;
+  winston?:CareerStatsDetailedHero;
+  wreckingball?:CareerStatsDetailedHero;
+  zarya?:CareerStatsDetailedHero;
+  zenyatta?:CareerStatsDetailedHero;
+  
+}
+
+export type CareerStatsDetailedAllHeroes = {
+  categories : CareerStatsDetailedCategory[];
+}
+
+
+export type CareerStatsDetailedHero = {
+  categories : CareerStatsDetailedCategory[];
+}
+
+export type CareerStatsDetailedCategory = {
+  category: careerStatCategory;
+  label: string;
+  stats: CareerStatsDetailedCategoryStat[];
+
+}
+
+export type CareerStatsDetailedCategoryStat = {
+  key: string;
+  label: string;
+  value: number;
+}
+
+export type careerStatCategory = "assists" |"average" | "best" | "combat" | "game" | "hero_specific" | "match_awards"|  "miscellaneous";
+

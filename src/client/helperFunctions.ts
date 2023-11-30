@@ -49,3 +49,27 @@ function combinePCandConsole(pcStats: {hero: HEROES_KEYS; value: number;}[], con
     });
     return combinedData;
 }
+
+
+//not correct, only gives time of pc quickplay
+export function getOverallHeroPlaytime(playerData: PlayerCareer, heroName : HEROES_KEYS){
+    const arr = playerData.stats?.pc?.quickplay?.heroes_comparisons.time_played.values;
+    console.log("arr", arr);
+    if(arr == undefined){
+        return 0;
+    }
+    const l = arr.length;
+    console.log("length", l);
+    var i = 0;
+    
+    while (i < l && arr[i]!.hero != heroName) {
+        
+        i = i + 1;
+    }
+    if(i >= l){
+        return 0
+    } else {
+        console.log(arr[i]!.hero, arr[i]!.value)
+        return arr[i]!.value;
+    }
+}
