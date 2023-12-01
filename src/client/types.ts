@@ -11,6 +11,7 @@ export type HEROES_KEYS =
   | "echo"
   | "genji"
   | "hanzo"
+  | "illari"
   | "junker-queen"
   | "junkrat"
   | "kiriko"

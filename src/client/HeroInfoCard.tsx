@@ -2,6 +2,7 @@ import { HeroComparison, HEROES_KEYS, HeroStats } from "./types";
 //import myimage from "./public/images/ana.png";
 import './App.css';
 import { useState } from "react";
+import { getHeroRole } from "./helperFunctions";
 
 
 const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
@@ -10,7 +11,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
     //all categories for a specific hero e.g. best, average, etc.
     let specificHero = (heroStats != undefined) ? heroStats[props.HeroName] : undefined;
 
-    console.log("Data: ", Data);
+    console.log("Hero : ", Data);
     if (Data != undefined && specificHero != undefined){
         const [showDetails, setShowDetails] = useState(false);
         console.log(heroStats);
@@ -31,10 +32,10 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
                 <div className="role gridEntry">
-                    Support
+                    {getHeroRole(props.HeroName as HEROES_KEYS)}
                 </div>
                 <div className="hero-image">
-                    <img src='https://d15f34w2p8l1cc.cloudfront.net/overwatch/3429c394716364bbef802180e9763d04812757c205e1b4568bc321772096ed86.png' width={200} height={200}/>
+                    <img src={"/Images/heroes/" + props.HeroName.toLowerCase() + ".png"} width={200} height={200}/>
                 </div>
                 <div className="data gridEntry">
                     <strong>Play Time </strong><br />
@@ -57,7 +58,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                         {heroSpecificInfo.map((element, index) => {
                             return (
                                 <div className={`additional-rows gridEntry ${showDetails ? 'visible' : ''}`} style={{ gridArea: `Add${index}`, paddingBottom: 10 }}>
-                                    <strong>{element.label}</strong> <br /> {element.value}
+                                    <strong>{element.label}</strong> <br /> {element.value}{element.label.includes("Accuracy") ? "%" : ""}
                                 </div>
                             )
                         })}
@@ -88,7 +89,7 @@ function find_predicate(props: { HeroData: HeroComparison | undefined; HeroName:
 const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
     return (
         <>
-            {props.HeroData?.games_won.values.map((element, index) => {
+            {props.HeroData?.games_won.values.map((element) => {
                 return (
                     <OneHeroInfoCard HeroData={props.HeroData} HeroName={element.hero} Herostats={props.Herostats}/>
                 )
