@@ -49,3 +49,7 @@ function combinePCandConsole(pcStats: {hero: HEROES_KEYS; value: number;}[], con
     });
     return combinedData;
 }
+
+function getPlaytime() {
+    return 0;
+}
