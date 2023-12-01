@@ -1,10 +1,10 @@
 import { HeroComparison, HEROES_KEYS, HeroStats } from "./types";
-import myimage from "./public/images/ana.png";
+//import myimage from "./public/images/ana.png";
 import './App.css';
 import { useState } from "react";
 
 
-const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
+const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
     let Data = props.HeroData;
     let heroStats = props.Herostats; //this is all Herostats
     //all categories for a specific hero e.g. best, average, etc.
@@ -27,40 +27,40 @@ const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: s
         let winRate = Data.win_percentage.values.find(find_predicate(props))?.value;
         return (
             <div className={`hero-card ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
-                <div className="name">
+                <div className="name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
-                <div className="role">
+                <div className="role gridEntry">
                     Support
                 </div>
                 <div className="hero-image">
-                    <img src={myimage} width={200} height={200}/>
+                    <img src='https://d15f34w2p8l1cc.cloudfront.net/overwatch/3429c394716364bbef802180e9763d04812757c205e1b4568bc321772096ed86.png' width={200} height={200}/>
                 </div>
-                <div className="data">
-                    Play Time <br />
-                    {play_time} seconds
+                <div className="data gridEntry">
+                    <strong>Play Time </strong><br />
+                    {Math.round(play_time! / 60)} minutes
                 </div>
-                <div className="data">
-                    Average Elimination Per Life <br />
+                <div className="data gridEntry">
+                    <strong>Average Eliminations Per Life</strong> <br />
                     {kd}
                 </div>
-                <div className="data">
-                    Total Number of Wins <br />
+                <div className="data gridEntry">
+                    <strong> Total Number of Wins</strong > <br />
                     {numWins}
                 </div>
-                <div className="data">
-                    Winrate <br />
+                <div className="data gridEntry">
+                    <strong> Winrate </strong> <br />
                     {winRate}%
                 </div>
                 {(heroSpecificInfo != undefined) && (
                     <>
-                        <div className={`additional-rows ${showDetails ? 'visible' : ''}`} style={{ gridArea: 'Add' }}>
-                            {heroSpecificInfo[0]?.label} <br /> {heroSpecificInfo[0]?.value}
-                        </div>
-                        <div className={`additional-rows ${showDetails ? 'visible' : ''}`} style={{ gridArea: 'Add2' }}>
-                            Additional Row 2
-                        </div>
-                        {/* Add more rows as needed */}
+                        {heroSpecificInfo.map((element, index) => {
+                            return (
+                                <div className={`additional-rows gridEntry ${showDetails ? 'visible' : ''}`} style={{ gridArea: `Add${index}`, paddingBottom: 10 }}>
+                                    <strong>{element.label}</strong> <br /> {element.value}
+                                </div>
+                            )
+                        })}
                     </>
                     )
                 }
@@ -76,10 +76,25 @@ const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: s
     
 };
 
-export default HeroInfoCard;
+
 
 function find_predicate(props: { HeroData: HeroComparison | undefined; HeroName: string; }): (value: { hero: HEROES_KEYS; value: number; }, index: number, obj: { hero: HEROES_KEYS; value: number; }[]) => unknown {
     return function (entry) {
         return entry.hero == props.HeroName;
     };
 }
+
+
+const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
+    return (
+        <>
+            {props.HeroData?.games_won.values.map((element, index) => {
+                return (
+                    <OneHeroInfoCard HeroData={props.HeroData} HeroName={element.hero} Herostats={props.Herostats}/>
+                )
+            })}
+        </>
+    )
+}
+
+export default HeroInfoCard;

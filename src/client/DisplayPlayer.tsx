@@ -16,7 +16,6 @@ const DisplayPlayer = () => {
             <p> Player not Found or some other error</p>
         )
     } else{ 
-        let t = playerData.stats?.pc?.competitive?.career_stats
         return (
             <>
                 {/* I honestly don't like the namecard as of now, but maybe we can do something with it */}
@@ -26,7 +25,7 @@ const DisplayPlayer = () => {
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
                 {console.log(getPlayTime(playerData, true))}
-                <HeroInfoCard HeroData={playerData.stats?.pc?.competitive?.heroes_comparisons} HeroName="sigma" Herostats={playerData.stats?.pc?.competitive?.career_stats}/>
+                <HeroInfoCard HeroData={playerData.stats?.pc?.competitive?.heroes_comparisons} Herostats={playerData.stats?.pc?.competitive?.career_stats}/>
             </>
         );
     }

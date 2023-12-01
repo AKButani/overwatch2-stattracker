@@ -2,7 +2,8 @@
 .hero-card{
     position: relative;
     align-self: center;
-    justify-items: center;
+    justify-items: left;
+    
     align-items: center;
     display: grid;
     grid-template-columns: auto 1fr 1fr;
@@ -11,7 +12,16 @@
         "header header role"
         "hero-image play-time kd"
         "hero-image numWins winRate"
-        ". Add Add2"
+        ". Add0 Add1"
+        ". Add2 Add3"
+        ". Add4 Add5"
+        ". Add6 Add7"
+        ". Add8 Add9"
+        ". Add10 Add11"     
+        ". Add12 Add13"
+        ". Add14 Add15"
+        ". Add16 Add17"
+        ". Add18 Add19"
         "moreDetails moreDetails moreDetails" ;
     width: 60%;
     border: 5px solid  yellow;
@@ -20,10 +30,12 @@
 
     transition: max-height 0.3s ease-in-out;
     max-height: 1000px;
-   /*  :hover{
-        
-    }
- */
+    
+}
+.hero-card:hover{
+    
+    box-shadow: 0 0 11px rgba(255,255,255,1); 
+    
 }
 
 .hero-card.expanded{
@@ -86,5 +98,9 @@
 .additional-rows.visible{
     max-height: 1000px;
     display: inline;
+    /* background-color: aqua; */
 }
 
+.gridEntry{
+    padding-left: 10px;
+}
