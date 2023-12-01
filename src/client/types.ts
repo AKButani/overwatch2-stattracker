@@ -115,7 +115,7 @@ type PlayerCareerStatsPlatform = {
 
 type PlayerCareerStatsGamemode = {
   heroes_comparisons: HeroComparison;
-  career_stats: any;
+  career_stats: HeroStats;
 };
 
 export type HeroComparison = {
@@ -172,4 +172,18 @@ export type Player = {
 export type PlayerInfoContext = {
   playerData: PlayerCareer | undefined | false;
   setPlayerData: React.Dispatch<React.SetStateAction<false | PlayerCareer | undefined>>;
+}
+
+export type HeroStats = Record<string, HeroStatCat[]>;
+
+
+// e.g category: "hero-specific" label: "Hero Specific", stats: etc.
+export type HeroStatCat = {
+  category: string,
+  label: string,
+  stats: {
+    key: string,
+    label: string,
+    value: number
+  }[]
 }
