@@ -1,4 +1,4 @@
-import { HEROES_KEYS, PlayerCareer, PlayerInfo } from "./types";
+import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform} from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
     if (isComp == "both"){
@@ -51,25 +51,21 @@ function combinePCandConsole(pcStats: {hero: HEROES_KEYS; value: number;}[], con
 }
 
 
-//not correct, only gives time of pc quickplay
-export function getOverallHeroPlaytime(playerData: PlayerCareer, heroName : HEROES_KEYS){
-    const arr = playerData.stats?.pc?.quickplay?.heroes_comparisons.time_played.values;
-    console.log("arr", arr);
-    if(arr == undefined){
-        return 0;
-    }
-    const l = arr.length;
-    console.log("length", l);
-    var i = 0;
+//get playtime for specific hero
+export function getHeroPlaytime(playerData: PlayerCareer, heroName : HEROES_KEYS, platform: platform ,mode: mode):number{
     
-    while (i < l && arr[i]!.hero != heroName) {
-        
-        i = i + 1;
+    if(platform != "both" && mode != "both"){
+        const arr = playerData?.stats?.[platform]?.[mode]?.heroes_comparisons.time_played.values;
+        if (!arr) {return 0;}
+        const heroInfo = arr.find(item => item.hero === heroName);
+        if (!heroInfo) {return 0;}
+        return heroInfo.value;
+    }else if(platform == "both" && mode != "both"){
+        return getHeroPlaytime(playerData, heroName, "pc", mode) + getHeroPlaytime(playerData, heroName, "console", mode);
+    }else if(platform != "both" && mode == "both"){
+        return getHeroPlaytime(playerData, heroName, platform, "quickplay") + getHeroPlaytime(playerData, heroName, platform, "competitive");
+    }else if(platform == "both" && mode == "both"){
+        return getHeroPlaytime(playerData, heroName, "pc", "both") + getHeroPlaytime(playerData, heroName, "console", "both");
     }
-    if(i >= l){
-        return 0
-    } else {
-        console.log(arr[i]!.hero, arr[i]!.value)
-        return arr[i]!.value;
-    }
+    return 0;
 }
