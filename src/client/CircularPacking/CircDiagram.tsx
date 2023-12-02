@@ -39,7 +39,7 @@ const heroes: HEROES_KEYS[] = [
   "zenyatta",
 ];
 
-type CircularPackingProps = {
+export type CircularPackingProps = {
   width: number;
   height: number;
   data: PlayerCareer;
@@ -57,8 +57,8 @@ type TreeLeaf = {
   value: number;
 };
 type Tree = TreeNode | TreeLeaf;
-export const CircDiagram = ({ width, height, data, valueFunction }: CircularPackingProps) => {
-    
+export const CircDiagram = (props:{ width: number, height:number, data:PlayerCareer, valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number}) => {
+  
   //build data structure the data    
   const graphData : Tree= {
       type: 'node',
@@ -67,7 +67,7 @@ export const CircDiagram = ({ width, height, data, valueFunction }: CircularPack
       children: heroes.map((hero) => ({
         type: 'leaf',
         name: hero.toUpperCase(),
-        value: valueFunction(data, hero),
+        value: props.valueFunction(props.data, hero),
       }))
   }
 
@@ -76,13 +76,13 @@ export const CircDiagram = ({ width, height, data, valueFunction }: CircularPack
     .hierarchy(graphData)
     .sum((d) => d.value)
     .sort((a, b) => b.value! - a.value!);
-  const packGenerator = d3.pack<Tree>().size([width, height]).padding(4);
+  const packGenerator = d3.pack<Tree>().size([props.width, props.height]).padding(4);
   const root = packGenerator(hierarchy as d3.HierarchyNode<Tree>);
   console.log("root", root);
 
   
   return (
-    <svg width={width} height={height} style={{ display: "inline-block" }}>
+    <svg width={props.width} height={props.height} style={{ display: "inline-block" }}>
       {root
         .descendants()
         .slice(1)
@@ -97,22 +97,6 @@ export const CircDiagram = ({ width, height, data, valueFunction }: CircularPack
             fill="#B794F4"
             fillOpacity={0.2}
           />
-        ))}
-      {root
-        .descendants()
-        .slice(1)
-        .map((node) => (
-          <text
-            key={node.data.name}
-            x={node.x}
-            y={node.y}
-            fontSize={13}
-            fontWeight={0.4}
-            textAnchor="middle"
-            alignmentBaseline="middle"
-          >
-            {node.data.name}
-          </text>
         ))}
         {root
         .descendants()
