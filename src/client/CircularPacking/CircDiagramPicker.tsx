@@ -9,7 +9,12 @@ export const CircDiagramPicker = (props: { data: PlayerCareer; width: number; he
   
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, "both", "both", event.target.value as comparisonCategory)))
+      if(event.target.value == "none"){
+          setValueFunction (() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
+      } else {
+          setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, "both", "both", event.target.value as comparisonCategory)));
+      }
+       
     }
   
 
@@ -17,6 +22,7 @@ export const CircDiagramPicker = (props: { data: PlayerCareer; width: number; he
     <div>
       <label htmlFor="valueFunctionPicker">Select Value Function:</label>
       <select id="valueFunctionPicker" onChange={handleSelectChange}>
+        <option value="none">-</option>
         <option value="time_played">Playtime</option>
         <option value="games_won">Games Won</option>
         <option value="weapon_accuracy">Weapon Accuracy</option>
