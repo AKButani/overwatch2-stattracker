@@ -1,5 +1,6 @@
 import * as d3 from "d3"; // we will need d3.js
 import { HEROES_KEYS, PlayerCareer } from "../types";
+import { useSpring, animated, SpringValue } from "react-spring";
 const heroes: HEROES_KEYS[] = [
   "ana",
   "ashe",
@@ -76,6 +77,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
     .hierarchy(graphData)
     .sum((d) => d.value)
     .sort((a, b) => b.value! - a.value!);
+    
   const packGenerator = d3.pack<Tree>().size([props.width, props.height]).padding(4);
   const root = packGenerator(hierarchy as d3.HierarchyNode<Tree>);
   console.log("root", root);
@@ -87,7 +89,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         .descendants()
         .slice(1)
         .map((node) => (
-          <circle
+          <AnimatedCircle
             key={node.data.name}
             cx={node.x}
             cy={node.y}
@@ -102,7 +104,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         .descendants()
         .slice(1)
         .map((node) => (
-          <image
+          <AnimatedImage
             key={node.data.name}
             x={node.x - node.r}
             y={node.y - node.r}
@@ -116,3 +118,53 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
   );
 };
 
+const AnimatedCircle = ({
+  cx,
+  cy,
+  r,
+  ...props
+}: React.SVGAttributes<SVGCircleElement>) => {
+  const animatedProps = useSpring({
+    cx,
+    cy,
+    r,
+  });
+  return (
+    <animated.circle
+      {...props}
+      r={animatedProps.r as any}
+      cx={animatedProps.cx as any}
+      cy={animatedProps.cy as any}
+      viewBox={""}
+    />
+  );
+};
+
+const AnimatedImage = ({
+  x,
+  y,
+  width,
+  height,
+  href,
+  style,
+  ...props
+}:({x:number; y:number; width:number; height:number; href:string, style:{ clipPath: string; }})) => {
+  const animatedProps = useSpring({
+    x,
+    y,
+    width,
+    height,
+    style,
+  });
+
+  return( <animated.image 
+        {...props} 
+        x={animatedProps.x} 
+        y={animatedProps.y} 
+        width={animatedProps.width} 
+        height={animatedProps.height} 
+        style={{ clipPath: 'circle()' }}
+        href={href} />
+        
+  )
+};

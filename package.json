@@ -19,6 +19,7 @@
     "overfast-api-client": "github:Sipixer/overfast-api-client",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-spring": "^9.7.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "vite-express": "*"

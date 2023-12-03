@@ -113,7 +113,7 @@ type PlayerCareerStatsPlatform = {
   competitive?: PlayerCareerStatsGamemode; //Stats in competitive
 };
 
-type PlayerCareerStatsGamemode = {
+export type PlayerCareerStatsGamemode = {
   heroes_comparisons: {
     time_played: PlayerCareerValueStat; //Time played on each hero
     games_won: PlayerCareerValueStat; //Games won on each hero
@@ -129,7 +129,7 @@ type PlayerCareerStatsGamemode = {
 
 
 
-type PlayerCareerValueStat = {
+export type PlayerCareerValueStat = {
   label: string;
   values: {
     hero: HEROES_KEYS;
@@ -239,4 +239,6 @@ export type CareerStatsDetailedCategoryStat = {
 }
 
 export type careerStatCategory = "assists" |"average" | "best" | "combat" | "game" | "hero_specific" | "match_awards"|  "miscellaneous";
-
+export type comparisonCategory = "time_played" | "games_won" | "weapon_accuracy" | "win_percentage" | "eliminations_per_life" | "critical_hit_accuracy" | "multikill_best" | "objective_kills"
+export type platform = "pc" | "console" | "both";
+export type mode = "quickplay" | "competitive" | "both";

@@ -1,4 +1,4 @@
-import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform} from "./types";
+import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform, comparisonCategory, PlayerCareerStatsGamemode} from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
     if (isComp == "both"){
@@ -51,21 +51,20 @@ function combinePCandConsole(pcStats: {hero: HEROES_KEYS; value: number;}[], con
 }
 
 
-//get playtime for specific hero
-export function getHeroPlaytime(playerData: PlayerCareer, heroName : HEROES_KEYS, platform: platform ,mode: mode):number{
-    
+//gets the value for a certain hero on a certain platform in a certain gamemode for a certain category
+export function getHeroComparison(playerData: PlayerCareer, heroName: HEROES_KEYS, platform: platform, mode: mode, category: comparisonCategory):number{
     if(platform != "both" && mode != "both"){
-        const arr = playerData?.stats?.[platform]?.[mode]?.heroes_comparisons.time_played.values;
+        const arr = playerData?.stats?.[platform]?.[mode]?.heroes_comparisons?.[category]?.values;
         if (!arr) {return 0;}
         const heroInfo = arr.find(item => item.hero === heroName);
         if (!heroInfo) {return 0;}
         return heroInfo.value;
     }else if(platform == "both" && mode != "both"){
-        return getHeroPlaytime(playerData, heroName, "pc", mode) + getHeroPlaytime(playerData, heroName, "console", mode);
+        return getHeroComparison(playerData, heroName, "pc", mode, category) + getHeroComparison(playerData, heroName, "console", mode, category);
     }else if(platform != "both" && mode == "both"){
-        return getHeroPlaytime(playerData, heroName, platform, "quickplay") + getHeroPlaytime(playerData, heroName, platform, "competitive");
+        return getHeroComparison(playerData, heroName, platform, "quickplay", category) + getHeroComparison(playerData, heroName, platform, "competitive", category);
     }else if(platform == "both" && mode == "both"){
-        return getHeroPlaytime(playerData, heroName, "pc", "both") + getHeroPlaytime(playerData, heroName, "console", "both");
+        return getHeroComparison(playerData, heroName, "pc", "both", category) + getHeroComparison(playerData, heroName, "console", "both", category);
     }
     return 0;
 }
