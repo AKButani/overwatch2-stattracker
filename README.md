@@ -68,10 +68,10 @@ docker run -it --rm -p 5173:5173 my-webapp bash
 
 ## Milestones
 Document here the major milestones of your code and future planned steps.\
-- [ ] Milestone 1: Basic Functionality
-  - [ ] Allow User Input
-  - [ ] Fetch the Data from the API
-  - [ ] Display the Data in a simple form
+- [X] Milestone 1: Basic Functionality [Link to Merge](course-fwe2023/students/project/express/abutani_project_express!3)
+  - [x] Allow User Input
+  - [x] Fetch the Data from the API
+  - [x] Display the Data in a simple form
 
 - [ ] Milestone 2
   - [ ] Sub-task: ...
