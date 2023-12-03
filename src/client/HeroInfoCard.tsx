@@ -85,11 +85,16 @@ function find_predicate(props: { HeroData: HeroComparison | undefined; HeroName:
     };
 }
 
+function compare(a: {hero: HEROES_KEYS, value: number},b: {hero: HEROES_KEYS, value: number}){
+    return b.value - a.value;
+}
+
 
 const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
+    let array = props.HeroData?.time_played.values.sort(compare);
     return (
         <>
-            {props.HeroData?.games_won.values.map((element) => {
+            {array?.map((element) => {
                 return (
                     <OneHeroInfoCard HeroData={props.HeroData} HeroName={element.hero} Herostats={props.Herostats}/>
                 )
