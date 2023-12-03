@@ -1,6 +1,8 @@
-import { HEROES_KEYS, PlayerCareer, PlayerInfo } from "./types";
+import { HEROES_KEYS, PlayerCareer } from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
+    //let t = playerData.stats?.pc?.competitive?.heroes_comparisons
+    
     if (isComp == "both"){
         return undefined;
     }else if(isComp){
@@ -48,4 +50,53 @@ function combinePCandConsole(pcStats: {hero: HEROES_KEYS; value: number;}[], con
         };
     });
     return combinedData;
+}
+
+export function getHeroRole(hero: HEROES_KEYS) {
+    switch (hero) {
+        case "dva":
+        case "orisa":
+        case "reinhardt":
+        case "roadhog":
+        case "sigma":
+        case "winston":
+        case "wrecking-ball":
+        case "zarya":
+        case "junker-queen":
+        case "ramattra":
+        case "doomfist":
+            return "tank";
+        case "ashe":
+        case "bastion":
+        
+        case "echo":
+        case "genji":
+        case "hanzo":
+        case "junkrat":
+        case "cassidy":
+        case "mei":
+        case "pharah":
+        case "reaper":
+        case "soldier-76":
+        case "sombra":
+        case "symmetra":
+        case "torbjorn":
+        case "tracer":
+        case "widowmaker":
+        case "sojourn":
+            return "damage";
+        case "kiriko":
+        case "ana":
+        case "baptiste":
+        case "brigitte":
+        case "lucio":
+        case "mercy":
+        case "moira":
+        case "zenyatta":
+        case "illari":
+            return "support";
+        default:
+            // Handle unknown heroes
+            return "";
+    }
 }

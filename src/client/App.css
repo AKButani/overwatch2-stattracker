@@ -1,1 +1,106 @@
 /*some style for app component*/
+.hero-card{
+    position: relative;
+    align-self: center;
+    justify-items: left;
+    
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "header header role"
+        "hero-image play-time kd"
+        "hero-image numWins winRate"
+        ". Add0 Add1"
+        ". Add2 Add3"
+        ". Add4 Add5"
+        ". Add6 Add7"
+        ". Add8 Add9"
+        ". Add10 Add11"     
+        ". Add12 Add13"
+        ". Add14 Add15"
+        ". Add16 Add17"
+        ". Add18 Add19"
+        "moreDetails moreDetails moreDetails" ;
+    width: 60%;
+    border: 5px solid  yellow;
+    border-radius: 10px;
+    background-color: navy;
+
+    transition: max-height 0.3s ease-in-out;
+    max-height: 1000px;
+    
+}
+.hero-card:hover{
+    
+    box-shadow: 0 0 11px rgba(255,255,255,1); 
+    
+}
+
+.hero-card.expanded{
+    max-height: none;
+}
+
+.hero-image{
+    grid-area: hero-image;
+}
+
+.play-time{
+    grid-area: play-time;
+}
+
+.kd{
+    grid-area: kd;
+}
+
+.numWins{
+    grid-area: numWins;
+}
+
+.winRate{
+    grid-area: winRate;
+}
+
+.moreDetails{
+    display: flex;
+    grid-area: moreDetails;
+    background-color: black;
+    justify-self: stretch;
+    justify-content: center;
+    /* align-content: center; */
+
+}
+
+.name{
+    padding-left: 5px;
+    grid-area: header;
+    font-weight: bold;
+    background-color: black;
+    border-bottom: 5px solid white;
+    justify-self: stretch;
+}
+
+.role{
+    padding-right: 5px;
+    grid-area: role;
+    background-color: black;
+    border-bottom: 5px solid white;
+    text-align: end;
+    justify-self: stretch;
+}
+
+.additional-rows{
+    max-height: 0;
+    display: none;
+}
+
+.additional-rows.visible{
+    max-height: 1000px;
+    display: inline;
+    /* background-color: aqua; */
+}
+
+.gridEntry{
+    padding-left: 10px;
+}

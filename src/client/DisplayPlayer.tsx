@@ -3,6 +3,8 @@ import { PlayerDataContext } from "./App";
 import PlayerAvatar from "./PlayerAvatar";
 import PlayerNameWithBackground from "./PlayerNameWithBackground";
 import {getPlayTime} from "./helperFunctions"
+import HeroInfoCard from "./HeroInfoCard";
+
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
@@ -23,6 +25,7 @@ const DisplayPlayer = () => {
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
                 {console.log(getPlayTime(playerData, true))}
+                <HeroInfoCard HeroData={playerData.stats?.pc?.competitive?.heroes_comparisons} Herostats={playerData.stats?.pc?.competitive?.career_stats}/>
             </>
         );
     }
