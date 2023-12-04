@@ -5,8 +5,15 @@ import { useState } from "react";
 
 const MARGIN_Y = 25;
 const MARGIN_X = 5;
-const COLORS = ["#e0ac2b", "#e85252", "#6689c6", "#9a6fb0", "#a53253"];
+// colors are weird, they differ between the two diagrams, 
+// comments below hold for QP
+const COLORS = ["#e85252", // damage node + support link color
+                "#5dde35", // support node + tank link color
+                "#2d33cf", // tank node + total link color
+                "#9a6fb0", // "total node" color
+                "#e3dc19"];// damage link color
 // if these are too small, it won't display properly
+const linkColor = "#f0d297";
 const WIDTH = 1000;
 const HEIGHT = 600;
 
@@ -226,7 +233,8 @@ const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
       <path
         key={i}
         d={path!}
-        stroke={colorScale(link.source)}
+        // stroke={colorScale(link.source)}
+        stroke={linkColor}
         fill="none"
         strokeOpacity={0.4}
         strokeWidth={link.width}
