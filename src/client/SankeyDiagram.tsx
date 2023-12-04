@@ -1,6 +1,7 @@
 import { scaleOrdinal } from "d3";
 import { sankey, sankeyJustify, sankeyLinkHorizontal } from "d3-sankey";
 import { PlayerCareer, PlayerCareerStatsGamemode } from "./types";
+import { useState } from "react";
 
 const MARGIN_Y = 25;
 const MARGIN_X = 5;
@@ -25,11 +26,6 @@ type Data = {
   nodes: NodeData[];
   links: LinkData[];
 };
-
-// type Data = {
-//   nodes: { name: string; category: string }[];
-//   links: { source: string; target: string; value: number }[];
-// };
 
 type SankeyProps = {
   width: number;
@@ -126,35 +122,53 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
   return {nodes: nodes, links:links};
 }
 
+
+
 export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
+  const [QPSorted, setQPSorted] = useState<boolean>(false);
+  const [CompSorted, setCompSorted] = useState<boolean>(false);
+
+  const handleQPClick = () => {
+    setQPSorted(!QPSorted);
+  }
+  const handleCompClick = () => {
+    setCompSorted(!CompSorted);
+  }
+
   // create nodes and links
   const comp_stats = props.playerData.stats!.pc!.competitive!;
   var comp_sankey = null;
   if (comp_stats) {
     const playtime_array = createPlaytimeArray(comp_stats);
     const data = convertToNodesLinks(playtime_array);
-    comp_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data});
+    comp_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data}, CompSorted);
   }
   const quickplay_stats = props.playerData.stats!.pc!.quickplay!;
-  console.log("Quickplay\n", quickplay_stats);
   var quickplay_sankey = null;
   if (quickplay_stats) {
     const playtime_array = createPlaytimeArray(quickplay_stats);
     const data = convertToNodesLinks(playtime_array);
-    console.log(data);
-    quickplay_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data});
+    quickplay_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data}, QPSorted);
   }
+
+  const buttonStyle = {
+    width: '200px',
+    padding: '10px',
+  };
+
   return  (
             <>
               {quickplay_sankey ? "Quickplay Playtime" : null}
               {quickplay_sankey}
+              <button style={buttonStyle} onClick={handleQPClick}>{!QPSorted ? 'Sort by playtime' : 'Unsort'}</button>
               {comp_sankey ? "Competitive Playtime" : null}
               {comp_sankey}
+              <button style={buttonStyle} onClick={handleCompClick}>{!CompSorted ? 'Sort by playtime' : 'Unsort'}</button>
             </>
           )
 }
 
-const Sankey = ({ width, height, data }: SankeyProps) => {
+const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
   const allGroups = [...new Set(data.nodes.map((d) => d.category))].sort();
   const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
@@ -164,7 +178,7 @@ const Sankey = ({ width, height, data }: SankeyProps) => {
   };
 
   // Set the sankey diagram properties
-  const sankeyGenerator = sankey<NodeData, LinkData>()
+  var sankeyGenerator = sankey<NodeData, LinkData>()
     .nodeWidth(32)
     .nodePadding(10)
     .extent([
@@ -174,8 +188,12 @@ const Sankey = ({ width, height, data }: SankeyProps) => {
     .nodeId((node) => node.name)
     .nodeAlign(sankeyJustify) // decides horizontal node position, doesn't matter here
     // comment out below to have
-    .nodeSort(nodeSort)
-    ; 
+    // .nodeSort(nodeSort)
+    ;
+
+    if (sorted) {
+      sankeyGenerator = sankeyGenerator.nodeSort(nodeSort);
+    }
     
 
   // Compute nodes and links positions
