@@ -4,6 +4,7 @@ import PlayerAvatar from "./PlayerAvatar";
 import PlayerNameWithBackground from "./PlayerNameWithBackground";
 import {getPlayTime} from "./helperFunctions"
 import HeroInfoCard from "./HeroInfoCard";
+import SankeyDiagram from "./SankeyDiagram";
 
 
 const DisplayPlayer = () => {
@@ -24,6 +25,7 @@ const DisplayPlayer = () => {
                     <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
+                <SankeyDiagram playerData={playerData}/>
                 {console.log(getPlayTime(playerData, true))}
                 <HeroInfoCard HeroData={playerData.stats?.pc?.competitive?.heroes_comparisons} Herostats={playerData.stats?.pc?.competitive?.career_stats}/>
             </>

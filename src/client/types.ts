@@ -114,7 +114,7 @@ type PlayerCareerStatsPlatform = {
   competitive?: PlayerCareerStatsGamemode; //Stats in competitive
 };
 
-type PlayerCareerStatsGamemode = {
+export type PlayerCareerStatsGamemode = {
   heroes_comparisons: HeroComparison;
   career_stats: HeroStats;
 };
