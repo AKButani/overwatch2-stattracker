@@ -3,8 +3,6 @@ import { PlayerDataContext } from "./App";
 import PlayerAvatar from "./PlayerAvatar";
 import PlayerNameWithBackground from "./PlayerNameWithBackground";
 import {getPlayTime} from "./helperFunctions"
-import { CircDiagramPicker } from "./CircularPacking/CircDiagramPicker";
-import { HEROES_KEYS, PlayerCareer } from "./types";
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
@@ -24,7 +22,6 @@ const DisplayPlayer = () => {
                     <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
                 } 
                 <PlayerAvatar imageUrl={playerData.summary.avatar}/>
-                <CircDiagramPicker width={500} height={500} data={playerData}/>
                 {console.log(getPlayTime(playerData, true))}
             </>
         );
