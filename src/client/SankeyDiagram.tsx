@@ -162,6 +162,8 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   const buttonStyle = {
     width: '250px',
     padding: '10px',
+    margin: '10px',
+    display: 'inline-block',
   };
 
   const buttonContainerStyle = {

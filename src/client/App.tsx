@@ -16,8 +16,8 @@ function App() {
   console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {
-
-    setUsername("emongg-11183"); // "WarDevil-11626", "Lemonade-11498", "emongg-11183"
+    // uncomment below for testing
+    // setUsername("emongg-11183"); // "WarDevil-11626", "Lemonade-11498", "emongg-11183"
     //testing
     //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
     try {
