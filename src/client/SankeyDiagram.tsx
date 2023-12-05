@@ -135,45 +135,49 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
 
 
 export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
-  const [QPSorted, setQPSorted] = useState<boolean>(false);
-  const [CompSorted, setCompSorted] = useState<boolean>(false);
+  const [sorted, setSorted] = useState<boolean>(false);
+  const [gameMode, setGameMode] = useState<string>("Comp")
 
-  const handleQPClick = () => {
-    setQPSorted(!QPSorted);
+  const handleGameModeClick = () => {
+    setGameMode(gameMode === "Comp" ? "QP" : "Comp");
   }
-  const handleCompClick = () => {
-    setCompSorted(!CompSorted);
+
+  const handleSortedClick = () => {
+    setSorted(!sorted);
   }
 
   // create nodes and links
-  const comp_stats = props.playerData.stats!.pc!.competitive!;
-  var comp_sankey = null;
-  if (comp_stats) {
-    const playtime_array = createPlaytimeArray(comp_stats);
-    const data = convertToNodesLinks(playtime_array);
-    comp_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data}, CompSorted);
+  const stats = props.playerData.stats;
+  if (stats === null || typeof stats === "undefined") {
+    return null;
   }
-  const quickplay_stats = props.playerData.stats!.pc!.quickplay!;
-  var quickplay_sankey = null;
-  if (quickplay_stats) {
-    const playtime_array = createPlaytimeArray(quickplay_stats);
-    const data = convertToNodesLinks(playtime_array);
-    quickplay_sankey = Sankey({width: WIDTH, height: HEIGHT, data: data}, QPSorted);
-  }
+  const gameModeStats = gameMode === "Comp" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
+  var sankey = null;
+  if (!gameModeStats) return null;
+
+  const playtime_array = createPlaytimeArray(gameModeStats);
+  const data = convertToNodesLinks(playtime_array);
+  sankey = Sankey({width: WIDTH, height: HEIGHT, data: data}, sorted);
 
   const buttonStyle = {
-    width: '200px',
+    width: '250px',
     padding: '10px',
   };
 
+  const buttonContainerStyle = {
+    display: 'inline-block',
+  }
+
   return  (
             <>
-              {quickplay_sankey ? "Quickplay Playtime" : null}
-              {quickplay_sankey}
-              <button style={buttonStyle} onClick={handleQPClick}>{!QPSorted ? 'Sort by playtime' : 'Unsort'}</button>
-              {comp_sankey ? "Competitive Playtime" : null}
-              {comp_sankey}
-              <button style={buttonStyle} onClick={handleCompClick}>{!CompSorted ? 'Sort by playtime' : 'Unsort'}</button>
+              <h1>
+              {gameMode === "Comp" ? "Competitive Playtime " : "Quickplay Playtime"}
+              </h1>
+              {sankey}
+              <div style={buttonContainerStyle}>
+                <button style={buttonStyle} onClick={handleGameModeClick}>{gameMode === "Comp" ? 'Switch to Quickplay' : 'Switch to Competitive'}</button>
+                <button style={buttonStyle} onClick={handleSortedClick}>{!sorted ? 'Sort by playtime' : 'Unsort'}</button>
+              </div>
             </>
           )
 }
