@@ -110,7 +110,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
             y={node.y - node.r}
             width={node.r * 2}
             height={node.r * 2}
-            href={"./public/Images/heroes/"+ node.data.name.toLocaleLowerCase() +".png"}
+            href={"/Images/heroes/"+ node.data.name.toLocaleLowerCase() +".png"}
             style={{ clipPath: 'circle()' }}
           />
         ))}

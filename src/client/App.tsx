@@ -18,7 +18,6 @@ function App() {
   const onUsernameSearch = async () => {
     //testing
     //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
-    setUsername("emongg-11183");
     try {
       let response = await fetch(`/players/${username}`)
       console.log(response.status)
