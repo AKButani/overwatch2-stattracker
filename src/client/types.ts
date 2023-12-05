@@ -116,7 +116,7 @@ type PlayerCareerStatsPlatform = {
 
 export type PlayerCareerStatsGamemode = {
   heroes_comparisons: HeroComparison;
-  career_stats: HeroStats;
+  career_stats?: HeroStats;
 };
 
 export type HeroComparison = {
