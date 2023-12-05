@@ -1,4 +1,4 @@
-import { HEROES_KEYS, PlayerCareer } from "./types";
+import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform, comparisonCategory, PlayerCareerStatsGamemode} from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
     //let t = playerData.stats?.pc?.competitive?.heroes_comparisons
@@ -99,4 +99,22 @@ export function getHeroRole(hero: HEROES_KEYS) {
             // Handle unknown heroes
             return "";
     }
+};
+
+//gets the value for a certain hero on a certain platform in a certain gamemode for a certain category
+export function getHeroComparison(playerData: PlayerCareer, heroName: HEROES_KEYS, platform: platform, mode: mode, category: comparisonCategory):number{
+    if(platform != "both" && mode != "both"){
+        const arr = playerData?.stats?.[platform]?.[mode]?.heroes_comparisons?.[category]?.values;
+        if (!arr) {return 0;}
+        const heroInfo = arr.find(item => item.hero === heroName);
+        if (!heroInfo) {return 0;}
+        return heroInfo.value;
+    }else if(platform == "both" && mode != "both"){
+        return getHeroComparison(playerData, heroName, "pc", mode, category) + getHeroComparison(playerData, heroName, "console", mode, category);
+    }else if(platform != "both" && mode == "both"){
+        return getHeroComparison(playerData, heroName, platform, "quickplay", category) + getHeroComparison(playerData, heroName, platform, "competitive", category);
+    }else if(platform == "both" && mode == "both"){
+        return getHeroComparison(playerData, heroName, "pc", "both", category) + getHeroComparison(playerData, heroName, "console", "both", category);
+    }
+    return 0;
 }
