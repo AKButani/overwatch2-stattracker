@@ -19,8 +19,8 @@ export const CircDiagramPicker = (props: { data: PlayerCareer; width: number; he
   
 
   return (
-    <div>
-      <label htmlFor="valueFunctionPicker">Select Value Function:</label>
+    <div style={{ textAlign: 'center' }}>
+      <label htmlFor="valueFunctionPicker"></label>
       <select id="valueFunctionPicker" onChange={handleSelectChange}>
         <option value="none">-</option>
         <option value="time_played">Playtime</option>
