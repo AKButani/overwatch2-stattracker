@@ -13,10 +13,7 @@
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@picocss/pico": "^1.5.10",
     "d3": "^7.8.5",
-<<<<<<< HEAD
     "d3-sankey": "^0.12.3",
-=======
->>>>>>> 5-circularpacking
     "express": "^4.18.2",
     "json-2-csv": "^4.1.0",
     "multer": "^1.4.5-lts.1",
@@ -30,10 +27,7 @@
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
-<<<<<<< HEAD
     "@types/d3-sankey": "^0.12.4",
-=======
->>>>>>> 5-circularpacking
     "@types/express": "^4.17.15",
     "@types/multer": "^1.4.7",
     "@types/node": "^18.11.18",
