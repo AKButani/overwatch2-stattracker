@@ -22,10 +22,10 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         const toggleDetails = () => {
             setShowDetails(!showDetails);
         };
-        let play_time = Data.time_played.values.find(find_predicate(props))?.value;
-        let kd = Data.eliminations_per_life.values.find(find_predicate(props))?.value;
-        let numWins = Data.games_won.values.find(find_predicate(props))?.value;
-        let winRate = Data.win_percentage.values.find(find_predicate(props))?.value;
+        let play_time = Data.time_played?.values.find(find_predicate(props))?.value;
+        let kd = Data.eliminations_per_life?.values.find(find_predicate(props))?.value;
+        let numWins = Data.games_won?.values.find(find_predicate(props))?.value;
+        let winRate = Data.win_percentage?.values.find(find_predicate(props))?.value;
         return (
             <div className={`hero-card ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
                 <div className="name gridEntry">
@@ -91,7 +91,7 @@ function compare(a: {hero: HEROES_KEYS, value: number},b: {hero: HEROES_KEYS, va
 
 
 const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
-    let array = props.HeroData?.time_played.values.sort(compare);
+    let array = props.HeroData?.time_played?.values.sort(compare);
     return (
         <>
             {array?.map((element) => {

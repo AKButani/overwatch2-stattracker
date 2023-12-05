@@ -138,7 +138,7 @@ export type PlayerCareerValueStat = {
     hero: HEROES_KEYS;
     value: number;
   }[];
-};
+} | null;
 
 type PlayerSummary = {
   username: string; //Username of the player
