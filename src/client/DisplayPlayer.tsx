@@ -20,14 +20,8 @@ const DisplayPlayer = () => {
         )
     } else{ 
         return (
-            <>
-                {/* I honestly don't like the namecard as of now, but maybe we can do something with it */}
-                { (!playerData.summary.namecard) ? 
-                    <h2> {playerData.summary.username} </h2>:
-                    // <PlayerNameWithBackground playerName={playerData.summary.username} imageUrl={playerData.summary.namecard!}/>
-                    <PlayerInfoBanner summary={playerData.summary}/>
-                } 
-                <PlayerAvatar imageUrl={playerData.summary.avatar}/>
+            <>            
+                <PlayerInfoBanner summary={playerData.summary}/>
                 <SankeyDiagram playerData={playerData}/>
                 <CircDiagramPicker width={500} height={500} data={playerData}/>
                 {console.log(getPlayTime(playerData, true))}

@@ -4,24 +4,9 @@ import "./PlayerInfoBanner.css"
 
 
 const PlayerInfoBanner = (props: {summary: PlayerSummary}) => {
-    const playerBannerStyle = {
-        display: 'grid',
-        gridTemplateAreas: `
-          "banner banner banner"
-          "avatar info ranks"
-          "selector selector selector"
-        `,
-        rowGap: '10px',
-        columnGap: '10px',
-        gridTemplateRows: '50px auto auto',
-        backgroundImage: `url(${props.summary.namecard})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        color: 'white',
-        gridTemplateColumns: ''
-      };
     return (
-    <div className="player-banner" style={{background: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${props.summary.namecard})`}}>
+    <div className="player-banner" style={{background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.summary.namecard})`,
+    backgroundPosition: 'center', backgroundSize: 'cover'}}>
         {/* <div style={{gridArea: "banner", height: 50, overflow: "hidden"}}>
             <img src={props.summary.namecard} />
         </div> */}
@@ -31,7 +16,7 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary}) => {
         </div>
 
         <div style={{gridArea: "info"}}>
-            {props.summary.username.toUpperCase()} <br />
+            <h1>{props.summary.username.toUpperCase()} </h1>
             {props.summary.title}
         </div>
         
