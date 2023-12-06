@@ -16,6 +16,7 @@ export type HEROES_KEYS =
   | "junkrat"
   | "kiriko"
   | "lucio"
+  | "mauga"
   | "mei"
   | "mercy"
   | "moira"
