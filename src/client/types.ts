@@ -86,12 +86,12 @@ type PlayerEndorsement = {
   frame: string; //URL of the endorsement frame corresponding to the level
 };
 
-type PlatformCompetitiveRank = {
+export type PlatformCompetitiveRank = {
   pc?: CompetitiveRank; //Competitive rank on PC
   console?: CompetitiveRank; //Competitive rank on console
 };
 
-type RoleDetails = {
+export type RoleDetails = {
   division: CompetitiveDivision; //Division of the rank (bronze, silver, gold, platinum, diamond, master, grandmaster)
   tier: number; //Tier inside the division, lower is better (1 to 5)
   role_icon: RoleIconUri; //URL the role icon
@@ -140,7 +140,7 @@ export type PlayerCareerValueStat = {
   }[];
 } | null;
 
-type PlayerSummary = {
+export type PlayerSummary = {
   username: string; //Username of the player
   avatar?: string; //URL of the avatar of the player
   title?: string; //Title of the player

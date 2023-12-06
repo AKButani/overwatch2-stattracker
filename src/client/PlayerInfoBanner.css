@@ -1,0 +1,29 @@
+.player-banner{
+    display: grid;
+    grid-template-areas: 
+    "banner banner banner"
+    "avatar info ranks"
+    "selector selector selector";
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-rows: 50px auto auto;
+    grid-template-columns: auto 2fr 1fr;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ranks-grid{
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    justify-items: center;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.rank-icon{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
