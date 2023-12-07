@@ -27,8 +27,8 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
         </div>
         <Tabs style={{ gridArea: "selector" }} selectedIndex={props.tabIndex} onSelect={(index) => props.setTabIndex(index)}>
             <TabList>
-                <Tab>Visualisations</Tab>
-                <Tab>Heroes</Tab>
+                <Tab className="react-tabs__tab tab">Visualisations</Tab>
+                <Tab className="react-tabs__tab tab">Heroes</Tab>
             </TabList>
             <TabPanel></TabPanel>
             <TabPanel></TabPanel>
