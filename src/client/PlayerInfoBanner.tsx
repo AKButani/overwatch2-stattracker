@@ -1,9 +1,11 @@
 import { PlatformCompetitiveRank, PlayerSummary, RoleDetails } from "./types";
-import "./PlayerInfoBanner.css"
+import "./PlayerInfoBanner.css";
+import {Tabs, TabList, Tab, TabPanel} from "react-tabs";
+import 'react-tabs/style/react-tabs.css';
 
 
 
-const PlayerInfoBanner = (props: {summary: PlayerSummary}) => {
+const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>}) => {
     return (
     <div className="player-banner" style={{background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.summary.namecard})`,
     backgroundPosition: 'center', backgroundSize: 'cover'}}>
@@ -23,6 +25,16 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary}) => {
         <div style={{gridArea: "ranks"}}>
            <DisplayRanks comp={props.summary.competitive} />
         </div>
+        <Tabs style={{ gridArea: "selector" }} selectedIndex={props.tabIndex} onSelect={(index) => props.setTabIndex(index)}>
+            <TabList>
+                <Tab>Visualisations</Tab>
+                <Tab>Heroes</Tab>
+            </TabList>
+            <TabPanel></TabPanel>
+            <TabPanel></TabPanel>
+        </Tabs>
+
+        
 
     </div>
     );

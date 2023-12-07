@@ -10,6 +10,7 @@
     grid-template-columns: auto 2fr 1fr;
     padding-left: 10px;
     padding-right: 10px;
+    align-self: stretch;
 }
 
 .ranks-grid{

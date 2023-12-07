@@ -4,8 +4,10 @@ import './App.css';
 import { useState } from "react";
 import { getHeroRole } from "./helperFunctions";
 
+type sortingType = "time_played" | "eliminations_per_life" | "games_won" | "win_percentage";
 
 const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
+    
     let Data = props.HeroData;
     let heroStats = props.Herostats; //this is all Herostats
     //all categories for a specific hero e.g. best, average, etc.
@@ -90,10 +92,32 @@ function compare(a: {hero: HEROES_KEYS, value: number},b: {hero: HEROES_KEYS, va
 }
 
 
+const SortSelector = (props: {setSortBy: React.Dispatch<React.SetStateAction<sortingType>>}) => {
+
+    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        props.setSortBy(event.target.value as sortingType);    
+    }
+
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <label htmlFor="heroCardSort"></label>
+            <select id="heroCardSortPicker" onChange={handleSelectChange}>
+                <option value="time_played">Playtime</option>
+                <option value="games_won">Games Won</option>
+                <option value="win_percentage">Win Percentage</option>
+                <option value="eliminations_per_life">Eliminations per Life</option>
+            </select>
+        </div>
+    );
+}
+
 const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
-    let array = props.HeroData?.time_played?.values.sort(compare);
+    let [sortBy, setSortBy] = useState<sortingType>("time_played");
+    
+    let array = props.HeroData?.[sortBy]?.values.sort(compare);
     return (
         <>
+            <SortSelector setSortBy={setSortBy}/>
             {array?.map((element) => {
                 return (
                     <OneHeroInfoCard HeroData={props.HeroData} HeroName={element.hero} Herostats={props.Herostats}/>
