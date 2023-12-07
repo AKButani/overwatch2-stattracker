@@ -104,3 +104,17 @@
 .gridEntry{
     padding-left: 10px;
 }
+
+/* Search Bar */
+
+.search-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    height: fit-content;
+    gap: 10px
+}
