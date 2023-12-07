@@ -8,6 +8,13 @@ const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<Rea
     props.setSearchTerm(mod_username);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      // Call the onSearch function when Enter key is pressed
+      props.onSearch();
+    }
+  };
+
   return (
     <div className="search-bar">
       <input
@@ -15,6 +22,7 @@ const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<Rea
         placeholder="Enter Player name (eg. emongg-11183)"
         value={props.searchTerm}
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         style={{ marginBottom: 0, width: '500px', border: 'none'}}
       />
       <FontAwesomeIcon onClick={props.onSearch} icon={faSearch} size='lg' />
