@@ -1,6 +1,8 @@
 import * as d3 from "d3"; // we will need d3.js
-import { HEROES_KEYS, PlayerCareer } from "../types";
+import { HEROES_KEYS, PlayerCareer, Role} from "../types";
 import { useSpring, animated, SpringValue } from "react-spring";
+import {useState} from "react";
+import { getHeroRole } from "../helperFunctions";
 const heroes: HEROES_KEYS[] = [
   "ana",
   "ashe",
@@ -40,6 +42,26 @@ const heroes: HEROES_KEYS[] = [
   "zarya",
   "zenyatta",
 ];
+
+
+const getRoleColor = (role:Role): string => {
+  const colorMap: Record<string, string> = {
+    tank: "blue",
+    damage: "red",
+    support: "gold"
+  }
+  return colorMap[role] || 'rgba(255, 255, 255, 1)';
+}
+
+const getHeroColor = (hero: HEROES_KEYS): string => {
+  // Define your color mapping here
+  const role = getHeroRole(hero);
+
+  if(role == ""){
+    return "black";
+  }
+  return getRoleColor(role);
+};
 
 export type CircularPackingProps = {
   width: number;
@@ -95,10 +117,8 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
             cx={node.x}
             cy={node.y}
             r={node.r}
-            stroke="#553C9A"
-            strokeWidth={2}
-            fill="#B794F4"
-            fillOpacity={0.2}
+            fill={getHeroColor((node.data.name as string).toLocaleLowerCase() as HEROES_KEYS)}
+            fillOpacity={0.5}
           />
         ))}
         {root
@@ -125,18 +145,32 @@ const AnimatedCircle = ({
   r,
   ...props
 }: React.SVGAttributes<SVGCircleElement>) => {
+
+  const [isHover, setIsHover] = useState(false);
+  const handleMouseHover = () => {
+    setIsHover(true);
+  };
+  const handleMouseOut = () => {
+    setIsHover(false);
+  };
   const animatedProps = useSpring({
     cx,
     cy,
     r,
   });
+
   return (
     <animated.circle
       {...props}
-      r={animatedProps.r as any}
+      r={r}
       cx={animatedProps.cx as any}
       cy={animatedProps.cy as any}
+      onMouseOver={handleMouseHover}
+      onMouseLeave={handleMouseOut}
       viewBox={""}
+      stroke={isHover ? "rgba(255, 255, 255, 1)": "rgba(0, 0, 0, 1)"}
+      strokeWidth={isHover ? 8: 2}
+      pointerEvents="all"
     />
   );
 };
@@ -165,7 +199,9 @@ const AnimatedImage = ({
         width={animatedProps.width} 
         height={animatedProps.height} 
         style={{ clipPath: 'circle()' }}
-        href={href} />
+        pointerEvents="none"
+        href={href} 
+        />
         
   )
 };
