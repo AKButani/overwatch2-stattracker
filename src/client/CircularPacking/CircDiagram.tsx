@@ -43,6 +43,24 @@ const heroes: HEROES_KEYS[] = [
   "zenyatta",
 ];
 
+export type CircularPackingProps = {
+  width: number;
+  height: number;
+  data: PlayerCareer;
+  valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number;
+};
+type TreeNode = {
+  type: 'node';
+  value: number;
+  name: string;
+  children: Tree[];
+};
+type TreeLeaf = {
+  type: 'leaf';
+  name: string;
+  value: number;
+};
+type Tree = TreeNode | TreeLeaf;
 
 const getRoleColor = (role:Role): string => {
   const colorMap: Record<string, string> = {
@@ -63,24 +81,6 @@ const getHeroColor = (hero: HEROES_KEYS): string => {
   return getRoleColor(role);
 };
 
-export type CircularPackingProps = {
-  width: number;
-  height: number;
-  data: PlayerCareer;
-  valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number;
-};
-type TreeNode = {
-  type: 'node';
-  value: number;
-  name: string;
-  children: Tree[];
-};
-type TreeLeaf = {
-  type: 'leaf';
-  name: string;
-  value: number;
-};
-type Tree = TreeNode | TreeLeaf;
 export const CircDiagram = (props:{ width: number, height:number, data:PlayerCareer, valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number}) => {
   
   //build data structure the data    

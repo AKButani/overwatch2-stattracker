@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import SearchBar from "./SearchBar";
 import { PlayerCareer, PlayerInfoContext } from "./types";
 import DisplayPlayer from "./DisplayPlayer";
+import { Bookmarks } from "./bookmarks";
 /*Test Player: WarDevil#11626*/
 
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
@@ -38,6 +39,18 @@ function App() {
         const data = await response.json();
         console.log('Data:', data);
         setPlayerData(data);
+        
+
+        //local storage handling for bookmarks
+        const storedBookmarked = localStorage.getItem("bookmarkedPlayers");
+        var bookmarks : Array<string> = [];
+        if(storedBookmarked != null){
+          bookmarks = JSON.parse(storedBookmarked);
+        }
+        const bookmarkSet = new Set(bookmarks);
+        bookmarkSet.add(username);
+        bookmarks = [...bookmarkSet];
+        localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
       }
     } catch (error) {
       // Handle network errors or other exceptions
@@ -51,6 +64,7 @@ function App() {
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <Layout>
         <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+        <Bookmarks onSearch={onUsernameSearch} setSearchTerm={setUsername}></Bookmarks>
         <DisplayPlayer />
       </Layout>
     </PlayerDataContext.Provider>

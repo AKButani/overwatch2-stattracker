@@ -1,6 +1,7 @@
 // SearchBar.js
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Bookmarks } from './bookmarks';
 
 const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<React.SetStateAction<string>>, onSearch: () => void}) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
