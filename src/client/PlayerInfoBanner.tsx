@@ -1,4 +1,4 @@
-import { PlatformCompetitiveRank, PlayerSummary, RoleDetails } from "./types";
+import { PlatformCompetitiveRank, PlayerSummary } from "./types";
 import "./PlayerInfoBanner.css";
 import {Tabs, TabList, Tab, TabPanel} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
@@ -17,8 +17,8 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
             <img src={props.summary.avatar}/>
         </div>
 
-        <div style={{gridArea: "info"}}>
-            <h1>{props.summary.username.toUpperCase()} </h1>
+        <div style={{gridArea: "info"}} className="lightGrey">
+            <h1 className="white">{props.summary.username.toUpperCase()} </h1>
             {props.summary.title}
         </div>
         
@@ -27,8 +27,8 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
         </div>
         <Tabs style={{ gridArea: "selector" }} selectedIndex={props.tabIndex} onSelect={(index) => props.setTabIndex(index)}>
             <TabList>
-                <Tab className="react-tabs__tab tab">Visualisations</Tab>
-                <Tab className="react-tabs__tab tab">Heroes</Tab>
+                <Tab className="react-tabs__tab tab lightGrey">Overview</Tab>
+                <Tab className="react-tabs__tab tab lightGrey">Heroes</Tab>
             </TabList>
             <TabPanel></TabPanel>
             <TabPanel></TabPanel>

@@ -1,8 +1,5 @@
 import { useContext, useState } from "react";
 import { PlayerDataContext } from "./App";
-import PlayerAvatar from "./PlayerAvatar";
-import PlayerNameWithBackground from "./PlayerNameWithBackground";
-import {getPlayTime} from "./helperFunctions"
 import HeroInfoCard from "./HeroInfoCard";
 import SankeyDiagram from "./SankeyDiagram";
 import { CircDiagramPicker } from "./CircularPacking/CircDiagramPicker";

@@ -32,3 +32,24 @@ body main {
     }
   }
 }
+
+/* Styles for light mode */
+@media (prefers-color-scheme: light) {
+
+  /* Additional styles for light mode */
+  .lightGrey {
+    color:rgb(217, 217, 217);
+  }
+
+  .white {
+    color:white;
+  }
+
+  .gridEntry {
+    color: rgb(200, 200, 200);
+  }
+
+  .search-bar {
+    border: 2px solid rgb(100, 100, 100);
+  }
+}
