@@ -1,4 +1,5 @@
-import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform, comparisonCategory, PlayerCareerStatsGamemode} from "./types";
+import { mode } from "d3-array";
+import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform, comparisonCategory, PlayerCareerStatsGamemode, mode} from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
     //let t = playerData.stats?.pc?.competitive?.heroes_comparisons
@@ -117,4 +118,13 @@ export function getHeroComparison(playerData: PlayerCareer, heroName: HEROES_KEY
         return getHeroComparison(playerData, heroName, "pc", "both", category) + getHeroComparison(playerData, heroName, "console", "both", category);
     }
     return 0;
+}
+
+//takes the index of the mode selection Tab and returns the mode
+export function getModefromTab(index: number){
+    if (index == 0){
+        return "quickplay";
+    }else{
+        return "competitive";
+    }
 }

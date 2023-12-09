@@ -105,7 +105,7 @@ type CompetitiveRank = {
   support: RoleDetails; //Details about the support rank
 };
 
-type PlayerCareerStats = {
+export type PlayerCareerStats = {
   pc?: PlayerCareerStatsPlatform; //Stats on PC
   console?: PlayerCareerStatsPlatform; //Stats on console
 };
