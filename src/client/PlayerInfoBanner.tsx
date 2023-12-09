@@ -1,4 +1,4 @@
-import { PlatformCompetitiveRank, PlayerSummary } from "./types";
+import { PlatformCompetitiveRank, PlayerSummary, mode } from "./types";
 import "./PlayerInfoBanner.css";
 import {Tabs, TabList, Tab, TabPanel} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
@@ -30,8 +30,8 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
                 <Tab className="react-tabs__tab tab lightGrey">Overview</Tab>
                 <Tab className="react-tabs__tab tab lightGrey">Heroes</Tab>
             </TabList>
-            <TabPanel></TabPanel>
-            <TabPanel></TabPanel>
+            {/* <TabPanel></TabPanel>
+            <TabPanel></TabPanel> */}
         </Tabs>
 
         
