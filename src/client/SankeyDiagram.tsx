@@ -7,13 +7,15 @@ const MARGIN_Y = 25;
 const MARGIN_X = 5;
 // colors are weird, they differ between the two diagrams, 
 // comments below hold for QP
-const COLORS = ["#e85252", // damage node + support link color
-                "#5dde35", // support node + tank link color
-                "#2d33cf", // tank node + total link color
-                "#9a6fb0", // "total node" color
+const COLORS = ["#f23a22", // damage node + support link color alt: #FF7F00  #e85252
+                "#00FF00", // support node + tank link color
+                "#00BFFF", // tank node + total link color
+                "#f99e1a", // "total node" color
                 "#e3dc19"];// damage link color
+
+const lightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+const linkColor = lightMode ? "#8c8c89" : "#d9d9d0";
 // if these are too small, it won't display properly
-const linkColor = "#f0d297";
 const WIDTH = 1000;
 const HEIGHT = 600;
 
@@ -119,8 +121,16 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
       role = "Support";
       heroRoleTable[role] = "Support";
     };
-    nodes.push({name: hero, category: role, weight: time});
-    links.push({source: role, target: hero, value: time / timeConverter})
+    var hero_cap = hero.charAt(0).toUpperCase() + hero.slice(1);
+    if (hero_cap === "Wrecking-ball") {
+      hero_cap = "Wrecking Ball";
+    } else if (hero_cap === "Junker-queen") {
+      hero_cap = "Junker Queen";
+    } else if (hero_cap === "Soldier-76") {
+      hero_cap = "Soldier: 76";
+    }
+    nodes.push({name: hero_cap, category: role, weight: time});
+    links.push({source: role, target: hero_cap, value: time / timeConverter})
     timePerRole[role] += time;
   });
   roles.forEach((role) => {
@@ -224,7 +234,7 @@ const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
           width={sankeyGenerator.nodeWidth()}
           x={node.x0}
           y={node.y0!}
-          stroke={"black"}
+          // stroke={"black"} // uncomment to paint surrounding box
           fill={colorScale(node.category)}
           fillOpacity={1}
           rx={0.5}
