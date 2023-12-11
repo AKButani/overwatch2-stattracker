@@ -28,20 +28,22 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         let kd = Data.eliminations_per_life?.values.find(find_predicate(props))?.value;
         let numWins = Data.games_won?.values.find(find_predicate(props))?.value;
         let winRate = Data.win_percentage?.values.find(find_predicate(props))?.value;
+        let role = getHeroRole(props.HeroName as HEROES_KEYS);
+        let role_upper = role.charAt(0).toUpperCase() + role.slice(1);
         return (
             <div className={`hero-card ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
                 <div className="name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
                 <div className="role gridEntry">
-                    {getHeroRole(props.HeroName as HEROES_KEYS)}
+                    {role_upper}
                 </div>
                 <div className="hero-image">
                     <img src={"/Images/heroes/" + props.HeroName.toLowerCase() + ".png"} width={200} height={200}/>
                 </div>
                 <div className="data gridEntry">
                     <strong>Play Time </strong><br />
-                    {Math.round(play_time! / 60)} minutes
+                    {calculate_time(play_time!)}
                 </div>
                 <div className="data gridEntry">
                     <strong>Average Eliminations Per Life</strong> <br />
@@ -69,7 +71,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                 }
 
                 <div className="moreDetails">
-                    <i className="fa fa-angle-down" />
+                    {showDetails ? <i className="fa fa-angle-up" /> : <i className="fa fa-angle-down" />}
                 </div>
             </div>
         );
@@ -79,7 +81,15 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
     
 };
 
-
+function calculate_time(seconds: number) {
+    const hours = Math.floor(seconds/3600);
+    const mins = Math.ceil((seconds % 3600) / 60);
+    return (
+        <>
+            {hours > 0 ? (hours > 1 ? hours + " hours" : "1 hour") : ""} {mins > 1 ? mins + " minutes": "1 minute"}
+        </>
+    );
+}
 
 function find_predicate(props: { HeroData: HeroComparison | undefined; HeroName: string; }): (value: { hero: HEROES_KEYS; value: number; }, index: number, obj: { hero: HEROES_KEYS; value: number; }[]) => unknown {
     return function (entry) {

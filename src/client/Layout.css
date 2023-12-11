@@ -36,20 +36,19 @@ body main {
 /* Styles for light mode */
 @media (prefers-color-scheme: light) {
 
-  /* Additional styles for light mode */
-  .lightGrey {
+  .lightGrey { /* player title and tab names */
     color:rgb(217, 217, 217);
   }
 
-  .white {
+  .white { /* player name */
     color:white;
   }
 
-  .gridEntry {
+  .gridEntry { /* text in hero cards */
     color: rgb(200, 200, 200);
   }
 
-  .search-bar {
-    border: 2px solid rgb(100, 100, 100);
+  .search-bar { /* box around search bar */
+    border: 2px solid rgb(217, 217, 217);
   }
 }
