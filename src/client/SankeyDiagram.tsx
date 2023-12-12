@@ -1,7 +1,8 @@
 import { scaleOrdinal } from "d3";
 import { sankey, sankeyJustify, sankeyLinkHorizontal } from "d3-sankey";
 import { HeroStatCat, PlayerCareer, PlayerCareerStatsGamemode } from "./types";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SelectedModeContext } from "./DisplayPlayer";
 
 const MARGIN_Y = 25;
 const MARGIN_X = 5;
@@ -135,23 +136,27 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
 
 
 export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
-  const [sorted, setSorted] = useState<boolean>(false);
-  const [gameMode, setGameMode] = useState<string>("Comp")
+  const stats = props.playerData.stats;
+  if (stats?.pc?.competitive){ //kind of an ugly way, but works for now, in case it is a console player
+    console.log("in sankeydiagram");
+    const [sorted, setSorted] = useState<boolean>(false);
+  // const [gameMode, setGameMode] = useState<string>("Comp");
+  const selectedMode = useContext(SelectedModeContext);
 
-  const handleGameModeClick = () => {
-    setGameMode(gameMode === "Comp" ? "QP" : "Comp");
-  }
+  // const handleGameModeClick = () => {
+  //   setGameMode(gameMode === "Comp" ? "QP" : "Comp");
+  // }
 
   const handleSortedClick = () => {
     setSorted(!sorted);
   }
 
   // create nodes and links
-  const stats = props.playerData.stats;
+  
   if (stats === null || typeof stats === "undefined") {
     return null;
   }
-  const gameModeStats = gameMode === "Comp" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
+  const gameModeStats = selectedMode === "competitive" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
   var sankey = null;
   if (!gameModeStats) return null;
 
@@ -173,15 +178,19 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   return  (
             <>
               <h1>
-              {gameMode === "Comp" ? "Competitive Playtime " : "Quickplay Playtime"}
+              {selectedMode === "competitive" ? "Competitive Playtime " : "Quickplay Playtime"}
               </h1>
               {sankey}
               <div style={buttonContainerStyle}>
-                <button style={buttonStyle} onClick={handleGameModeClick}>{gameMode === "Comp" ? 'Switch to Quickplay' : 'Switch to Competitive'}</button>
+                {/* <button style={buttonStyle} onClick={handleGameModeClick}>{gameMode === "Comp" ? 'Switch to Quickplay' : 'Switch to Competitive'}</button> */}
                 <button style={buttonStyle} onClick={handleSortedClick}>{!sorted ? 'Sort by playtime' : 'Unsort'}</button>
               </div>
             </>
           )
+  }else{
+    return (<></>);
+  }
+  
 }
 
 const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {

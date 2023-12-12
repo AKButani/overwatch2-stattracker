@@ -16,7 +16,7 @@
 .ranks-grid{
     display: grid;
     grid-template-rows: repeat(2, auto);
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     align-items: center;
     justify-items: center;
     row-gap: 10px;

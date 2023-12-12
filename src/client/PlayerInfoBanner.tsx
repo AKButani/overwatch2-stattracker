@@ -44,25 +44,53 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
     
     return (
         <div className="ranks-grid">
+            {props.comp?.pc && (
+                <>
+                <div> 
+                
+                </div>
+                <div>
+                    <img src={props.comp?.pc?.damage?.role_icon} width={20} height={20}/> 
+                </div>
+                <div>
+                    <img src={props.comp?.pc?.support?.role_icon} width={20} height={20}/> 
+                </div>
+                <div>
+                    <img src={props.comp?.pc?.tank?.role_icon} width={20} height={20}/> 
+                </div>
+                <div>
+                    PC
+                </div>
+    
+                <div>
+                    <img src={props.comp?.pc?.damage?.rank_icon} width={50} height={50}/> 
+                </div>
+                <div>
+                    <img src={props.comp?.pc?.support?.rank_icon} width={50} height={50}/> 
+                </div>
+                <div>
+                    <img src={props.comp?.pc?.tank?.rank_icon} width={50} height={50}/> 
+                </div>
+                </>
+            )}
+            
+            {props.comp?.console && (
+            <>
             <div>
-                <img src={props.comp?.pc?.damage.role_icon} width={20} height={20}/> 
-            </div>
-            <div>
-                <img src={props.comp?.pc?.support.role_icon} width={20} height={20}/> 
-            </div>
-            <div>
-                <img src={props.comp?.pc?.tank.role_icon} width={20} height={20}/> 
+                CONSOLE
             </div>
 
             <div>
-                <img src={props.comp?.pc?.damage.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.damage.rank_icon} width={50} height={50}/> 
             </div>
             <div>
-                <img src={props.comp?.pc?.support.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.support.rank_icon} width={50} height={50}/> 
             </div>
             <div>
-                <img src={props.comp?.pc?.tank.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.tank.rank_icon} width={50} height={50}/> 
             </div>
+            </>
+            )}
 
         </div>
     )
