@@ -74,7 +74,7 @@ Document here the major milestones of your code and future planned steps.\
   - [x] Display the Data in a simple form
 
 - [ ] Milestone 2
-  - [ ] Sub-task: ...
+  - [ ] Sub-task: Add bookmarks
   - [ ] Sub-task: ...
 
 Create a list subtask.\
