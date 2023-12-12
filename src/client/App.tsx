@@ -81,7 +81,6 @@ function App() {
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <Layout>
         <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
-        <Bookmarks onSearch={onUsernameSearch} setSearchTerm={setUsername}></Bookmarks>
         <DisplayPlayer />
       </Layout>
     </PlayerDataContext.Provider>
