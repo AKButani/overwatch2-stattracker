@@ -56,7 +56,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                 </div>
                 <div className="data gridEntry">
                     <strong> Winrate </strong> <br />
-                    {winRate}%
+                    {winRate ?winRate+"%" : "-"}
                 </div>
                 {(heroSpecificInfo != undefined) && (
                     <>
