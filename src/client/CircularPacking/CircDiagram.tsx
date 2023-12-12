@@ -104,7 +104,12 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
   const packGenerator = d3.pack<Tree>().size([props.width, props.height]).padding(4);
   const root = packGenerator(hierarchy as d3.HierarchyNode<Tree>);
   console.log("root", root);
-
+  
+  const initialHeroHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
+    (acc, hero) => ({ ...acc, [hero]: false }),
+    {} as Record<HEROES_KEYS, boolean>
+  );
+  const [heroHoverState, setHeroHoverState] = useState<Record<HEROES_KEYS, boolean>>(initialHeroHoverState);
   
   return (
     <svg width={props.width} height={props.height} style={{ display: "inline-block" }}>
@@ -114,11 +119,14 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         .map((node) => (
           <AnimatedCircle
             key={node.data.name}
+            hero = {node.data.name}
             cx={node.x}
             cy={node.y}
             r={node.r}
-            fill={getHeroColor((node.data.name as string).toLocaleLowerCase() as HEROES_KEYS)}
+            fill={"black"}
             fillOpacity={0.5}
+            heroHoverState = {setHeroHoverState}
+            isHover = {heroHoverState}
           />
         ))}
         {root
@@ -127,31 +135,68 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         .map((node) => (
           <AnimatedImage
             key={node.data.name}
+            hero={node.data.name}
             x={node.x - node.r}
             y={node.y - node.r}
             width={node.r * 2}
             height={node.r * 2}
             href={"/Images/heroes/"+ node.data.name.toLocaleLowerCase() +".png"}
             style={{ clipPath: 'circle()' }}
+            heroHoverState = {setHeroHoverState}
+            isHover = {heroHoverState}
+            
           />
+        ))}
+
+        {root
+        .descendants()
+        .slice(1)
+        .map((node) => (
+          <AnimatedText
+          fon
+            key={node.data.name}
+            hero={node.data.name}
+            x={node.x}
+            y={node.y}
+            fontSize={13}
+            fontWeight={0.1}
+            textAnchor="middle"
+            alignmentBaseline="middle"
+            heroHoverState = {setHeroHoverState}
+            isHover = {heroHoverState}
+          >
+            {node.value}
+          </AnimatedText>
         ))}
     </svg>
   );
 };
 
+
+
+
 const AnimatedCircle = ({
+  key,
+  hero,
   cx,
   cy,
   r,
+  heroHoverState,
+  isHover,
   ...props
-}: React.SVGAttributes<SVGCircleElement>) => {
+}) => {
 
-  const [isHover, setIsHover] = useState(false);
+  const initialHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
+    (acc, hero) => ({ ...acc, [hero]: false }),
+    {} as Record<HEROES_KEYS, boolean>
+  );
+  const newHoverState = initialHoverState;
+  newHoverState[hero as HEROES_KEYS] = true;
   const handleMouseHover = () => {
-    setIsHover(true);
+    heroHoverState(newHoverState);
   };
   const handleMouseOut = () => {
-    setIsHover(false);
+    heroHoverState(initialHoverState);
   };
   const animatedProps = useSpring({
     cx,
@@ -168,8 +213,8 @@ const AnimatedCircle = ({
       onMouseOver={handleMouseHover}
       onMouseLeave={handleMouseOut}
       viewBox={""}
-      stroke={isHover ? "rgba(255, 255, 255, 1)": "rgba(0, 0, 0, 1)"}
-      strokeWidth={isHover ? 8: 2}
+      stroke={isHover[hero as HEROES_KEYS] ? "rgba(255, 255, 255, 1)": "rgba(0, 0, 0, 1)"}
+      strokeWidth={isHover[hero as HEROES_KEYS] ? 8: 2}
       pointerEvents="all"
     />
   );
@@ -178,18 +223,22 @@ const AnimatedCircle = ({
 const AnimatedImage = ({
   x,
   y,
+  hero,
   width,
   height,
   href,
   style,
+  heroHoverState,
+  isHover,
   ...props
-}:({x:number; y:number; width:number; height:number; href:string, style:{ clipPath: string; }})) => {
+}) => {
   const animatedProps = useSpring({
     x,
     y,
     width,
     height,
     style,
+    ...props
   });
 
   return( <animated.image 
@@ -197,11 +246,50 @@ const AnimatedImage = ({
         x={animatedProps.x} 
         y={animatedProps.y} 
         width={animatedProps.width} 
-        height={animatedProps.height} 
-        style={{ clipPath: 'circle()' }}
+        height={animatedProps.height}
+        style={isHover[hero] ? {clipPath: 'circle()', opacity: 0.2} : {clipPath: 'circle()'}}
         pointerEvents="none"
         href={href} 
         />
         
   )
 };
+
+const AnimatedText = ({
+  x,
+  y,
+  hero,
+  heroHoverState,
+  isHover,
+  ...props
+}) => 
+{
+  const initialHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
+    (acc, hero) => ({ ...acc, [hero]: false }),
+    {} as Record<HEROES_KEYS, boolean>
+  );
+  const newHoverState = initialHoverState;
+  newHoverState[hero as HEROES_KEYS] = true;
+  const handleMouseHover = () => {
+    heroHoverState(newHoverState);
+  };
+  const handleMouseOut = () => {
+    heroHoverState(initialHoverState);
+  };
+  const animatedProps = useSpring({
+    x,
+    y,
+  });
+  return (
+    <animated.text
+      {...props}
+      onMouseOver={handleMouseHover}
+      onMouseLeave={handleMouseOut}
+      x={animatedProps.x as any}
+      y={animatedProps.y as any}
+      style= {isHover[hero] ? {opacity:1} : {opacity:0}}
+      fill="white"
+    />
+  );
+};
+
