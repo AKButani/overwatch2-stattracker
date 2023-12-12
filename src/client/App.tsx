@@ -42,15 +42,32 @@ function App() {
         
 
         //local storage handling for bookmarks
+        var iconUrl;
+        var namecardUrl;
+        if(data != undefined && ((data as PlayerCareer).summary) != undefined){
+          iconUrl = (data as PlayerCareer).summary.avatar;
+          namecardUrl = (data as PlayerCareer).summary.namecard;
+        } else {
+          iconUrl = undefined;
+          namecardUrl = undefined;
+        }
         const storedBookmarked = localStorage.getItem("bookmarkedPlayers");
-        var bookmarks : Array<string> = [];
+        var bookmarks : Array<[string , string | undefined, string | undefined]> = [];
         if(storedBookmarked != null){
           bookmarks = JSON.parse(storedBookmarked);
         }
-        const bookmarkSet = new Set(bookmarks);
-        bookmarkSet.add(username);
-        bookmarks = [...bookmarkSet];
-        localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
+        
+        var alreadyThere : Boolean = false;
+        for(var i = 0; i < bookmarks.length; i++){
+          if (bookmarks[i]![0] == username){
+            alreadyThere = true;
+          }
+        }
+        if(!alreadyThere){
+          bookmarks.push([username, iconUrl, namecardUrl]);
+          localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
+
+        }        
       }
     } catch (error) {
       // Handle network errors or other exceptions
