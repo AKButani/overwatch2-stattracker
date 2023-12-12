@@ -1,8 +1,9 @@
-import { HeroComparison, HEROES_KEYS, HeroStats } from "./types";
+import { HeroComparison, HEROES_KEYS, HeroStats, PlayerCareerStats} from "./types";
 //import myimage from "./public/images/ana.png";
 import './App.css';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getHeroRole } from "./helperFunctions";
+import { SelectedModeContext } from "./DisplayPlayer";
 
 type sortingType = "time_played" | "eliminations_per_life" | "games_won" | "win_percentage";
 
@@ -55,7 +56,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                 </div>
                 <div className="data gridEntry">
                     <strong> Winrate </strong> <br />
-                    {winRate}%
+                    {winRate ?winRate+"%" : "-"}
                 </div>
                 {(heroSpecificInfo != undefined) && (
                     <>
@@ -121,16 +122,18 @@ const SortSelector = (props: {setSortBy: React.Dispatch<React.SetStateAction<sor
     );
 }
 
-const HeroInfoCard = (props: { HeroData: HeroComparison | undefined, Herostats: HeroStats | undefined }) => {
+const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostats: HeroStats | undefined }) => {
     let [sortBy, setSortBy] = useState<sortingType>("time_played");
+    const selectedMode = useContext(SelectedModeContext);
+    let data = props.HeroData?.pc?.[selectedMode]?.heroes_comparisons;
     
-    let array = props.HeroData?.[sortBy]?.values.sort(compare);
+    let array = data?.[sortBy]?.values.sort(compare);
     return (
         <>
             <SortSelector setSortBy={setSortBy}/>
             {array?.map((element) => {
                 return (
-                    <OneHeroInfoCard HeroData={props.HeroData} HeroName={element.hero} Herostats={props.Herostats}/>
+                    <OneHeroInfoCard HeroData={data} HeroName={element.hero} Herostats={props.Herostats}/>
                 )
             })}
         </>

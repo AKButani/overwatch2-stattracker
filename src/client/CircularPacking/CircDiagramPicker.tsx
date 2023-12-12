@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CircDiagram } from "./CircDiagram";
 import { HEROES_KEYS, PlayerCareer, comparisonCategory, mode, platform} from "../types";
 import { getHeroComparison} from "../helperFunctions";
+import { SelectedModeContext } from "../DisplayPlayer";
 
-export const CircDiagramPicker = (props: { data: PlayerCareer; width: number; height: number }) => {
+export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; width: number; height: number }) => {
   type vF = ((data:PlayerCareer, hero:HEROES_KEYS) => number);
   const [valueFunction, setValueFunction] = useState<vF>(() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
-  
+  const selectedMode = useContext(SelectedModeContext);
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       if(event.target.value == "none"){
           setValueFunction (() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
       } else {
-          setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, "both", "both", event.target.value as comparisonCategory)));
+          setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, "both", selectedMode , event.target.value as comparisonCategory)));
       }
        
     }
