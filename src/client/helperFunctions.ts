@@ -95,6 +95,7 @@ export function getHeroRole(hero: HEROES_KEYS) {
         case "moira":
         case "zenyatta":
         case "illari":
+        case "lifeweaver":
             return "support";
         default:
             // Handle unknown heroes
