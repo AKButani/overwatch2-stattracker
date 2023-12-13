@@ -100,6 +100,8 @@ const createPlaytimeArray = (stats:PlayerCareerStatsGamemode) : HeroTimeTuple[] 
     if (key === "all-heroes") continue;
     const interm = career_stats[key] as HeroStatCat[];
     if (interm === null) continue;
+    if (interm[3] === null || interm[3] === undefined) continue;
+    if (interm[3]!.stats === null) continue;
     const obj = interm[3]!.stats[0]!;
     if (obj.key! === "time_played") {
       result.push([key, obj.value] as HeroTimeTuple);
