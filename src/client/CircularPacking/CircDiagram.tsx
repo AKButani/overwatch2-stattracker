@@ -188,17 +188,17 @@ const AnimatedCircle = ({
   ...props
 }) => {
 
-  const initialHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
+  const hoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
     (acc, hero) => ({ ...acc, [hero]: false }),
     {} as Record<HEROES_KEYS, boolean>
   );
-  const newHoverState = initialHoverState;
-  newHoverState[hero as HEROES_KEYS] = true;
+  hoverState[hero as HEROES_KEYS] = true;
   const handleMouseHover = () => {
-    heroHoverState(newHoverState);
+    heroHoverState(hoverState);
   };
   const handleMouseOut = () => {
-    heroHoverState(initialHoverState);
+    hoverState[hero as HEROES_KEYS] = false;
+    heroHoverState(hoverState);
   };
   const animatedProps = useSpring({
     cx,
@@ -266,17 +266,17 @@ const AnimatedText = ({
   ...props
 }) => 
 {
-  const initialHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
+  const hoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
     (acc, hero) => ({ ...acc, [hero]: false }),
     {} as Record<HEROES_KEYS, boolean>
   );
-  const newHoverState = initialHoverState;
-  newHoverState[hero as HEROES_KEYS] = true;
+  hoverState[hero as HEROES_KEYS] = true;
   const handleMouseHover = () => {
-    heroHoverState(newHoverState);
+    heroHoverState(hoverState);
   };
   const handleMouseOut = () => {
-    heroHoverState(initialHoverState);
+    hoverState[hero as HEROES_KEYS] = false;
+    heroHoverState(hoverState);
   };
   const animatedProps = useSpring({
     x,
