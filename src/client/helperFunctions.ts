@@ -129,3 +129,11 @@ export function getModefromTab(index: number){
         return "competitive";
     }
 }
+
+export function getPlatformFromTab(index: number){
+    if (index == 0){
+        return "pc";
+    }else{
+        return "console";
+    }
+}

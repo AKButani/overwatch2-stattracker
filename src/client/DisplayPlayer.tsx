@@ -7,7 +7,7 @@ import PlayerInfoBanner from "./PlayerInfoBanner";
 import { Tabs, TabList, Tab } from "react-tabs";
 import { createContext } from "react";
 import { gamemode, platform } from "./types";
-import { getModefromTab } from "./helperFunctions";
+import { getModefromTab, getPlatformFromTab } from "./helperFunctions";
 
 export type ModeChosen = {
     platform: platform;
@@ -32,7 +32,7 @@ const DisplayPlayer = () => {
         )
     } else{ 
         return (
-            <SelectedModeContext.Provider value={{platform: "pc", mode: getModefromTab(modeTab)}}>            
+            <SelectedModeContext.Provider value={{platform: getPlatformFromTab(platformTab), mode: getModefromTab(modeTab)}}>            
                 <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
