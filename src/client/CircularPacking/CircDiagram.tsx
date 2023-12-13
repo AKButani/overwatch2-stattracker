@@ -3,6 +3,7 @@ import { HEROES_KEYS, PlayerCareer, Role} from "../types";
 import { useSpring, animated, SpringValue } from "react-spring";
 import {useState} from "react";
 import { getHeroRole } from "../helperFunctions";
+import { valueFunction, getDisplayValueFunction} from "./circTypes";
 const heroes: HEROES_KEYS[] = [
   "ana",
   "ashe",
@@ -67,7 +68,7 @@ export type CircularPackingProps = {
   width: number;
   height: number;
   data: PlayerCareer;
-  valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number;
+  valueFunction: valueFunction;
 };
 type TreeNode = {
   type: 'node';
@@ -81,7 +82,7 @@ type TreeLeaf = {
   value: number;
 };
 type Tree = TreeNode | TreeLeaf;
-export const CircDiagram = (props:{ width: number, height:number, data:PlayerCareer, valueFunction: (data: PlayerCareer, hero: HEROES_KEYS) => number}) => {
+export const CircDiagram = (props:{ width: number, height:number, data:PlayerCareer, valueFunction: valueFunction, getDisplayValue:getDisplayValueFunction}) => {
   
   //build data structure the data    
   const graphData : Tree= {
@@ -94,6 +95,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         value: props.valueFunction(props.data, hero),
       }))
   }
+  
 
   // build the hierarchy object
   const hierarchy = d3
@@ -103,7 +105,6 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
     
   const packGenerator = d3.pack<Tree>().size([props.width, props.height]).padding(4);
   const root = packGenerator(hierarchy as d3.HierarchyNode<Tree>);
-  console.log("root", root);
   
   const initialHeroHoverState: Record<HEROES_KEYS, boolean> = heroes.reduce(
     (acc, hero) => ({ ...acc, [hero]: false }),
@@ -165,7 +166,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
             heroHoverState = {setHeroHoverState}
             isHover = {heroHoverState}
           >
-            {node.value}
+            {props.getDisplayValue(node.value as number)}
           </AnimatedText>
         ))}
     </svg>
