@@ -19,6 +19,7 @@ const heroes: HEROES_KEYS[] = [
   "junker-queen",
   "junkrat",
   "kiriko",
+  "lifeweaver",
   "lucio",
   "mauga",
   "mei",

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CircDiagram } from "./CircDiagram";
-import { HEROES_KEYS, PlayerCareer, comparisonCategory, mode, platform} from "../types";
+import { HEROES_KEYS, PlayerCareer, comparisonCategory, gamemode, platform} from "../types";
 import { getHeroComparison} from "../helperFunctions";
 import { SelectedModeContext } from "../DisplayPlayer";
 import { valueFunction, getDisplayValueFunction} from "./circTypes";
@@ -14,7 +14,7 @@ export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; widt
       if(event.target.value == "none"){
           setValueFunction (() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
       } else {
-          setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, "both", selectedMode , event.target.value as comparisonCategory)));
+          setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, selectedMode.platform , selectedMode.mode , event.target.value as comparisonCategory)));
       }
 
       switch(event.target.value) {

@@ -196,4 +196,4 @@ export type HeroStatCat = {
 export type careerStatCategory = "assists" |"average" | "best" | "combat" | "game" | "hero_specific" | "match_awards"|  "miscellaneous";
 export type comparisonCategory = "time_played" | "games_won" | "weapon_accuracy" | "win_percentage" | "eliminations_per_life" | "critical_hit_accuracy" | "multikill_best" | "objective_kills"
 export type platform = "pc" | "console" | "both";
-export type mode = "quickplay" | "competitive" | "both";
+export type gamemode = "quickplay" | "competitive" | "both";

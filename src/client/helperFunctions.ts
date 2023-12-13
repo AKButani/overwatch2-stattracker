@@ -1,5 +1,5 @@
 import { mode } from "d3-array";
-import { HEROES_KEYS, PlayerCareer, PlayerInfo, mode, platform, comparisonCategory, PlayerCareerStatsGamemode, mode} from "./types";
+import { HEROES_KEYS, PlayerCareer, PlayerInfo, gamemode, platform, comparisonCategory, PlayerCareerStatsGamemode} from "./types";
 
 export function getPlayTime(playerData: PlayerCareer, isComp: boolean | "both"){ //true for competitive , false for QuickPlay, both for both 
     //let t = playerData.stats?.pc?.competitive?.heroes_comparisons
@@ -104,7 +104,7 @@ export function getHeroRole(hero: HEROES_KEYS) {
 };
 
 //gets the value for a certain hero on a certain platform in a certain gamemode for a certain category
-export function getHeroComparison(playerData: PlayerCareer, heroName: HEROES_KEYS, platform: platform, mode: mode, category: comparisonCategory):number{
+export function getHeroComparison(playerData: PlayerCareer, heroName: HEROES_KEYS, platform: platform, mode: gamemode, category: comparisonCategory):number{
     if(platform != "both" && mode != "both"){
         const arr = playerData?.stats?.[platform]?.[mode]?.heroes_comparisons?.[category]?.values;
         if (!arr) {return 0;}

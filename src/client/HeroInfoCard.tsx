@@ -125,7 +125,8 @@ const SortSelector = (props: {setSortBy: React.Dispatch<React.SetStateAction<sor
 const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostats: HeroStats | undefined }) => {
     let [sortBy, setSortBy] = useState<sortingType>("time_played");
     const selectedMode = useContext(SelectedModeContext);
-    let data = props.HeroData?.pc?.[selectedMode]?.heroes_comparisons;
+    if(selectedMode.mode != "both" && selectedMode.platform != "both"){ //always true
+        let data = props.HeroData?.[selectedMode.platform]?.[selectedMode.mode]?.heroes_comparisons;
     
     let array = data?.[sortBy]?.values.sort(compare);
     return (
@@ -138,6 +139,8 @@ const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostat
             })}
         </>
     )
+    }
+    return;
 }
 
 export default HeroInfoCard;

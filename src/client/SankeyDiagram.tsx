@@ -168,7 +168,7 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   if (stats === null || typeof stats === "undefined") {
     return null;
   }
-  const gameModeStats = selectedMode === "competitive" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
+  const gameModeStats = selectedMode.mode === "competitive" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
   var sankey = null;
   if (!gameModeStats) return null;
 
@@ -190,7 +190,7 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   return  (
             <>
               <h1>
-              {selectedMode === "competitive" ? "Competitive Playtime " : "Quickplay Playtime"}
+              {selectedMode.mode === "competitive" ? "Competitive Playtime " : "Quickplay Playtime"}
               </h1>
               {sankey}
               <div style={buttonContainerStyle}>

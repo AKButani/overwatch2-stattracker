@@ -6,15 +6,23 @@ import { CircDiagramPicker } from "./CircularPacking/CircDiagramPicker";
 import PlayerInfoBanner from "./PlayerInfoBanner";
 import { Tabs, TabList, Tab } from "react-tabs";
 import { createContext } from "react";
-import { mode } from "./types";
+import { gamemode, platform } from "./types";
 import { getModefromTab } from "./helperFunctions";
 
-export const SelectedModeContext = createContext<"quickplay" |"competitive">("competitive");
+export type ModeChosen = {
+    platform: platform;
+    mode: gamemode;
+}
+
+export const SelectedModeContext = createContext<ModeChosen>({platform: "pc", mode: "competitive"});
 
 const DisplayPlayer = () => {
     const playerData = useContext(PlayerDataContext)?.playerData;
     const [tabIndex, setTabIndex] = useState<number>(0); //0: visualisations, 1: heroes, ...
     const [modeTab, setModeTab] = useState<number>(0); //0: QP, 1: Comp
+
+    //This is the platform state, for reference on how to use, you can compare it with modeTab 
+    const [platformTab, setplatformTab] = useState<number>(0); //0: pc, 1: Console
     if (playerData === undefined){
         return;
     }
@@ -24,14 +32,22 @@ const DisplayPlayer = () => {
         )
     } else{ 
         return (
-            <SelectedModeContext.Provider value={getModefromTab(modeTab)}>            
+            <SelectedModeContext.Provider value={{platform: "pc", mode: getModefromTab(modeTab)}}>            
                 <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
-                <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
-                    <TabList>
-                        <Tab className="react-tabs__tab tab lightGrey">QuickPlay</Tab>
-                        <Tab className="react-tabs__tab tab lightGrey">Competitive</Tab>
-                    </TabList>
-                </Tabs>
+                <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
+                    <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
+                        <TabList>
+                            <Tab className="react-tabs__tab tab lightGrey">QuickPlay</Tab>
+                            <Tab className="react-tabs__tab tab lightGrey">Competitive</Tab>
+                        </TabList>
+                    </Tabs>
+                    <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
+                        <TabList>
+                            <Tab className="react-tabs__tab tab lightGrey">PC</Tab>
+                            <Tab className="react-tabs__tab tab lightGrey">Console</Tab>
+                        </TabList>
+                    </Tabs>
+                </div>
 
                 {tabIndex == 0 && (
                     <>
