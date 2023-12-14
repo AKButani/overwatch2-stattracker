@@ -111,7 +111,7 @@ export type PlayerCareerStats = {
   console?: PlayerCareerStatsPlatform; //Stats on console
 };
 
-type PlayerCareerStatsPlatform = {
+export type PlayerCareerStatsPlatform = {
   quickplay?: PlayerCareerStatsGamemode; //Stats in quickplay
   competitive?: PlayerCareerStatsGamemode; //Stats in competitive
 };

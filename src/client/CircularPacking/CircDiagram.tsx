@@ -1,9 +1,10 @@
 import * as d3 from "d3"; // we will need d3.js
 import { HEROES_KEYS, PlayerCareer, Role} from "../types";
 import { useSpring, animated, SpringValue } from "react-spring";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import { getHeroRole } from "../helperFunctions";
 import { valueFunction, getDisplayValueFunction} from "./circTypes";
+import { SelectedModeContext } from "../DisplayPlayer";
 const heroes: HEROES_KEYS[] = [
   "ana",
   "ashe",
@@ -45,6 +46,7 @@ const heroes: HEROES_KEYS[] = [
   "zenyatta",
 ];
 
+// const selectedMode = useContext(SelectedModeContext);
 
 const getRoleColor = (role:Role): string => {
   const colorMap: Record<string, string> = {

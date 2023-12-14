@@ -22,6 +22,8 @@
         ". Add14 Add15"
         ". Add16 Add17"
         ". Add18 Add19"
+        ". Add20 Add21"
+        ". Add22 Add23"
         "moreDetails moreDetails moreDetails" ;
     width: 60%;
     border: 5px solid  yellow;
@@ -32,7 +34,7 @@
     max-height: 1000px;
     
 }
-.hero-card:hover{
+.expandable:hover{
     
     box-shadow: 0 0 11px rgba(255,255,255,1); 
     

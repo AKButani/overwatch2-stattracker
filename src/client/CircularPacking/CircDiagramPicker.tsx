@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CircDiagram } from "./CircDiagram";
-import { HEROES_KEYS, PlayerCareer, comparisonCategory, gamemode, platform} from "../types";
+import { HEROES_KEYS, PlayerCareer, comparisonCategory} from "../types";
 import { getHeroComparison} from "../helperFunctions";
 import { SelectedModeContext } from "../DisplayPlayer";
 import { valueFunction, getDisplayValueFunction} from "./circTypes";

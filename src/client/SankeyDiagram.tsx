@@ -6,13 +6,13 @@ import { SelectedModeContext } from "./DisplayPlayer";
 
 const MARGIN_Y = 25;
 const MARGIN_X = 5;
-// colors are weird, they differ between the two diagrams, 
-// comments below hold for QP
-const COLORS = ["#f23a22", // damage node + support link color alt: #FF7F00  #e85252
-                "#00FF00", // support node + tank link color
-                "#00BFFF", // tank node + total link color
-                "#f99e1a", // "total node" color
-                "#e3dc19"];// damage link color
+
+const colorDict: {[key: string]: string} = {
+  "Support": "#00FF00",
+  "Damage": "#f23a22",
+  "Tank": "#00BFFF",
+  "Total": "#f99e1a",
+}
 
 const lightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
 const linkColor = lightMode ? "#8c8c89" : "#d9d9d0";
@@ -46,8 +46,6 @@ type SankeyProps = {
 type HeroTimeTuple = [string, number];
 
 const roles = ["Support", "Damage", "Tank"]
-
-const timeConverter = 1;
 
 const heroRoleTable: { [key:string]: string} = {
   "cassidy": "Damage",
@@ -133,13 +131,15 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
       hero_cap = "Soldier: 76";
     }
     nodes.push({name: hero_cap, category: role, weight: time});
-    links.push({source: role, target: hero_cap, value: time / timeConverter})
+    links.push({source: role, target: hero_cap, value: time})
     timePerRole[role] += time;
   });
   roles.forEach((role) => {
     const time = timePerRole[role]!;
-    nodes.push({name: role, category: role, weight: time})
-    links.push({source: "Total", target: role, value: time / timeConverter})
+    if (time != 0) {
+      nodes.push({name: role, category: role, weight: time})
+      links.push({source: "Total", target: role, value: time})
+    }
   });
   nodes.push({name: "Total", category: "Total", weight: 0});
   return {nodes: nodes, links:links};
@@ -149,26 +149,23 @@ const convertToNodesLinks = (playtime_per_hero: HeroTimeTuple[]) : Data => {
 
 export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   const stats = props.playerData.stats;
-  if (stats?.pc?.competitive){ //kind of an ugly way, but works for now, in case it is a console player
-    console.log("in sankeydiagram");
-    const [sorted, setSorted] = useState<boolean>(false);
-  // const [gameMode, setGameMode] = useState<string>("Comp");
+  const [sorted, setSorted] = useState<number>(0);
   const selectedMode = useContext(SelectedModeContext);
 
-  // const handleGameModeClick = () => {
-  //   setGameMode(gameMode === "Comp" ? "QP" : "Comp");
-  // }
-
   const handleSortedClick = () => {
-    setSorted(!sorted);
+    setSorted(sorted == 1 ? 2 : 1);
   }
 
   // create nodes and links
-  
   if (stats === null || typeof stats === "undefined") {
     return null;
   }
-  const gameModeStats = selectedMode.mode === "competitive" ? stats!.pc!.competitive! : stats!.pc!.quickplay!;
+  const platformStats = selectedMode.platform === "pc" ? stats!.pc! : stats!.console!;
+
+  if (platformStats == null || platformStats == undefined) {
+    return null;
+  }
+  const gameModeStats = selectedMode.mode === "competitive" ? platformStats.competitive! : platformStats.quickplay!;
   var sankey = null;
   if (!gameModeStats) return null;
 
@@ -189,29 +186,30 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
 
   return  (
             <>
-              <h1>
-              {selectedMode.mode === "competitive" ? "Competitive Playtime " : "Quickplay Playtime"}
-              </h1>
+              <h2>
+              Playtime
+              </h2>
               {sankey}
               <div style={buttonContainerStyle}>
-                {/* <button style={buttonStyle} onClick={handleGameModeClick}>{gameMode === "Comp" ? 'Switch to Quickplay' : 'Switch to Competitive'}</button> */}
-                <button style={buttonStyle} onClick={handleSortedClick}>{!sorted ? 'Sort by playtime' : 'Unsort'}</button>
+                <button style={buttonStyle} onClick={handleSortedClick}>{sorted != 1 ? 'Sort by playtime' : 'Sort alphabetically'}</button>
               </div>
             </>
           )
-  }else{
-    return (<></>);
-  }
   
 }
 
-const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
-  const allGroups = [...new Set(data.nodes.map((d) => d.category))].sort();
-  const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
+const Sankey = ({ width, height, data }: SankeyProps, sorted: number) => {
+  // const allGroups = [...new Set(data.nodes.map((d) => d.category))].sort();
+  // const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
-  var nodeSort = (node1: NodeData, node2: NodeData) : number=> {
+  var nodeSortValue = (node1: NodeData, node2: NodeData) : number=> {
     // < 0: node1 above node2; > 0: node1 below node2
     return node2.weight - node1.weight;
+  };
+
+  var nodeSortAlph = (node1: NodeData, node2: NodeData) : number=> {
+    // < 0: node1 above node2; > 0: node1 below node2
+    return node1.name.localeCompare(node2.name);
   };
 
   // Set the sankey diagram properties
@@ -228,8 +226,10 @@ const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
     // .nodeSort(nodeSort)
     ;
 
-    if (sorted) {
-      sankeyGenerator = sankeyGenerator.nodeSort(nodeSort);
+    if (sorted == 1) {
+      sankeyGenerator = sankeyGenerator.nodeSort(nodeSortValue);
+    } else if (sorted == 2) {
+      sankeyGenerator = sankeyGenerator.nodeSort(nodeSortAlph);
     }
     
 
@@ -246,7 +246,7 @@ const Sankey = ({ width, height, data }: SankeyProps, sorted: Boolean) => {
           x={node.x0}
           y={node.y0!}
           // stroke={"black"} // uncomment to paint surrounding box
-          fill={colorScale(node.category)}
+          fill={colorDict[node.category]}
           fillOpacity={1}
           rx={0.5}
         />
