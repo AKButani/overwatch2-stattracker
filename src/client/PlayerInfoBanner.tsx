@@ -1,6 +1,6 @@
-import { PlatformCompetitiveRank, PlayerSummary, mode } from "./types";
+import { PlatformCompetitiveRank, PlayerSummary} from "./types";
 import "./PlayerInfoBanner.css";
-import {Tabs, TabList, Tab, TabPanel} from "react-tabs";
+import {Tabs, TabList, Tab} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
 import { DamageIcon, SupportIcon, TankIcon } from "./RoleIcons";
 
@@ -80,13 +80,13 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
             </div>
 
             <div>
-                <img src={props.comp?.console?.damage.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.damage?.rank_icon} width={50} height={50}/> 
             </div>
             <div>
-                <img src={props.comp?.console?.support.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.support?.rank_icon} width={50} height={50}/> 
             </div>
             <div>
-                <img src={props.comp?.console?.tank.rank_icon} width={50} height={50}/> 
+                <img src={props.comp?.console?.tank?.rank_icon} width={50} height={50}/> 
             </div>
             </>
             )}
