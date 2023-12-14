@@ -1,6 +1,7 @@
 import { PlatformCompetitiveRank, PlayerSummary, mode } from "./types";
 import "./PlayerInfoBanner.css";
 import {Tabs, TabList, Tab, TabPanel} from "react-tabs";
+import { BookmarkIcon } from "./bookmarks/bookmarkIcon";
 import 'react-tabs/style/react-tabs.css';
 
 
@@ -12,7 +13,9 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
         {/* <div style={{gridArea: "banner", height: 50, overflow: "hidden"}}>
             <img src={props.summary.namecard} />
         </div> */}
-
+        <div style={{gridArea: "bookmark", height: 200}}>
+            <BookmarkIcon summary={props.summary}/>
+        </div>
         <div style={{gridArea: "avatar", height: 200}}>
             <img src={props.summary.avatar}/>
         </div>

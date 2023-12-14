@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./bookmarks.css";
-import "./Layout.css"
+import "/Users/alexanderroth/Documents/eth/s5/fwe/finalProject/abutani_project_express/src/client/Layout.css"
 
 
 const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIcon:string, playerNamecard:string, setSearchTerm:React.Dispatch<React.SetStateAction<string>>}) => {
@@ -41,4 +41,4 @@ export const Bookmarks = (props: {onSearch: () => void, setSearchTerm:React.Disp
             </div>
         </div>
     )
-}
+}"

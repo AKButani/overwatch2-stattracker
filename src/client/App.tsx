@@ -5,7 +5,7 @@ import Layout from "./Layout";
 import SearchBar from "./SearchBar";
 import { PlayerCareer, PlayerInfoContext } from "./types";
 import DisplayPlayer from "./DisplayPlayer";
-import { Bookmarks } from "./bookmarks";
+import { Bookmarks } from "./bookmarks/bookmarks";
 /*Test Player: WarDevil#11626*/
 
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
@@ -41,8 +41,8 @@ function App() {
         setPlayerData(data);
         
 
-        //local storage handling for bookmarks
-        var iconUrl;
+        //maybe reuse for search history
+        /*var iconUrl;
         var namecardUrl;
         if(data != undefined && ((data as PlayerCareer).summary) != undefined){
           iconUrl = (data as PlayerCareer).summary.avatar;
@@ -67,7 +67,8 @@ function App() {
           bookmarks.push([username, iconUrl, namecardUrl]);
           localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
 
-        }        
+        }  
+      */      
       }
     } catch (error) {
       // Handle network errors or other exceptions
