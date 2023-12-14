@@ -52,7 +52,7 @@ const DisplayPlayer = () => {
                 {tabIndex == 0 && (
                     <>
                      <SankeyDiagram playerData={playerData}/>
-                     <CircDiagramPicker key={modeTab} width={500} height={500} data={playerData}/>
+                     <CircDiagramPicker key={modeTab + platformTab} width={500} height={500} data={playerData}/>
                     </>
                 )}
                 {tabIndex == 1 && (
