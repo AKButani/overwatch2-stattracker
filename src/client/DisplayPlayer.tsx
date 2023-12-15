@@ -41,14 +41,26 @@ const DisplayPlayer = () => {
         if (!pcPossible) {
             setplatformTab(1);
         }
+        if (!pcPossible && !consolePossible) {
+            return (
+                <>
+                    No stats to display
+                </>
+            );
+        }
+        const platformStats = platformTab == 0 ? pcStats : consoleStats;
+        const qpStats = platformStats.quickplay!;
+        const quickplayPossible = qpStats != null && qpStats != undefined;
+        const compStats = platformStats.competitive!;
+        const compPossible = compStats != null && compStats != undefined;
         return (
             <SelectedModeContext.Provider value={{platform: getPlatformFromTab(platformTab), mode: getModefromTab(modeTab)}}>            
                 <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                         <TabList>
-                            <Tab className="react-tabs__tab tab">QuickPlay</Tab>
-                            <Tab className="react-tabs__tab tab">Competitive</Tab>
+                            {quickplayPossible ? <Tab className="react-tabs__tab tab">QuickPlay</Tab> : null}
+                            {compPossible ? <Tab className="react-tabs__tab tab">Competitive</Tab> : null}
                         </TabList>
                     </Tabs>
                     <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
