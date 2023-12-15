@@ -1,4 +1,4 @@
-.player-bookmark{
+/*.player-bookmark{
     display: grid;
     grid-template-areas: 
     "avatar info";
@@ -20,8 +20,48 @@
     background: transparent;
     font-size: 0.75rem;
 }
-
+*/
 .bookmark-container{
     display: flex;
 }
 
+.player-bookmark {
+    position: relative;
+    width: 170px;
+    height: 70px;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.player-bookmark:hover {
+    transform: scale(1.05);
+}
+
+.avatar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    text-decoration:none;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    background: transparent;
+    text-decoration:none;
+}
