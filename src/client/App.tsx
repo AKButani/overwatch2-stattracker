@@ -9,7 +9,7 @@ import { Bookmarks } from "./bookmarks/bookmarks";
 /*Test Player: WarDevil#11626*/
 
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
-export const PlayerTagContext = createContext<string>("");
+
 
 function App() {
   
@@ -39,37 +39,7 @@ function App() {
         // If the response status is OK, handle the successful response
         const data = await response.json();
         console.log('Data:', data);
-        setPlayerData(data);
-        
-
-        //maybe reuse for search history
-        /*var iconUrl;
-        var namecardUrl;
-        if(data != undefined && ((data as PlayerCareer).summary) != undefined){
-          iconUrl = (data as PlayerCareer).summary.avatar;
-          namecardUrl = (data as PlayerCareer).summary.namecard;
-        } else {
-          iconUrl = undefined;
-          namecardUrl = undefined;
-        }
-        const storedBookmarked = localStorage.getItem("bookmarkedPlayers");
-        var bookmarks : Array<[string , string | undefined, string | undefined]> = [];
-        if(storedBookmarked != null){
-          bookmarks = JSON.parse(storedBookmarked);
-        }
-        
-        var alreadyThere : Boolean = false;
-        for(var i = 0; i < bookmarks.length; i++){
-          if (bookmarks[i]![0] == username){
-            alreadyThere = true;
-          }
-        }
-        if(!alreadyThere){
-          bookmarks.push([username, iconUrl, namecardUrl]);
-          localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
-
-        }  
-      */      
+        setPlayerData(data);    
       }
     } catch (error) {
       // Handle network errors or other exceptions
@@ -82,7 +52,7 @@ function App() {
   return (
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <Layout>
-        <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+        <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch}/>
         <DisplayPlayer username={username}/>
       </Layout>
     </PlayerDataContext.Provider>
