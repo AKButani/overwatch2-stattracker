@@ -6,7 +6,7 @@ import 'react-tabs/style/react-tabs.css';
 
 
 
-const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>}) => {
+const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>, username:string}) => {
     return (
     <div className="player-banner" style={{background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.summary.namecard})`,
     backgroundPosition: 'center', backgroundSize: 'cover'}}>
@@ -14,7 +14,7 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
             <img src={props.summary.namecard} />
         </div> */}
         <div style={{gridArea: "bookmark", height: 200}}>
-            <BookmarkIcon summary={props.summary}/>
+            <BookmarkIcon summary={props.summary}  username={props.username}/>
         </div>
         <div style={{gridArea: "avatar", height: 200}}>
             <img src={props.summary.avatar}/>

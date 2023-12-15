@@ -11,7 +11,7 @@ import { getModefromTab } from "./helperFunctions";
 
 export const SelectedModeContext = createContext<"quickplay" |"competitive">("competitive");
 
-const DisplayPlayer = () => {
+const DisplayPlayer = (props:{username:string}) => {
     const playerData = useContext(PlayerDataContext)?.playerData;
     const [tabIndex, setTabIndex] = useState<number>(0); //0: visualisations, 1: heroes, ...
     const [modeTab, setModeTab] = useState<number>(0); //0: QP, 1: Comp
@@ -25,7 +25,7 @@ const DisplayPlayer = () => {
     } else{ 
         return (
             <SelectedModeContext.Provider value={getModefromTab(modeTab)}>            
-                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex} username={props.username}/>
                 <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                     <TabList>
                         <Tab className="react-tabs__tab tab lightGrey">QuickPlay</Tab>

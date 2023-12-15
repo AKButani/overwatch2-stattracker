@@ -5,7 +5,7 @@ import { faBookmark} from '@fortawesome/free-solid-svg-icons';
 import { HEROES_KEYS, PlayerCareer, PlayerSummary, mode, platform} from "../types";
 
 
-export const BookmarkIcon = (props: {summary: PlayerSummary}) => {
+export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const handleClick = (book:Boolean) => {
         setIsBookmarked(!isBookmarked);
@@ -15,7 +15,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary}) => {
             bookmarks = JSON.parse(storedBookmarked);
         }
        
-        const username = props.summary.username;
+        const username = props.username;
         const iconUrl = props.summary.avatar;
         const namecardUrl = props.summary.namecard;
 

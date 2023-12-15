@@ -9,6 +9,7 @@ import { Bookmarks } from "./bookmarks/bookmarks";
 /*Test Player: WarDevil#11626*/
 
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
+export const PlayerTagContext = createContext<string>("");
 
 function App() {
   
@@ -82,7 +83,7 @@ function App() {
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <Layout>
         <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
-        <DisplayPlayer />
+        <DisplayPlayer username={username}/>
       </Layout>
     </PlayerDataContext.Provider>
   );
