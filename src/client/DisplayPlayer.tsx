@@ -23,6 +23,7 @@ const DisplayPlayer = () => {
 
     //This is the platform state, for reference on how to use, you can compare it with modeTab 
     const [platformTab, setplatformTab] = useState<number>(0); //0: pc, 1: Console
+    
     if (playerData === undefined){
         return;
     }
@@ -30,21 +31,42 @@ const DisplayPlayer = () => {
         return (
             <p> Player not Found or some other error</p>
         )
-    } else{ 
+    } else{
+        const stats = playerData!.stats!;
+        if (stats == null || stats == undefined) {}
+        const consoleStats = playerData.stats!.console!;
+        const consolePossible = consoleStats != null && consoleStats != undefined;
+        const pcStats = playerData.stats!.pc!;
+        const pcPossible = pcStats != null && pcStats != undefined;
+        if (!pcPossible) {
+            setplatformTab(1);
+        }
+        if (!pcPossible && !consolePossible) {
+            return (
+                <>
+                    No stats to display
+                </>
+            );
+        }
+        const platformStats = platformTab == 0 ? pcStats : consoleStats;
+        const qpStats = platformStats.quickplay!;
+        const quickplayPossible = qpStats != null && qpStats != undefined;
+        const compStats = platformStats.competitive!;
+        const compPossible = compStats != null && compStats != undefined;
         return (
             <SelectedModeContext.Provider value={{platform: getPlatformFromTab(platformTab), mode: getModefromTab(modeTab)}}>            
                 <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                         <TabList>
-                            <Tab className="react-tabs__tab tab lightGrey">QuickPlay</Tab>
-                            <Tab className="react-tabs__tab tab lightGrey">Competitive</Tab>
+                            {quickplayPossible ? <Tab className="react-tabs__tab tab">QuickPlay</Tab> : null}
+                            {compPossible ? <Tab className="react-tabs__tab tab">Competitive</Tab> : null}
                         </TabList>
                     </Tabs>
                     <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
                         <TabList>
-                            <Tab className="react-tabs__tab tab lightGrey">PC</Tab>
-                            <Tab className="react-tabs__tab tab lightGrey">Console</Tab>
+                            {pcPossible ? <Tab className="react-tabs__tab tab">PC</Tab> : null}
+                            {consolePossible ? <Tab className="react-tabs__tab tab">Console</Tab> : null}
                         </TabList>
                     </Tabs>
                 </div>
@@ -52,7 +74,7 @@ const DisplayPlayer = () => {
                 {tabIndex == 0 && (
                     <>
                      <SankeyDiagram playerData={playerData}/>
-                     <CircDiagramPicker key={modeTab} width={500} height={500} data={playerData}/>
+                     <CircDiagramPicker key={modeTab + platformTab} width={500} height={500} data={playerData}/>
                     </>
                 )}
                 {tabIndex == 1 && (

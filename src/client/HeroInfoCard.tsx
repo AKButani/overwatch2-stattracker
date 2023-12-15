@@ -18,7 +18,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
 
     if (Data != undefined){
         const [showDetails, setShowDetails] = useState(false);
-        console.log(heroStats);
+        // console.log(heroStats);
 
         let heroSpecificInfo = undefined;
 
@@ -39,7 +39,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         let role = getHeroRole(props.HeroName as HEROES_KEYS);
         let role_upper = role.charAt(0).toUpperCase() + role.slice(1);
         return (
-            <div className={`hero-card ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
+            <div className={`hero-card ${heroSpecificInfo != undefined ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
                 <div className="name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
@@ -79,7 +79,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
                 }
 
                 <div className="moreDetails">
-                    {showDetails ? <i className="fa fa-angle-up" /> : <i className="fa fa-angle-down" />}
+                    {(!showDetails && heroSpecificInfo != undefined) ? <i className="fa fa-angle-down" /> : <i className="fa fa-angle-up" />}
                 </div>
             </div>
         );
@@ -90,11 +90,15 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
 };
 
 function calculate_time(seconds: number) {
-    const hours = Math.floor(seconds/3600);
-    const mins = Math.ceil((seconds % 3600) / 60);
+    var hours = Math.floor(seconds/3600);
+    var mins = Math.ceil((seconds % 3600) / 60);
+    if (mins == 60) {
+        mins = 0;
+        hours += 1;
+    }
     return (
         <>
-            {hours > 0 ? (hours > 1 ? hours + " hours" : "1 hour") : ""} {mins > 1 ? mins + " minutes": "1 minute"}
+            {hours > 0 ? (hours > 1 ? hours + " hours" : "1 hour") : ""} {mins != 1 ? mins + " minutes": "1 minute"}
         </>
     );
 }
