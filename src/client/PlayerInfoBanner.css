@@ -11,6 +11,8 @@
     padding-left: 10px;
     padding-right: 10px;
     align-self: stretch;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 
 .ranks-grid{
