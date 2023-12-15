@@ -1,7 +1,7 @@
 .player-banner{
     display: grid;
     grid-template-areas: 
-    "banner banner banner"
+    "banner banner bookmark"
     "avatar info ranks"
     "selector selector selector";
     row-gap: 10px;

@@ -3,10 +3,11 @@ import "./PlayerInfoBanner.css";
 import {Tabs, TabList, Tab} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
 import { DamageIcon, SupportIcon, TankIcon } from "./RoleIcons";
+import { BookmarkIcon } from "./Bookmarks/bookmarkIcon";
 
 
 
-const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>}) => {
+const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>, username:string}) => {
     const bannerStyle = {
         background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.summary.namecard})`,
         backgroundPosition: 'center', 
@@ -20,6 +21,9 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
             <img src={props.summary.namecard} />
         </div> */}
 
+                <div style={{ gridArea: "bookmark", height: 200 }}>
+                    <BookmarkIcon summary={props.summary} username={props.username}/>
+                </div>
                 <div style={{ gridArea: "avatar", height: 200 }}>
                     <img src={props.summary.avatar} />
                 </div>
