@@ -8,6 +8,7 @@ import DisplayPlayer from "./DisplayPlayer";
 /*Test Player: WarDevil#11626*/
 
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
+export const UsernameContext = createContext<string | undefined>(undefined); // Create a new context for the username
 
 function App() {
   
@@ -49,10 +50,12 @@ function App() {
 
   return (
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
-      <Layout>
-        <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
-        <DisplayPlayer username = {username}/>
-      </Layout>
+      <UsernameContext.Provider value={username}> {/* In order to pass the tag to the bokmark components */}
+        <Layout>
+          <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+          <DisplayPlayer />
+        </Layout>
+      </UsernameContext.Provider>
     </PlayerDataContext.Provider>
   );
 }

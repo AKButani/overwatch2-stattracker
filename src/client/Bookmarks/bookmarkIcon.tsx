@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { PlayerDataContext } from "/Users/alexanderroth/Documents/eth/s5/fwe/finalProject/abutani_project_express/src/client/App";
+import { PlayerDataContext, UsernameContext} from "/Users/alexanderroth/Documents/eth/s5/fwe/finalProject/abutani_project_express/src/client/App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
 import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
 
 
-export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) => {
+export const BookmarkIcon = (props: {summary: PlayerSummary}) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const handleClick = (book:Boolean) => {
         setIsBookmarked(!isBookmarked);
@@ -15,7 +15,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
             bookmarks = JSON.parse(storedBookmarked);
         }
        
-        const username = props.username;
+        const username = useContext(UsernameContext) as string;
         const iconUrl = props.summary.avatar;
         const namecardUrl = props.summary.namecard;
 
