@@ -16,7 +16,7 @@ export type ModeChosen = {
 
 export const SelectedModeContext = createContext<ModeChosen>({platform: "pc", mode: "competitive"});
 
-const DisplayPlayer = () => {
+const DisplayPlayer = (props : {username:string}) => {
     const playerData = useContext(PlayerDataContext)?.playerData;
     const [tabIndex, setTabIndex] = useState<number>(0); //0: visualisations, 1: heroes, ...
     const [modeTab, setModeTab] = useState<number>(0); //0: QP, 1: Comp
@@ -57,7 +57,7 @@ const DisplayPlayer = () => {
         const compPossible = compStats != null && compStats != undefined;
         return (
             <SelectedModeContext.Provider value={{platform: getPlatformFromTab(platformTab), mode: getModefromTab(modeTab)}}>            
-                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex} username={props.username}/>
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                         <TabList>

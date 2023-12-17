@@ -40,7 +40,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         let role_upper = role.charAt(0).toUpperCase() + role.slice(1);
         return (
             <div className={`hero-card ${heroSpecificInfo != undefined ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
-                <div className="name gridEntry">
+                <div className="hero-name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
                 <div className="role gridEntry">
