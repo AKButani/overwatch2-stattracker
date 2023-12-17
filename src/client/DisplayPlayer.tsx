@@ -33,7 +33,9 @@ const DisplayPlayer = () => {
         )
     } else{
         const stats = playerData!.stats!;
-        if (stats == null || stats == undefined) {}
+        if (stats == null || stats == undefined) {
+            return (<p> Player has no stats </p>)
+        }
         const consoleStats = playerData.stats!.console!;
         const consolePossible = consoleStats != null && consoleStats != undefined;
         const pcStats = playerData.stats!.pc!;

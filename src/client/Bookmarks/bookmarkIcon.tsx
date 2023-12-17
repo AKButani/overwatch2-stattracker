@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { PlayerDataContext, UsernameContext} from "/Users/alexanderroth/Documents/eth/s5/fwe/finalProject/abutani_project_express/src/client/App";
+import { PlayerDataContext, UsernameContext} from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
 import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
