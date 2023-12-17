@@ -6,20 +6,21 @@ import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
 
 
 export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) => {
-    const [isBookmarked, setIsBookmarked] = useState(false);
-    const handleClick = (book:Boolean) => {
-        setIsBookmarked(!isBookmarked);
-        const storedBookmarked = localStorage.getItem("bookmarkedPlayers");
-        var bookmarks : Array<[string , string | undefined, string | undefined]> = [];
-        if(storedBookmarked != null){
-            bookmarks = JSON.parse(storedBookmarked);
-        }
-       
+    
+    const storedBookmarked = localStorage.getItem("bookmarkedPlayers");
+    var bookmarks : Array<[string , string | undefined, string | undefined]> = [];
+    if(storedBookmarked != null){
+        bookmarks = JSON.parse(storedBookmarked);
+    }
+    const [isBookmarked, setIsBookmarked] = useState(bookmarks.filter((item) => item[0] == props.username).length > 0);
+    const handleClick = () => {
+        const newBookmarkState = !isBookmarked;
+        setIsBookmarked(newBookmarkState);
         const username = props.username;
         const iconUrl = props.summary.avatar;
         const namecardUrl = props.summary.namecard;
 
-        if(!book){
+        if(newBookmarkState){
             bookmarks.push([username, iconUrl, namecardUrl]);
         }else{
             bookmarks = bookmarks.filter(
@@ -31,7 +32,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
     }
     return (
         <div style={{ cursor: 'pointer', color: isBookmarked ? 'grey' : 'black' }}>
-          <FontAwesomeIcon icon={faBookmark} onClick={() => (handleClick(isBookmarked))} size="3x"/>
+          <FontAwesomeIcon icon={faBookmark} onClick={() => (handleClick())} size="3x"/>
         </div>
     );
 }
