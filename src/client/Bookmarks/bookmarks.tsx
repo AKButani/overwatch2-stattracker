@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./bookmark.css";
-import "/Users/alexanderroth/Documents/eth/s5/fwe/finalProject/abutani_project_express/src/client/Layout.css"
+import "../Layout.css"
+import { useEffect } from 'react';
 
 
 const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIcon:string, playerNamecard:string, setSearchTerm:React.Dispatch<React.SetStateAction<string>>}) => {
     const handleSearch = () => {
+        console.log("in handleSearch")
         props.setSearchTerm(props.playerName);
-        props.onSearch()
+        //props.onSearch()
     }    
     return(
         <div>
