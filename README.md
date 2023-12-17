@@ -17,22 +17,19 @@ The goal is to create a user-friendly website that aggregates and presents detai
 We will leverage the [Overfast API](https://overfast-api.tekrop.fr/) to gather player data efficiently. Our team has already conducted preliminary research and explored the API's capabilities. 
 
 ### Tasks
-Define all the tasks you want your app to solve.
+With our web-app we want to give the users the ability to get a good overview of their, or their friend's, Overwatch 2 account. 
+
+With different visualisations, the user should be able to quickly understand how much and how well they play certain heroes. 
 
 
 ## Requirements
-Write here all intructions to build the environment and run your code.\
-**NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
+1) Install Node.js and make sure it is running.
 
 ## How to Run
-Write here **DETAILED** intructions on how to run your code.\
-**NOTE:** If we cannot run your code following these instructions we will not be able to evaluate it.
-
-As an example here are the instructions to run the Dummy Project:
-To run the Dummy project you have to:
-- clone the repository;
-- open a terminal instance and using the command ```cd``` move to the folder where the project has been downloaded;
-- then run:
+To run the project you have to:
+1) clone the repository
+2) open a terminal instance and using the command ```cd``` move to the folder where the project has been downloaded
+3) then execute the command ```npm run dev```
 
 
 ### Local Development
@@ -71,11 +68,17 @@ Document here the major milestones of your code and future planned steps.\
 - [X] Milestone 1: Basic Functionality [Link to Merge](course-fwe2023/students/project/express/abutani_project_express!3)
   - [x] Allow User Input
   - [x] Fetch the Data from the API
-  - [x] Display the Data in a simple form
+  - [x] Display the Data with Hero Cards
 
-- [ ] Milestone 2
-  - [ ] Sub-task: Add bookmarks
-  - [ ] Sub-task: ...
+- [x] Milestone 2: Visualisations
+  - [x] Sub-task: Add Sankey Diagram
+  - [x] Sub-task: Add Circular Diagram
+
+- [x] Milestone 3: Different Filtering options
+  - [x] Sub-task: Competitive / Quickplay Selector
+  - [x] Sub-task: PC / Console Selector
+
+- [x] Milestone 4: Bookmarks
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -88,6 +91,43 @@ This will help you have a clearer overview of what you are currently doing, trac
 ## Weekly Summary 
 Write here a short summary with weekly progress, including challanges and open questions.\
 We will use this to understand what your struggles and where did the weekly effort go to.
+
+20.11.23 - 26.11.23
+  - Decided to use Express for the backend and React for the frontend, due to the experience we gathered from the exercises during the semester.
+
+  - The main challenge we dealt with was making sure the API works as intended, and we created a rough layout of how we want our webpage to look like.
+
+  - We created a simple searchbar which allowed us to test the API and make sure that we recieved the player data. 
+
+27.11.23 - 3.12.23
+  - Started different kinds of visualisations, e.g. Sankey Diagram.
+
+  - Added Herocards which allow the user, to get some stats for every specific hero. 
+
+
+4.12.23 - 10.12.23
+
+  - Added another visualisation: CircularDiagram
+
+  - Improved visualisations of the Searchbar as well as the hero cards.
+
+  - Added Player Overview, including their name, title, rank, etc.
+
+11.12.23 - 17.12.23
+
+  - Added bookmarks
+
+  - Added Quickplay / Competitive Selector
+
+  - Added PC / Console Selector
+
+  - Fixed bugs with the bookmarks
+
+18.12.23 - 21.12.23
+
+  - Improve Layout 
+
+  - Bug fixes
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
