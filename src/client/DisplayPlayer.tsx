@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { PlayerDataContext } from "./App";
 import HeroInfoCard from "./HeroInfoCard";
 import SankeyDiagram from "./SankeyDiagram";
