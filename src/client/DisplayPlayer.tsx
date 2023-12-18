@@ -8,6 +8,8 @@ import { Tabs, TabList, Tab } from "react-tabs";
 import { createContext } from "react";
 import { gamemode, platform } from "./types";
 import { getModefromTab, getPlatformFromTab } from "./helperFunctions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation, faLock } from "@fortawesome/free-solid-svg-icons";
 
 export type ModeChosen = {
     platform: platform;
@@ -29,13 +31,16 @@ const DisplayPlayer = (props : {username:string}) => {
     }
     else if (playerData === false || playerData.summary! === null || playerData.summary! === undefined){
         return (
-            <p> Player not Found or some other error</p>
+            <>
+                <FontAwesomeIcon icon={faCircleExclamation} />
+                <p> Player not found</p>
+            </>
         )
     } else{
         const return_if_no_stats = (
             <>
                 <PlayerInfoBanner summary={playerData.summary} tabIndex={-1} setTabIndex={setTabIndex} username={props.username}/>
-                No stats to display
+                <FontAwesomeIcon icon={faLock} /> Account is private
             </>);
         const stats = playerData!.stats!;
         if (stats == null || stats == undefined) {

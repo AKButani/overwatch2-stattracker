@@ -19,7 +19,7 @@ const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIc
                     <img className="icon" src={props.playerIcon}/>
                 </div>
                 <div style={{gridArea: "info"}} className="info">
-                    <h1 className="name">{((props.playerName).split('-')[0] as string).toUpperCase()} </h1>
+                    <h1 className="name white">{((props.playerName).split('-')[0] as string).toUpperCase()} </h1>
                 </div>
             </div>
         </div>

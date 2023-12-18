@@ -28,7 +28,7 @@ const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<Rea
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Enter Player name (eg. emongg-11183)"
+          placeholder="Enter player name (e.g. emongg-11183)"
           
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

@@ -54,7 +54,7 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
 const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
     if (props.comp?.pc || props.comp?.console){
         return (
-            <div className="ranks-grid">
+            <div className="ranks-grid lightGrey">
                 <div>
     
                 </div>
