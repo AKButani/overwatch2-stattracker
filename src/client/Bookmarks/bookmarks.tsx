@@ -37,7 +37,7 @@ export const Bookmarks = (props: {onSearch: () => void, setSearchTerm:React.Disp
         <div>
             <div className="bookmark-container">
                 {bookmarks.map(([playerName, icon, namecard]) => (
-                    <SingleBookmark playerName={playerName as string} playerIcon={icon as string} playerNamecard={namecard as string} onSearch={props.onSearch} setSearchTerm={props.setSearchTerm}/>
+                    <SingleBookmark key={playerName as string} playerName={playerName as string} playerIcon={icon as string} playerNamecard={namecard as string} onSearch={props.onSearch} setSearchTerm={props.setSearchTerm}/>
                 ))
                 }
             </div>
