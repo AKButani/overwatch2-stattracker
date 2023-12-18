@@ -8,6 +8,8 @@ import { Tabs, TabList, Tab } from "react-tabs";
 import { createContext } from "react";
 import { gamemode, platform } from "./types";
 import { getModefromTab, getPlatformFromTab } from "./helperFunctions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation, faLock } from "@fortawesome/free-solid-svg-icons";
 
 export type ModeChosen = {
     platform: platform;
@@ -16,7 +18,7 @@ export type ModeChosen = {
 
 export const SelectedModeContext = createContext<ModeChosen>({platform: "pc", mode: "competitive"});
 
-const DisplayPlayer = () => {
+const DisplayPlayer = (props : {username:string}) => {
     const playerData = useContext(PlayerDataContext)?.playerData;
     const [tabIndex, setTabIndex] = useState<number>(0); //0: visualisations, 1: heroes, ...
     const [modeTab, setModeTab] = useState<number>(0); //0: QP, 1: Comp
@@ -27,13 +29,23 @@ const DisplayPlayer = () => {
     if (playerData === undefined){
         return;
     }
-    else if (playerData === false){
+    else if (playerData === false || playerData.summary! === null || playerData.summary! === undefined){
         return (
-            <p> Player not Found or some other error</p>
+            <>
+                <FontAwesomeIcon icon={faCircleExclamation} />
+                <p> Player not found</p>
+            </>
         )
     } else{
+        const return_if_no_stats = (
+            <>
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={-1} setTabIndex={setTabIndex} username={props.username}/>
+                <FontAwesomeIcon icon={faLock} /> Account is private
+            </>);
         const stats = playerData!.stats!;
-        if (stats == null || stats == undefined) {}
+        if (stats == null || stats == undefined) {
+            return return_if_no_stats;
+        }
         const consoleStats = playerData.stats!.console!;
         const consolePossible = consoleStats != null && consoleStats != undefined;
         const pcStats = playerData.stats!.pc!;
@@ -42,31 +54,27 @@ const DisplayPlayer = () => {
             setplatformTab(1);
         }
         if (!pcPossible && !consolePossible) {
-            return (
-                <>
-                    No stats to display
-                </>
-            );
+            return return_if_no_stats;
         }
         const platformStats = platformTab == 0 ? pcStats : consoleStats;
-        const qpStats = platformStats.quickplay!;
+        const qpStats = platformStats?.quickplay!;
         const quickplayPossible = qpStats != null && qpStats != undefined;
-        const compStats = platformStats.competitive!;
+        const compStats = platformStats?.competitive!;
         const compPossible = compStats != null && compStats != undefined;
         return (
             <SelectedModeContext.Provider value={{platform: getPlatformFromTab(platformTab), mode: getModefromTab(modeTab)}}>            
-                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex}/>
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={tabIndex} setTabIndex={setTabIndex} username={props.username}/>
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                         <TabList>
-                            {quickplayPossible ? <Tab className="react-tabs__tab tab">QuickPlay</Tab> : null}
-                            {compPossible ? <Tab className="react-tabs__tab tab">Competitive</Tab> : null}
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!quickplayPossible}>QuickPlay</Tab>
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!compPossible}>Competitive</Tab> 
                         </TabList>
                     </Tabs>
                     <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
                         <TabList>
-                            {pcPossible ? <Tab className="react-tabs__tab tab">PC</Tab> : null}
-                            {consolePossible ? <Tab className="react-tabs__tab tab">Console</Tab> : null}
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!pcPossible}>PC</Tab>
+                           <Tab className="react-tabs__tab tab darkTab" disabled={!consolePossible}>Console</Tab>
                         </TabList>
                     </Tabs>
                 </div>

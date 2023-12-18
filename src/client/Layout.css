@@ -55,4 +55,10 @@ body main {
   .expandable:hover{
     box-shadow: 0 0 15px yellow;
   }
+
+  .darkTab.react-tabs__tab--selected {
+    background-color: rgb(55, 55, 55);
+    color: white;
+    border: 0px;
+  }
 }
