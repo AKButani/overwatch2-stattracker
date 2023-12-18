@@ -1,9 +1,5 @@
 import { useContext, useState } from "react";
-<<<<<<< HEAD
-import { PlayerDataContext, UsernameContext} from "../App";
-=======
 import { PlayerDataContext } from "../App";
->>>>>>> 53db94090d98f96b3e68667b4cc5682fdf565572
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
 import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
@@ -48,8 +44,10 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
         console.log("Bookmarks", bookmarks);
     }
     return (
-        <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username) ? 'grey' : 'black' }}>
+        <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username) ? 'grey' : 'lightgrey' }}>
           <FontAwesomeIcon icon={faBookmark} onClick={() => (handleClick())} size="3x"/>
         </div>
     );
 }
+
+{/* "fa-light fa-bookmark" */}
