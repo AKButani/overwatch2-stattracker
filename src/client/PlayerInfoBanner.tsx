@@ -52,7 +52,12 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
 }
 
 const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
-    if (props.comp?.pc || props.comp?.console){
+    let pcRankExists = props.comp?.pc?.damage?.rank_icon || props.comp?.pc?.support?.rank_icon || props.comp?.pc?.tank?.rank_icon;
+    let consoleRankExists = props.comp?.console?.damage?.rank_icon || props.comp?.console?.support?.rank_icon || props.comp?.console?.tank?.rank_icon;
+    //trust me, I hate this more than you do
+
+    
+    if (pcRankExists || consoleRankExists){
         return (
             <div className="ranks-grid lightGrey">
                 <div>
@@ -64,7 +69,7 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                 <TankIcon />
     
     
-                {props.comp?.pc && (
+                {pcRankExists && (
                     <>
                     
                     <div>
@@ -72,31 +77,31 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                     </div>
         
                     <div>
-                        <img src={props.comp?.pc?.damage?.rank_icon} width={50} height={50}/> 
+                        {props.comp?.pc?.damage?.rank_icon && <img src={props.comp?.pc?.damage?.rank_icon} width={50} height={50}/> }
                     </div>
                     <div>
-                        <img src={props.comp?.pc?.support?.rank_icon} width={50} height={50}/> 
+                        {props.comp?.pc?.support?.rank_icon && <img src={props.comp?.pc?.support?.rank_icon} width={50} height={50}/> }
                     </div>
                     <div>
-                        <img src={props.comp?.pc?.tank?.rank_icon} width={50} height={50}/> 
+                        {props.comp?.pc?.tank?.rank_icon && <img src={props.comp?.pc?.tank?.rank_icon} width={50} height={50}/> }
                     </div>
                     </>
                 )}
                 
-                {props.comp?.console && (
+                {consoleRankExists && (
                 <>
                 <div>
                     CONSOLE
                 </div>
     
                 <div>
-                    <img src={props.comp?.console?.damage?.rank_icon} width={50} height={50}/> 
+                    {props.comp?.console?.damage?.rank_icon && <img src={props.comp?.console?.damage?.rank_icon} width={50} height={50}/> }
                 </div>
                 <div>
-                    <img src={props.comp?.console?.support?.rank_icon} width={50} height={50}/> 
+                    {props.comp?.console?.support?.rank_icon && <img src={props.comp?.console?.support?.rank_icon} width={50} height={50}/> }
                 </div>
                 <div>
-                    <img src={props.comp?.console?.tank?.rank_icon} width={50} height={50}/> 
+                    {props.comp?.console?.tank?.rank_icon && <img src={props.comp?.console?.tank?.rank_icon} width={50} height={50}/> }
                 </div>
                 </>
                 )}
