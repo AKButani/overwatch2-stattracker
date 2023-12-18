@@ -1,7 +1,6 @@
-import { scaleOrdinal } from "d3";
 import { sankey, sankeyJustify, sankeyLinkHorizontal } from "d3-sankey";
 import { HeroStatCat, PlayerCareer, PlayerCareerStatsGamemode } from "./types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SelectedModeContext } from "./DisplayPlayer";
 
 const MARGIN_Y = 25;
@@ -151,6 +150,10 @@ export const SankeyDiagram = (props:{playerData:PlayerCareer}) => {
   const stats = props.playerData.stats;
   const [sorted, setSorted] = useState<number>(0);
   const selectedMode = useContext(SelectedModeContext);
+
+  useEffect(() => {
+    setSorted(0);
+  }, [props.playerData]);
 
   const handleSortedClick = () => {
     setSorted(sorted == 1 ? 2 : 1);
