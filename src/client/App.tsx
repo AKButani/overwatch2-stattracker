@@ -22,7 +22,8 @@ function App() {
     //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
     console.log("onSearch");
     try {
-      let response = await fetch(`/players/${username}`)
+      const rightUsername = username.replace('#', '-');
+      let response = await fetch(`/players/${rightUsername}`)
       console.log(response.status)
       if (!response.ok) {
         // If the response status is not OK (not in the range 200-299), handle the error
@@ -56,7 +57,8 @@ function App() {
       if (username != "") {
         console.log("onSearch");
         try {
-          let response = await fetch(`/players/${username}`)
+          const rightUsername = username.replace('#', '-');
+          let response = await fetch(`/players/${rightUsername}`)
           console.log(response.status)
           if (!response.ok) {
             // If the response status is not OK (not in the range 200-299), handle the error

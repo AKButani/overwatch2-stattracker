@@ -67,14 +67,14 @@ const DisplayPlayer = (props : {username:string}) => {
                 <div style={{ display: "flex", flexDirection: "row", gap: 100 }}> {/* Styling to be changed */}
                     <Tabs selectedIndex={modeTab} onSelect={(index) => setModeTab(index)}>
                         <TabList>
-                            <Tab className="react-tabs__tab tab" disabled={!quickplayPossible}>QuickPlay</Tab>
-                            <Tab className="react-tabs__tab tab" disabled={!compPossible}>Competitive</Tab> 
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!quickplayPossible}>QuickPlay</Tab>
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!compPossible}>Competitive</Tab> 
                         </TabList>
                     </Tabs>
                     <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
                         <TabList>
-                            <Tab className="react-tabs__tab tab" disabled={!pcPossible}>PC</Tab>
-                           <Tab className="react-tabs__tab tab" disabled={!consolePossible}>Console</Tab>
+                            <Tab className="react-tabs__tab tab darkTab" disabled={!pcPossible}>PC</Tab>
+                           <Tab className="react-tabs__tab tab darkTab" disabled={!consolePossible}>Console</Tab>
                         </TabList>
                     </Tabs>
                 </div>
