@@ -105,8 +105,19 @@ export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; widt
     }
       
   }
-  console.log("all Zeros", checkAllZeros("win_percentage"));
-  return (
+    const stats = data.stats;
+    if (stats === null || typeof stats === "undefined") {
+      return null;
+    }
+    const platformStats = selectedMode.platform === "pc" ? stats!.pc! : stats!.console!;
+
+    if (platformStats == null || platformStats == undefined) {
+      return null;
+    }
+    const gameModeStats = selectedMode.mode === "competitive" ? platformStats.competitive! : platformStats.quickplay!;
+    var sankey = null;
+    if (!gameModeStats) return null;
+    return (
      
     <div style={{ textAlign: 'center' }}>
       <label htmlFor="valueFunctionPicker"></label>
