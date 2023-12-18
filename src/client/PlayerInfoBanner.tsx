@@ -36,14 +36,14 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
                 <div style={{ gridArea: "ranks" }}>
                     <DisplayRanks comp={props.summary.competitive} />
                 </div>
-                <Tabs style={{ gridArea: "selector" }} selectedIndex={props.tabIndex} onSelect={(index) => props.setTabIndex(index)}>
+                {props.tabIndex > -1 ? <Tabs style={{ gridArea: "selector" }} selectedIndex={props.tabIndex} onSelect={(index) => props.setTabIndex(index)}>
                     <TabList>
                         <Tab className="react-tabs__tab tab lightGrey">Overview</Tab>
                         <Tab className="react-tabs__tab tab lightGrey">Heroes</Tab>
                     </TabList>
                     {/* <TabPanel></TabPanel>
             <TabPanel></TabPanel> */}
-                </Tabs>
+                </Tabs> : null}
 
 
 

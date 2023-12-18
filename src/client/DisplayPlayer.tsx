@@ -27,14 +27,19 @@ const DisplayPlayer = (props : {username:string}) => {
     if (playerData === undefined){
         return;
     }
-    else if (playerData === false){
+    else if (playerData === false || playerData.summary! === null || playerData.summary! === undefined){
         return (
             <p> Player not Found or some other error</p>
         )
     } else{
+        const return_if_no_stats = (
+            <>
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={-1} setTabIndex={setTabIndex} username={props.username}/>
+                No stats to display
+            </>);
         const stats = playerData!.stats!;
         if (stats == null || stats == undefined) {
-            return (<p> Player has no stats </p>)
+            return return_if_no_stats;
         }
         const consoleStats = playerData.stats!.console!;
         const consolePossible = consoleStats != null && consoleStats != undefined;
@@ -44,11 +49,7 @@ const DisplayPlayer = (props : {username:string}) => {
             setplatformTab(1);
         }
         if (!pcPossible && !consolePossible) {
-            return (
-                <>
-                    No stats to display
-                </>
-            );
+            return return_if_no_stats;
         }
         const platformStats = platformTab == 0 ? pcStats : consoleStats;
         const qpStats = platformStats?.quickplay!;
