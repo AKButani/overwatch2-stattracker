@@ -145,7 +145,7 @@ const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostat
                 <SortSelector setSortBy={setSortBy}/>
                 {array?.map((element) => {
                     return (
-                        <OneHeroInfoCard HeroData={data} HeroName={element.hero} Herostats={props.Herostats}/>
+                        <OneHeroInfoCard key={element.hero + selectedMode.mode + selectedMode.platform} HeroData={data} HeroName={element.hero} Herostats={props.Herostats}/>
                     )
                 })}
             </>

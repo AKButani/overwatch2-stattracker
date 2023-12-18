@@ -4,7 +4,7 @@ import HeroInfoCard from "./HeroInfoCard";
 import SankeyDiagram from "./SankeyDiagram";
 import { CircDiagramPicker } from "./CircularPacking/CircDiagramPicker";
 import PlayerInfoBanner from "./PlayerInfoBanner";
-import { Tabs, TabList, Tab } from "react-tabs";
+import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { createContext } from "react";
 import { gamemode, platform } from "./types";
 import { getModefromTab, getPlatformFromTab } from "./helperFunctions";
@@ -32,15 +32,15 @@ const DisplayPlayer = (props : {username:string}) => {
     else if (playerData === false || playerData.summary! === null || playerData.summary! === undefined){
         return (
             <>
-                <FontAwesomeIcon icon={faCircleExclamation} />
+                <FontAwesomeIcon icon={faCircleExclamation} size="2xl"/>
                 <p> Player not found</p>
             </>
         )
     } else{
         const return_if_no_stats = (
             <>
-                <PlayerInfoBanner summary={playerData.summary} tabIndex={-1} setTabIndex={setTabIndex} username={props.username}/>
-                <FontAwesomeIcon icon={faLock} /> Account is private
+                <PlayerInfoBanner summary={playerData.summary} tabIndex={-1} setTabIndex={setTabIndex} username={props.username} />
+                <FontAwesomeIcon icon={faLock} size="2xl"/> Account is private
             </>);
         const stats = playerData!.stats!;
         if (stats == null || stats == undefined) {
@@ -70,12 +70,16 @@ const DisplayPlayer = (props : {username:string}) => {
                             <Tab className="react-tabs__tab tab darkTab" disabled={!quickplayPossible}>QuickPlay</Tab>
                             <Tab className="react-tabs__tab tab darkTab" disabled={!compPossible}>Competitive</Tab> 
                         </TabList>
+                        <TabPanel />
+                        <TabPanel />
                     </Tabs>
                     <Tabs selectedIndex={platformTab} onSelect={(index) => setplatformTab(index)}>
                         <TabList>
                             <Tab className="react-tabs__tab tab darkTab" disabled={!pcPossible}>PC</Tab>
                            <Tab className="react-tabs__tab tab darkTab" disabled={!consolePossible}>Console</Tab>
                         </TabList>
+                        <TabPanel />
+                        <TabPanel />
                     </Tabs>
                 </div>
 
