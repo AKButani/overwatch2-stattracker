@@ -29,7 +29,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
     const handleClick = () => {
         const newBookmarkState = !isBookmarked;
         setIsBookmarked(newBookmarkState);
-        const username = props.username;
+        const username = props.username.replace(/#/g, "-");
         const iconUrl = props.summary.avatar;
         const namecardUrl = props.summary.namecard;
 
