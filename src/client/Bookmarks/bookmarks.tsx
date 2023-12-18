@@ -31,7 +31,7 @@ export const Bookmarks = (props: {onSearch: () => void, setSearchTerm:React.Disp
     if(!storedBookmarks){
         return(null);
     }
-    const bookmarks : Array<string> = JSON.parse(storedBookmarks);
+    const bookmarks : Array<[string,string,string]> = JSON.parse(storedBookmarks);
     console.log(bookmarks)
     return(
         <div>
