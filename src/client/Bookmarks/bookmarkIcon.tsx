@@ -25,7 +25,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
         return false;
     }
     
-    const [isBookmarked, setIsBookmarked] = useState(bookmarks.filter((item) => item[0] == props.username).length > 0);
+    const [isBookmarked, setIsBookmarked] = useState(bookmarks.filter((item) => item[0] == props.username.replace(/#/g, "-")).length > 0);
     const handleClick = () => {
         const newBookmarkState = !isBookmarked;
         setIsBookmarked(newBookmarkState);
@@ -44,7 +44,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
         console.log("Bookmarks", bookmarks);
     }
     return (
-        <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username) ? 'grey' : 'lightgrey' }}>
+        <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username.replace(/#/g, "-")) ? 'grey' : 'lightgrey' }}>
           <FontAwesomeIcon icon={faBookmark} onClick={() => (handleClick())} size="3x"/>
         </div>
     );
