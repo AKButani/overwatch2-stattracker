@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { CircDiagram } from "./CircDiagram";
 import { HEROES_KEYS, PlayerCareer, comparisonCategory} from "../types";
 import { getHeroComparison} from "../helperFunctions";
 import { SelectedModeContext } from "../DisplayPlayer";
 import { valueFunction, getDisplayValueFunction} from "./circTypes";
-import { get } from "http";
+import { PlayerDataContext } from "../App";
 
 export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; width: number; height: number }) => {
   const heroes: HEROES_KEYS[] = [
@@ -47,11 +47,17 @@ export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; widt
     "zarya",
     "zenyatta",
   ];
+  const data : PlayerCareer= useContext(PlayerDataContext)?.playerData as PlayerCareer;
   const [valueFunction, setValueFunction] = useState<valueFunction>(() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
   const [displayValueFunction, setDisplayValueFunction] = useState<getDisplayValueFunction>(() => ((value:number) => "-"));
   const selectedMode = useContext(SelectedModeContext);
+  const [selectedValue, setSelectedValue] = useState<comparisonCategory | string>("none");
  
-  
+  useEffect(() => {
+    setDisplayValueFunction(() => ((value:number) => "-"));
+    setValueFunction (() => ((data:PlayerCareer, hero:HEROES_KEYS) => 5));
+    setSelectedValue("none");
+  },[data]);
 
   const checkAllZeros = (category : comparisonCategory) => {
       return (
@@ -67,7 +73,7 @@ export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; widt
     } else {
         setValueFunction(() => ((data:PlayerCareer, hero:HEROES_KEYS):number => getHeroComparison(data, hero, selectedMode.platform , selectedMode.mode , event.target.value as comparisonCategory)));
     }
-
+    setSelectedValue(event.target.value);
     switch(event.target.value) {
       case "none":
         setDisplayValueFunction(() => ((value:number) => "-"));
@@ -104,7 +110,8 @@ export const CircDiagramPicker = (props: { key: number; data: PlayerCareer; widt
      
     <div style={{ textAlign: 'center' }}>
       <label htmlFor="valueFunctionPicker"></label>
-      <select id="valueFunctionPicker" onChange={handleSelectChange}>
+      <select id="valueFunctionPicker" value={selectedValue} onChange={handleSelectChange}>
+        <option value="none">None</option>
         {!checkAllZeros("time_played") && <option value="time_played">Playtime</option>}
         {!checkAllZeros("games_won") && <option value="games_won">Games Won</option>}
         {!checkAllZeros("weapon_accuracy") && <option value="weapon_accuracy">Weapon Accuracy</option>}
