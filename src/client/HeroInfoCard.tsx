@@ -13,12 +13,9 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
     let heroStats = props.Herostats; //this is all Herostats
     //all categories for a specific hero e.g. best, average, etc.
     let specificHero = (heroStats != undefined) ? heroStats[props.HeroName] : undefined;
-    console.log("Data: ", Data);
-    console.log("heroStats: ", heroStats);
 
     if (Data != undefined){
         const [showDetails, setShowDetails] = useState(false);
-        // console.log(heroStats);
 
         let heroSpecificInfo = undefined;
 
@@ -32,7 +29,6 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         };
         
         let play_time = Data.time_played?.values.find(find_predicate(props))?.value;
-        console.log(props.HeroName + ": playtime " + play_time);
         let kd = Data.eliminations_per_life?.values.find(find_predicate(props))?.value;
         let numWins = Data.games_won?.values.find(find_predicate(props))?.value;
         let winRate = Data.win_percentage?.values.find(find_predicate(props))?.value;
@@ -138,7 +134,6 @@ const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostat
     const selectedMode = useContext(SelectedModeContext);
     if(selectedMode.mode != "both" && selectedMode.platform != "both"){ //always true
         let data = props.HeroData?.[selectedMode.platform]?.[selectedMode.mode]?.heroes_comparisons;
-        console.log("in hero info card");
         let array = data?.[sortBy]?.values.sort(compare);
         return (
             <>

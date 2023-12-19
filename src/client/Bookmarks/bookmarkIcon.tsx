@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { BookmarksContext, PlayerDataContext } from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
-import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
+import { PlayerSummary} from "../types";
 
 
 

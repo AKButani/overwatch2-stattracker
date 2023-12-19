@@ -9,7 +9,7 @@ import { BookmarkIcon } from "./Bookmarks/bookmarkIcon";
 
 const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>, username:string}) => {
     const bannerStyle = {
-        background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.summary.namecard})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.summary.namecard})`,
         backgroundPosition: 'center', 
         backgroundSize: "cover", 
         backgroundRepeat: "no-repeat" 
