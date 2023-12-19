@@ -66,6 +66,7 @@ export function getHeroRole(hero: HEROES_KEYS) {
         case "junker-queen":
         case "ramattra":
         case "doomfist":
+        case "mauga":
             return "tank";
         case "ashe":
         case "bastion":

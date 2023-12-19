@@ -7,6 +7,14 @@ import { SelectedModeContext } from "./DisplayPlayer";
 
 type sortingType = "time_played" | "eliminations_per_life" | "games_won" | "win_percentage";
 
+const colorDict: {[key: string]: string} = {
+    "support": "#00FF00",
+    "damage": "#f23a22",
+    "tank": "#00BFFF",
+    "": "#f99e1a",
+}
+
+
 const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
     
     let Data = props.HeroData;
@@ -35,7 +43,7 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         let role = getHeroRole(props.HeroName as HEROES_KEYS);
         let role_upper = role.charAt(0).toUpperCase() + role.slice(1);
         return (
-            <div className={`hero-card ${heroSpecificInfo != undefined ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
+            <div style={{border: `3px solid ${colorDict[getHeroRole(props.HeroName as HEROES_KEYS)]}` }} className={`hero-card ${heroSpecificInfo != undefined ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
                 <div className="hero-name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
