@@ -8,10 +8,11 @@ const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIc
     const handleSearch = () => {
         props.setSearchTerm(props.playerName);
         //props.onSearch()
-    }    
+    }
+    let url = props.playerNamecard && props.playerNamecard != "https://d15f34w2p8l1cc.cloudfront.net/overwatch/4565e481953f18de9150e966a5bfd692d91df07d038da7d773acdc94030205a7.png" ? props.playerNamecard :  "/Images/banner/default_banner.jpg"
     return(
         <div>
-            <div onClick={handleSearch} className="player-bookmark" style={{background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${props.playerNamecard})`,
+            <div onClick={handleSearch} className="player-bookmark" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${url})`,
             backgroundPosition: 'center', backgroundSize: 'fit'}}>
                 <div className="avatar" style={{gridArea: "avatar"}}>
                     <img className="icon" src={props.playerIcon}/>
