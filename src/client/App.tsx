@@ -20,7 +20,7 @@ function App() {
   const [username, setUsername] = useState<string>("");
   const [playerData, setPlayerData] = useState<PlayerCareer | undefined | false>(undefined); //false means player not found, undefined means not searched yet
   const [bookmarks, setBookmarks] = useState<Array<[string, string, string]>>(localStorage.getItem("bookmarkedPlayers")? JSON.parse(localStorage.getItem("bookmarkedPlayers")!) : []);
-
+  const [loadingState, setLoadingState] = useState<boolean>(false);
   const onUsernameSearch = async () => {
     // uncomment below for testing
     // setUsername("samsungnunca-1517"); // e.g. "WarDevil-11626", "Lemonade-11498", "emongg-11183"
@@ -56,6 +56,7 @@ function App() {
       //testing
       if (username != "") {
         try {
+          setLoadingState(true);
           const rightUsername = username.replace('#', '-');
           let response = await fetch(`/players/${rightUsername}`)
           if (!response.ok) {
@@ -63,19 +64,25 @@ function App() {
             if (response.status === 404) {
               // Handle 404 Not Found
               console.log("in 404");
+              setLoadingState(false);
               setPlayerData(false);
             } else {
               // Handle other error cases
+              
               console.log('Server error');
+              setLoadingState(false);
             }
           } else {
             // If the response status is OK, handle the successful response
             const data = await response.json();
+            setLoadingState(false);
             setPlayerData(data);
           }
         } catch (error) {
           // Handle network errors or other exceptions
+          
           console.log('Error:', error);
+          setLoadingState(false);
         }
       }
       
@@ -89,7 +96,7 @@ function App() {
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
       <BookmarksContext.Provider value={{ bookmarks: bookmarks, setBookmarks: setBookmarks }} >
         <Layout>
-          <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+          <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} loadingState={loadingState}/>
           <DisplayPlayer username={username} />
         </Layout>
       </BookmarksContext.Provider>
