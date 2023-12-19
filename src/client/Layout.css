@@ -1,5 +1,5 @@
 body h1 {
-  margin-top: 0;
+  margin-bottom: 0;
 }
 
 body h2 {
@@ -67,3 +67,21 @@ body main {
 
 }
 
+.TitleFirstLetter {
+  font-family: 'BankSansEf';
+  font-size: 50px;
+  font-weight: bold;
+  margin-right: 6px;
+  color: rgba(202,204,213,1);
+  vertical-align: middle;
+}
+
+.TitleRest {
+  font-family: 'Overwatch';
+  color: rgba(202,204,213,1);
+}
+
+.TitleA {
+  font-family: 'Overwatch';
+  color: rgba(221,109,49,1);
+}
