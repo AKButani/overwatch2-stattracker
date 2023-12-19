@@ -53,8 +53,11 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
         console.log("Bookmarks", bookmarks);
     }
     return (
-        <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username.replace(/#/g, "-")) ? 'grey' : 'lightgrey' }}>
-          <FontAwesomeIcon icon={faBookmark} onClick={() => (handleClick())} size="3x"/>
+        <div onClick={() => (handleClick())} style={{ cursor: 'pointer', display: "flex", flexGrow: "row", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
+            <FontAwesomeIcon icon={faBookmark} color={checkifBookmarked(props.username.replace(/#/g, "-")) ? 'lightgrey' : 'grey'} size="3x" />
+            <div className="white">
+                Favourite
+            </div>
         </div>
     );
 }

@@ -21,11 +21,14 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
             <img src={props.summary.namecard} />
         </div> */}
 
-                <div style={{ gridArea: "bookmark", height: 200 }}>
-                    <BookmarkIcon summary={props.summary} username={props.username}/>
+                <div style={{ gridArea: "banner", height: "2px" }} />
+                <div style={{ gridArea: "bookmark" }}>
+
+                    <BookmarkIcon summary={props.summary} username={props.username} />
+
                 </div>
-                <div style={{ gridArea: "avatar", height: 200 }}>
-                    <img src={props.summary.avatar} />
+                <div style={{ gridArea: "avatar", height: 200, display: "flex", alignItems: "center" }}>
+                    <img src={props.summary.avatar} height={175} width={175} style={{ borderRadius: "5%" }} />
                 </div>
 
                 <div style={{ gridArea: "info" }} className="lightGrey">
