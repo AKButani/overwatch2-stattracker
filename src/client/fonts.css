@@ -28,7 +28,7 @@
     font-family: 'BankSansEf';
     src: url('/Fonts/BankSansEf/BankSansEFCY-Lig.woff2') format('woff2'),
          url('/Fonts/BankSansEf/BankSansEFCY-Lig.woff') format('woff');
-    font-weight: lighter;
+    font-weight: light;
     font-style: normal;
 }
 
@@ -36,7 +36,7 @@
     font-family: 'BankSansEf';
     src: url('/Fonts/BankSansEf/BankSansEFCY-LigObl.woff2') format('woff2'),
          url('/Fonts/BankSansEf/BankSansEFCY-LigObl.woff') format('woff');
-    font-weight: lighter;
+    font-weight: light;
     font-style: oblique;
 }
 

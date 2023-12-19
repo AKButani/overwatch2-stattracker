@@ -34,7 +34,8 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
 
                 <div style={{ gridArea: "info" }} className="lightGrey">
                     <h1 className="white" id="BannerUsername">{props.summary.username.toUpperCase()} </h1>
-                    {props.summary.title}
+                    <div id="playerTitle">{props.summary.title}</div>
+                    
                 </div>
 
                 <div style={{ gridArea: "ranks" }}>
@@ -76,7 +77,7 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                 {pcRankExists && (
                     <>
                     
-                    <div>
+                    <div className="rankCategory">
                         PC
                     </div>
         
@@ -94,7 +95,7 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                 
                 {consoleRankExists && (
                 <>
-                <div>
+                <div className="rankCategory">
                     CONSOLE
                 </div>
     

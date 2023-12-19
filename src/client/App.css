@@ -133,3 +133,7 @@
 /* .fa-bookmark {
     border: white,
 } */
+
+.react-tabs__tab {
+    font-family: "Arial";
+}
