@@ -156,7 +156,9 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
         .slice(1)
         .map((node) => (
           <AnimatedText
-          fon
+          // fon
+          // @Alex: this was causing error messages, if it served any purpose please restore
+          // I assumed it's a typo from e.g. "fontSize"
             key={node.data.name}
             hero={node.data.name}
             x={node.x}
@@ -179,7 +181,7 @@ export const CircDiagram = (props:{ width: number, height:number, data:PlayerCar
 
 
 const AnimatedCircle = ({
-  key,
+  // key, @Alex: removing this fixes it
   hero,
   cx,
   cy,
