@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { BookmarksContext, PlayerDataContext } from "../App";
+import { useContext } from "react";
+import { BookmarksContext } from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
 import { PlayerSummary} from "../types";
