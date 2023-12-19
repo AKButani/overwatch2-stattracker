@@ -87,7 +87,8 @@ body main {
 
 .TitleA {
   font-family: 'Overwatch';
-  color: rgba(221,109,49,1);
+  /* color: rgba(221,109,49,1); */
+  color: (249,158,26); /* same color as in sankey diagram */
   margin-right: -4pt;
   margin-left: -4pt;
 }
