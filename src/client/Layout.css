@@ -53,7 +53,7 @@ body main {
   }
 
   .expandable:hover{
-    box-shadow: 0 0 15px yellow;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 1);
   }
 
   .darkTab.react-tabs__tab--selected {
