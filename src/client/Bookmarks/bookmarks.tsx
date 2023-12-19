@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./bookmark.css";
 import "../Layout.css"
-import { useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { BookmarksContext } from '../App';
 
 
 const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIcon:string, playerNamecard:string, setSearchTerm:React.Dispatch<React.SetStateAction<string>>}) => {
@@ -27,16 +28,17 @@ const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIc
 }
 
 export const Bookmarks = (props: {onSearch: () => void, setSearchTerm:React.Dispatch<React.SetStateAction<string>>}) => {
-    const storedBookmarks = localStorage.getItem('bookmarkedPlayers');
-    if(!storedBookmarks){
+    const bookmarksState = useContext(BookmarksContext)?.bookmarks; 
+    //const storedBookmarks = localStorage.getItem('bookmarkedPlayers');
+    if(bookmarksState == undefined){
         return(null);
     }
-    const bookmarks : Array<[string,string,string]> = JSON.parse(storedBookmarks);
-    console.log(bookmarks)
+    //const bookmarks : Array<[string,string,string]> = JSON.parse(storedBookmarks);
+    //console.log(bookmarks)
     return(
         <div>
             <div className="bookmark-container">
-                {bookmarks.map(([playerName, icon, namecard]) => (
+                {bookmarksState.map(([playerName, icon, namecard]) => (
                     <SingleBookmark key={playerName as string} playerName={playerName as string} playerIcon={icon as string} playerNamecard={namecard as string} onSearch={props.onSearch} setSearchTerm={props.setSearchTerm}/>
                 ))
                 }

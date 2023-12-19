@@ -7,12 +7,19 @@ import { PlayerCareer, PlayerInfoContext } from "./types";
 import DisplayPlayer from "./DisplayPlayer";
 /*Test Player: WarDevil#11626*/
 
+export type BookmarksContextType = {
+  bookmarks: Array<[string, string, string]>;
+  setBookmarks: React.Dispatch<React.SetStateAction<Array<[string, string, string]>>>;
+};
+
 export const PlayerDataContext = createContext<PlayerInfoContext | undefined>(undefined);
+export const BookmarksContext = createContext<BookmarksContextType | undefined>(undefined);
 
 function App() {
   
   const [username, setUsername] = useState<string>("");
   const [playerData, setPlayerData] = useState<PlayerCareer | undefined | false>(undefined); //false means player not found, undefined means not searched yet
+  const [bookmarks, setBookmarks] = useState<Array<[string, string, string]>>(localStorage.getItem("bookmarkedPlayers")? JSON.parse(localStorage.getItem("bookmarkedPlayers")!) : []);
   console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {
@@ -91,10 +98,12 @@ function App() {
 
   return (
     <PlayerDataContext.Provider value={{ playerData: playerData, setPlayerData: setPlayerData }}>
-      <Layout>
-        <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
-        <DisplayPlayer username = {username}/>
-      </Layout>
+      <BookmarksContext.Provider value={{ bookmarks: bookmarks, setBookmarks: setBookmarks }} >
+        <Layout>
+          <SearchBar searchTerm={username} setSearchTerm={setUsername} onSearch={onUsernameSearch} />
+          <DisplayPlayer username={username} />
+        </Layout>
+      </BookmarksContext.Provider>
     </PlayerDataContext.Provider>
   );
 }
