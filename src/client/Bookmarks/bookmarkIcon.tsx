@@ -50,7 +50,6 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
         }
         localStorage.setItem("bookmarkedPlayers", JSON.stringify(newBookmarks));
         setBookmarks!(newBookmarks); //we stringify and then parse to get rid of the undefined values
-        console.log("Bookmarks", bookmarks);
     }
     return (
         <div  style={{ display: "flex", flexGrow: "row", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
