@@ -65,15 +65,19 @@ body main {
     border: 0px;
   }
 
+  span.TitleFirstLetter, span.TitleRest {
+    color: rgb(96, 96, 96);
+  }
+
 }
 
 .TitleFirstLetter {
   font-family: 'BankSansEf';
   font-size: 50px;
   font-weight: bold;
-  margin-right: 6px;
+  margin-right: 4px;
   color: rgba(202,204,213,1);
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 .TitleRest {
@@ -84,4 +88,6 @@ body main {
 .TitleA {
   font-family: 'Overwatch';
   color: rgba(221,109,49,1);
+  margin-right: -4pt;
+  margin-left: -4pt;
 }
