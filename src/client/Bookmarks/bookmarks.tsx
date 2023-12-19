@@ -13,11 +13,11 @@ const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIc
     return(
         <div>
             <div onClick={handleSearch} className="player-bookmark" style={{ background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${url})`,
-            backgroundPosition: 'center', backgroundSize: 'fit'}}>
+            backgroundPosition: 'center', backgroundSize: 'fit', padding: "5px"}}>
                 <div className="avatar" style={{gridArea: "avatar"}}>
                     <img className="icon" src={props.playerIcon}/>
                 </div>
-                <div style={{gridArea: "info"}} className="info">
+                <div className="info">
                     <h1 className="name white">{((props.playerName).split('-')[0] as string).toUpperCase()} </h1>
                 </div>
             </div>
