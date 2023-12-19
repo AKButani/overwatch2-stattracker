@@ -1,10 +1,9 @@
 import * as d3 from "d3"; // we will need d3.js
 import { HEROES_KEYS, PlayerCareer, Role} from "../types";
-import { useSpring, animated, SpringValue } from "react-spring";
-import {useContext, useState} from "react";
+import { useSpring, animated } from "react-spring";
+import {useState} from "react";
 import { getHeroRole } from "../helperFunctions";
 import { valueFunction, getDisplayValueFunction} from "./circTypes";
-import { SelectedModeContext } from "../DisplayPlayer";
 const heroes: HEROES_KEYS[] = [
   "ana",
   "ashe",

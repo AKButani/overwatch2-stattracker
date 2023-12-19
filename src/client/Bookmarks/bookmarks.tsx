@@ -1,13 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import "./bookmark.css";
 import "../Layout.css"
-import { useEffect } from 'react';
 
 
 const SingleBookmark = (props: {playerName:string, onSearch:() => void, playerIcon:string, playerNamecard:string, setSearchTerm:React.Dispatch<React.SetStateAction<string>>}) => {
     const handleSearch = () => {
-        console.log("in handleSearch")
         props.setSearchTerm(props.playerName);
         //props.onSearch()
     }    
@@ -32,7 +28,6 @@ export const Bookmarks = (props: {onSearch: () => void, setSearchTerm:React.Disp
         return(null);
     }
     const bookmarks : Array<[string,string,string]> = JSON.parse(storedBookmarks);
-    console.log(bookmarks)
     return(
         <div>
             <div className="bookmark-container">

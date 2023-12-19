@@ -13,18 +13,14 @@ function App() {
   
   const [username, setUsername] = useState<string>("");
   const [playerData, setPlayerData] = useState<PlayerCareer | undefined | false>(undefined); //false means player not found, undefined means not searched yet
-  console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {
     // uncomment below for testing
     // setUsername("samsungnunca-1517"); // e.g. "WarDevil-11626", "Lemonade-11498", "emongg-11183"
     //testing
-    //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
-    console.log("onSearch");
     try {
       const rightUsername = username.replace('#', '-');
       let response = await fetch(`/players/${rightUsername}`)
-      console.log(response.status)
       if (!response.ok) {
         // If the response status is not OK (not in the range 200-299), handle the error
         if (response.status === 404) {
@@ -38,12 +34,10 @@ function App() {
       } else {
         // If the response status is OK, handle the successful response
         const data = await response.json();
-        console.log('Data:', data);
         setPlayerData(data);
       }
     } catch (error) {
       // Handle network errors or other exceptions
-      console.log("in error");
       console.log('Error:', error);
     }
   }
@@ -53,13 +47,10 @@ function App() {
       // uncomment below for testing
       // setUsername("samsungnunca-1517"); // e.g. "WarDevil-11626", "Lemonade-11498", "emongg-11183"
       //testing
-      //console.log("player Summary Fetch:", await (await fetch(`/players/${username}`)).json());
       if (username != "") {
-        console.log("onSearch");
         try {
           const rightUsername = username.replace('#', '-');
           let response = await fetch(`/players/${rightUsername}`)
-          console.log(response.status)
           if (!response.ok) {
             // If the response status is not OK (not in the range 200-299), handle the error
             if (response.status === 404) {
@@ -73,12 +64,10 @@ function App() {
           } else {
             // If the response status is OK, handle the successful response
             const data = await response.json();
-            console.log('Data:', data);
             setPlayerData(data);
           }
         } catch (error) {
           // Handle network errors or other exceptions
-          console.log("in error");
           console.log('Error:', error);
         }
       }

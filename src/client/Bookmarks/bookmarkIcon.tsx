@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
-import { PlayerDataContext } from "../App";
+import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark} from '@fortawesome/free-solid-svg-icons';
-import { HEROES_KEYS, PlayerCareer, PlayerSummary, platform} from "../types";
+import { PlayerSummary} from "../types";
 
 
 
@@ -41,7 +40,6 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
             );
         }
         localStorage.setItem("bookmarkedPlayers", JSON.stringify(bookmarks));
-        console.log("Bookmarks", bookmarks);
     }
     return (
         <div style={{ cursor: 'pointer', color: checkifBookmarked(props.username.replace(/#/g, "-")) ? 'grey' : 'lightgrey' }}>

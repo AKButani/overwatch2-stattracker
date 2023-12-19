@@ -104,7 +104,6 @@ const createPlaytimeArray = (stats:PlayerCareerStatsGamemode) : HeroTimeTuple[] 
       result.push([key, obj.value] as HeroTimeTuple);
     }
   }
-  // console.log(result);
   return result;
 }
 
