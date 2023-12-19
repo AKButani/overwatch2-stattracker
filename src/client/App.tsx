@@ -20,7 +20,6 @@ function App() {
   const [username, setUsername] = useState<string>("");
   const [playerData, setPlayerData] = useState<PlayerCareer | undefined | false>(undefined); //false means player not found, undefined means not searched yet
   const [bookmarks, setBookmarks] = useState<Array<[string, string, string]>>(localStorage.getItem("bookmarkedPlayers")? JSON.parse(localStorage.getItem("bookmarkedPlayers")!) : []);
-  console.log("PlayerData", playerData);
 
   const onUsernameSearch = async () => {
     // uncomment below for testing

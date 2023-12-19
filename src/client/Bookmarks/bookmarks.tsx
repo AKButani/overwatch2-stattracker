@@ -1,6 +1,6 @@
 import "./bookmark.css";
 import "../Layout.css"
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { BookmarksContext } from '../App';
 
 
