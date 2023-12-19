@@ -1,0 +1,89 @@
+/*Overwatch*/
+@font-face {
+    font-family: 'Overwatch';
+    src: url('/Fonts/Overwatch/OVERWTACH.woff2') format('woff2'),
+         url('/Fonts/Overwatch/OVERWATCH.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*BankSansEf, font Overwatch font is based on*/
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-Bol.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-Bol.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-BolObl.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-BolObl.woff') format('woff');
+    font-weight: bold;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-Lig.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-Lig.woff') format('woff');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-LigObl.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-LigObl.woff') format('woff');
+    font-weight: lighter;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-Med.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-Med.woff') format('woff');
+    font-weight: medium;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-MedObl.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-MedObl.woff') format('woff');
+    font-weight: medium;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-Reg.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-Reg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BankSansEf';
+    src: url('/Fonts/BankSansEf/BankSansEFCY-RegObl.woff2') format('woff2'),
+         url('/Fonts/BankSansEf/BankSansEFCY-RegObl.woff') format('woff');
+    font-weight: normal;
+    font-style: oblique;
+}
+
+@font-face {
+    font-family: 'BigNoodle';
+    src: url('/Fonts/bigNoodle/BigNoodleTitling.woff2') format('woff2'),
+         url('/Fonts/bigNoodle/BigNoodleTitling.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BigNoodle';
+    src: url('/Fonts/bigNoodle/BigNoodleTitling-Oblique.woff2') format('woff2'),
+         url('/Fonts/bigNoodle/BigNoodleTitling-Oblique.woff') format('woff');
+    font-weight: normal;
+    font-style: oblique;
+}

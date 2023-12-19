@@ -33,7 +33,7 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
                 </div>
 
                 <div style={{ gridArea: "info" }} className="lightGrey">
-                    <h1 className="white">{props.summary.username.toUpperCase()} </h1>
+                    <h1 className="white" id="BannerUsername">{props.summary.username.toUpperCase()} </h1>
                     {props.summary.title}
                 </div>
 
