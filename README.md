@@ -137,6 +137,11 @@ Then list here the weekly tags. \
 We will evaluate your code every week, based on the corresponding version.
 
 Tags:
+- Week 1: [Week1](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/tags/Week1)
+- Week 2: [Week2](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/tags/Week2)
+- Week 3: [Week3](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/tags/week3)
+- Week 4: [Week4](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/tags/week4)
+- Final Version:
 - Milestone 1: ...
 - Milestone 2: ...
 - Milestone 3: ...
