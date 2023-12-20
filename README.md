@@ -129,6 +129,8 @@ We will use this to understand what your struggles and where did the weekly effo
 
   - Bug fixes
 
+  - Added fonts
+
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
 Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html) for more details. 
