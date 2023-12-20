@@ -1,4 +1,7 @@
-body h1,
+body h1 {
+  margin-bottom: 0;
+}
+
 body h2 {
   margin-bottom: 0;
 }
@@ -61,4 +64,31 @@ body main {
     color: white;
     border: 0px;
   }
+
+  span.TitleFirstLetter, span.TitleRest {
+    color: rgb(96, 96, 96);
+  }
+
+}
+
+.TitleFirstLetter {
+  font-family: 'BankSansEf';
+  font-size: 50px;
+  font-weight: bold;
+  margin-right: 4px;
+  color: rgba(202,204,213,1);
+  /* vertical-align: middle; */
+}
+
+.TitleRest {
+  font-family: 'Overwatch';
+  color: rgba(202,204,213,1);
+}
+
+.TitleA {
+  font-family: 'Overwatch';
+  /* color: rgba(221,109,49,1); */
+  color: rgb(249,158,26); /* same color as in sankey diagram */
+  margin-right: -4pt;
+  margin-left: -4pt;
 }

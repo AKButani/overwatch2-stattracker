@@ -10,7 +10,7 @@ import { BookmarkIcon } from "./Bookmarks/bookmarkIcon";
 const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setTabIndex: React.Dispatch<React.SetStateAction<number>>, username:string}) => {
     let url = props.summary.namecard && props.summary.namecard != "https://d15f34w2p8l1cc.cloudfront.net/overwatch/4565e481953f18de9150e966a5bfd692d91df07d038da7d773acdc94030205a7.png" ? props.summary.namecard :  "/Images/banner/default_banner.jpg"
     const bannerStyle = {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${url})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${url})`,
         backgroundPosition: 'center', 
         backgroundSize: "cover", 
         backgroundRepeat: "no-repeat" 
@@ -33,8 +33,9 @@ const PlayerInfoBanner = (props: {summary: PlayerSummary, tabIndex: number, setT
                 </div>
 
                 <div style={{ gridArea: "info" }} className="lightGrey">
-                    <h1 className="white">{props.summary.username.toUpperCase()} </h1>
-                    {props.summary.title}
+                    <h1 className="white" id="BannerUsername">{props.summary.username.toUpperCase()} </h1>
+                    <div id="playerTitle">{props.summary.title}</div>
+                    
                 </div>
 
                 <div style={{ gridArea: "ranks" }}>
@@ -76,7 +77,7 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                 {pcRankExists && (
                     <>
                     
-                    <div>
+                    <div className="rankCategory">
                         PC
                     </div>
         
@@ -94,7 +95,7 @@ const DisplayRanks = (props: {comp: PlatformCompetitiveRank | undefined}) => {
                 
                 {consoleRankExists && (
                 <>
-                <div>
+                <div className="rankCategory">
                     CONSOLE
                 </div>
     

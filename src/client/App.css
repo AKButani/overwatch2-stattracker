@@ -1,4 +1,13 @@
 /*some style for app component*/
+
+
+
+
+
+
+
+
+
 .hero-card{
     position: relative;
     align-self: center;
@@ -127,3 +136,7 @@
 /* .fa-bookmark {
     border: white,
 } */
+
+.react-tabs__tab {
+    font-family: "Arial";
+}

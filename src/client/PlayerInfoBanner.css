@@ -37,3 +37,20 @@
     color: black;
     border-radius: 5px;
 }
+
+#BannerUsername {
+    font-family: "BigNoodle";
+    font-style: oblique;
+    font-size: 50px;
+    letter-spacing: 10px;
+}
+
+.rankCategory{
+    font-family: "BankSansEF";
+    font-style:oblique;
+    font-weight: normal;
+}
+
+#playerTitle {
+    font-family: "BankSansEf";
+}
