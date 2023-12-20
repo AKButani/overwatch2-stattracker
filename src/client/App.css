@@ -140,3 +140,11 @@
 .react-tabs__tab {
     font-family: "Arial";
 }
+
+.react-tabs__tab:focus-visible {
+    background-color: orange;
+}
+
+.darkTab.react-tabs__tab:focus-visible {
+    background-color: orange;
+}

@@ -53,7 +53,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
     }
     return (
         <div  style={{ display: "flex", flexGrow: "row", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
-            <div onClick={() => (handleClick())} style={{cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
+            <div className="favourite" tabIndex={100} onKeyDown={(e) => {if (e.key === 'Enter') handleClick()}} onClick={() => (handleClick())} style={{cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
                 <FontAwesomeIcon icon={faStar} color={checkifBookmarked(props.username.replace(/#/g, "-")) ? 'orange' : 'lightgrey'} size="2x" />
                 <div className="white">
                     Favourite

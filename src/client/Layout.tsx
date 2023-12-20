@@ -5,7 +5,7 @@ import "./App.css"
 const Layout = (props: { children: React.ReactNode }) => {
   return (
     <>
-      <nav className="container-fluid">
+      <nav tabIndex={-1} className="container-fluid">
         <ul>
           <li>
             <h1 className="Title">

@@ -29,7 +29,7 @@ const SearchBar = (props: {searchTerm: string, setSearchTerm: React.Dispatch<Rea
         <input
           type="text"
           placeholder="Enter player name (e.g. emongg-11183)"
-          
+          tabIndex={1}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           style={{ marginBottom: 0, width: '500px', border: 'none'}}
