@@ -15,6 +15,10 @@ nav {
   }
 }
 
+body {
+  overflow-y: hidden;
+}
+
 body main {
   max-height: calc(100vh - 100px);
   overflow-y: auto;
