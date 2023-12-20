@@ -7,14 +7,6 @@ import { SelectedModeContext } from "./DisplayPlayer";
 
 type sortingType = "time_played" | "eliminations_per_life" | "games_won" | "win_percentage";
 
-const colorDict: {[key: string]: string} = {
-    "support": "#00FF00",
-    "damage": "#f23a22",
-    "tank": "#00BFFF",
-    "": "#f99e1a",
-}
-
-
 const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined, tabIndex: number}) => {
     
     let Data = props.HeroData;
