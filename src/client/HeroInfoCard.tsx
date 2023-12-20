@@ -1,9 +1,9 @@
-import { HeroComparison, HEROES_KEYS, HeroStats, PlayerCareerStats} from "./types";
+import { gamemode, HeroComparison, HEROES_KEYS, HeroStats, PlayerCareerStats} from "./types";
 //import myimage from "./public/images/ana.png";
 import './App.css';
 import { useContext, useState } from "react";
 import { getHeroRole } from "./helperFunctions";
-import { SelectedModeContext } from "./DisplayPlayer";
+import { ModeChosen, SelectedModeContext } from "./DisplayPlayer";
 
 type sortingType = "time_played" | "eliminations_per_life" | "games_won" | "win_percentage";
 
@@ -131,7 +131,6 @@ const SortSelector = (props: {setSortBy: React.Dispatch<React.SetStateAction<sor
             <select id="heroCardSortPicker" onChange={handleSelectChange}>
                 <option value="time_played">Playtime</option>
                 <option value="games_won">Games Won</option>
-                <option value="win_percentage">Win Percentage</option>
                 <option value="eliminations_per_life">Eliminations per Life</option>
             </select>
         </div>
