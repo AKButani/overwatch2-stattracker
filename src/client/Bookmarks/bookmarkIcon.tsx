@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BookmarksContext } from "../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark} from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { PlayerSummary} from "../types";
 
 
@@ -54,7 +54,7 @@ export const BookmarkIcon = (props: {summary: PlayerSummary, username: string}) 
     return (
         <div  style={{ display: "flex", flexGrow: "row", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
             <div onClick={() => (handleClick())} style={{cursor: 'pointer', display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "10px" }}>
-                <FontAwesomeIcon icon={faBookmark} color={checkifBookmarked(props.username.replace(/#/g, "-")) ? 'lightgrey' : 'grey'} size="3x" />
+                <FontAwesomeIcon icon={faStar} color={checkifBookmarked(props.username.replace(/#/g, "-")) ? 'orange' : 'lightgrey'} size="2x" />
                 <div className="white">
                     Favourite
                 </div>
