@@ -47,22 +47,26 @@
 .card-support {
     border: 3px solid rgb(0,255,0);
 }
-.card-support:focus-visible {
+/* .card-support:focus-visible {
     box-shadow: 0 0 11px rgb(0,255,0);
-}
+} */
 
 .card-damage {
     border: 3px solid rgb(242,58,34);
 }
-.card-damage:focus-visible {
+/* .card-damage:focus-visible {
     box-shadow: 0 0 11px rgb(242,58,34);
-}
+} */
 
 .card-tank {
     border: 3px solid rgb(0,191,255);
 }
-.card-tank:focus-visible {
+/* .card-tank:focus-visible {
     box-shadow: 0 0 11px rgb(0,191,255);
+} */
+
+.hero-card:focus-visible {
+    box-shadow: 0 0 11px rgba(255,255,255,1);
 }
 
 .expandable:hover{
