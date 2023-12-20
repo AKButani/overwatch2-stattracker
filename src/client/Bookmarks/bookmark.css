@@ -28,6 +28,8 @@
     max-height: 140px;
     overflow:hidden;
     gap: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .player-bookmark {
