@@ -72,13 +72,20 @@ Document here the major milestones of your code and future planned steps.\
 
 - [x] Milestone 2: Visualisations
   - [x] Sub-task: Add Sankey Diagram
-  - [x] Sub-task: Add Circular Diagram
+  - [x] Sub-task: [Add Circular Packing Diagram](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/5)
 
 - [x] Milestone 3: Different Filtering options
-  - [x] Sub-task: Competitive / Quickplay Selector
-  - [x] Sub-task: PC / Console Selector
+  - [x] Sub-task: [Competitive / Quickplay Selector](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/6)
+  - [x] Sub-task: [PC / Console Selector](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/8)
+  - [x] Sub-task: [Auto-Switch Tabs](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/11)
 
-- [x] Milestone 4: Bookmarks
+- [x] Milestone 4: [Bookmarks](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/10)
+  - [x] Sub-task: [Make state change update bookmarks instantly](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/13)
+
+- [x] Milestone 5: Overall Layout
+  - [x] Sub-task: [Fonts](https://gitlab.inf.ethz.ch/course-fwe2023/students/project/express/abutani_project_express/-/merge_requests/14)
+
+
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
