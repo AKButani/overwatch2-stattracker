@@ -15,7 +15,7 @@ const colorDict: {[key: string]: string} = {
 }
 
 
-const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined }) => {
+const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName: string, Herostats: HeroStats | undefined, tabIndex: number}) => {
     
     let Data = props.HeroData;
     let heroStats = props.Herostats; //this is all Herostats
@@ -42,8 +42,9 @@ const OneHeroInfoCard = (props: { HeroData: HeroComparison | undefined, HeroName
         let winRate = Data.win_percentage?.values.find(find_predicate(props))?.value;
         let role = getHeroRole(props.HeroName as HEROES_KEYS);
         let role_upper = role.charAt(0).toUpperCase() + role.slice(1);
+        const expandable = heroSpecificInfo != undefined;
         return (
-            <div style={{border: `3px solid ${colorDict[getHeroRole(props.HeroName as HEROES_KEYS)]}` }} className={`hero-card ${heroSpecificInfo != undefined ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails}>
+            <div tabIndex={expandable ? props.tabIndex + 1000 : -1} className={`hero-card ${`card-` + getHeroRole(props.HeroName as HEROES_KEYS)} ${expandable ? 'expandable':''} ${showDetails ? 'expanded' : ''}`} onClick={toggleDetails} onKeyDown={(e) => {if (e.key === 'Enter') toggleDetails()}}>
                 <div className="hero-name gridEntry">
                     {props.HeroName.toLocaleUpperCase()}
                 </div>
@@ -146,9 +147,9 @@ const HeroInfoCard = (props: { HeroData: PlayerCareerStats | undefined, Herostat
         return (
             <>
                 <SortSelector setSortBy={setSortBy}/>
-                {array?.map((element) => {
+                {array?.map((element, index) => {
                     return (
-                        <OneHeroInfoCard key={element.hero + selectedMode.mode + selectedMode.platform} HeroData={data} HeroName={element.hero} Herostats={props.Herostats}/>
+                        <OneHeroInfoCard tabIndex={index} key={element.hero + selectedMode.mode + selectedMode.platform} HeroData={data} HeroName={element.hero} Herostats={props.Herostats}/>
                     )
                 })}
             </>
